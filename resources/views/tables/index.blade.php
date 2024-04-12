@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </button>
-                        @include('modals.using_unused_table')
+                        @include('modals.using_unused_Atable')
                       @else
                       <button type="button" class="btn edit-using-Atable" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
                             <div class="m-3 using-table">
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                       </button>
-                    @include('modals.using_unused_table')
+                    @include('modals.using_unused_Atable')
                       @endif
                     @endforeach
                 </div>
@@ -59,7 +59,7 @@
             <div class="row bg-white">
                 <div class="col-10 d-flex flex-wrap">
                     @foreach ($Btables as $Btable)
-                    @dd($Btable)
+                    {{-- @dd($Btable) --}}
                         @if ($Btable->status == '未使用')
                         <button type="button" class="btn edit-unused-Btable" data-bs-toggle="modal" data-bs-target="#unusedTableBModal{{$Btable->id}}" data-table-id="{{ $Btable->id }}">
                             <div class="m-3">
@@ -75,20 +75,23 @@
                                 </div>
                             </div>
                         </button>
-                        @include('modals.using_unused_table')
+                        @include('modals.using_unused_Btable')
                         @else
-                        <div class="m-3 using-table">
-                            <div class="d-flex">
-                                <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                            </div>
+                        <button type="button" class="btn edit-using-Btable" data-bs-toggle="modal" data-bs-target="#usingTableBModal{{$Btable->id}}" data-table-id="{{ $Btable->id }}">
+                             <div class="m-3 using-table">
+                                <div class="d-flex">
+                                    <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
+                                </div>
 
-                            <div class="border d-flex align-items-center justify-content-center" style="height: 70px; width: 50px;">
-                                <span>{{$Btable->name}}</span>
+                                <div class="border d-flex align-items-center justify-content-center" style="height: 70px; width: 50px;">
+                                    <span>{{$Btable->name}}</span>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                            </div>
-                        </div>
+                        </button>
+                        @include('modals.using_unused_Btable')
                         @endif
                     @endforeach
                 </div>
