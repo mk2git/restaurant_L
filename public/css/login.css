@@ -31,7 +31,7 @@ h1{
 }
 
 .top-bg{
-    /* background-image: url('../images/home.jpg'); */
+    background-image: url('../images/home.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh; /* 画面の高さに合わせる */
