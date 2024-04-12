@@ -1,0 +1,79 @@
+body{
+    font-family: "Ephesis", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+}
+.register-bg{
+    background-image: url('../images/sign-up.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* 画面の高さに合わせる */
+}
+.login-bg {
+    background-image: url('../images/login.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* 画面の高さに合わせる */
+}
+h1{
+    font-size: 20px;
+}
+.logo, .logo a {
+    font-family: "Ephesis", cursive;
+    font-size: 50px;
+    color: rgb(224, 164, 72);
+    text-decoration: none;
+    font-weight: 400;
+    font-style: normal;
+}
+.logo-sm{
+    font-size: 40px;
+}
+
+.top-bg{
+    /* background-image: url('../images/home.jpg'); */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* 画面の高さに合わせる */
+}
+
+
+.circle{
+    color: rgb(224, 164, 72);
+    width: 150px;
+    height: 80px;
+    border-radius: 10%;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    margin-bottom: 10%;
+    text-decoration: none;
+}
+.circle:hover{
+    color: white;
+}
+
+.circle span {
+    margin-top: 5px;
+}
+.container-dash {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; /* 要素間のスペースを均等に配置 */
+}
+
+.container-menu{
+    background-color: rgb(241, 219, 121);
+}
+.container-reserve{
+    width: 30%;
+}
+
+.using-table .border{
+    background-color: coral;
+}
+
