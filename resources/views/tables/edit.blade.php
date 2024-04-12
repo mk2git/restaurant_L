@@ -65,8 +65,7 @@
                     <div class="bg-white p-3 border rounded mb-3">
                         <p>4人席</p>
                         <div class="d-flex">
-                            {{-- <form action="{{route('table.store',['count' => count($Atables)])}}" method="post"> --}}
-                                <form action="{{route('table.store', count($Atables))}}" method="post">
+                            <form action="{{route('table.store', count($Atables))}}" method="post">
                                 @csrf
                                 <input type="hidden" name="name" value="A-">
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
