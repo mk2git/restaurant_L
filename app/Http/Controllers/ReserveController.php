@@ -56,17 +56,18 @@ class ReserveController extends Controller
         $rules = [
             'date' => 'required',
             'time' => 'required',
-            'adult' => 'required|integer|min:0',
-            'kid' => 'required|integer|min:0',
+            'adult' => 'required|integer|min:1',
             'name' => 'required|max:20',
             'phone_number' => 'required'
         ];
 
         $messages = [
             'date.required' => '日付は必須です。',
-            'title.unique' => 'タイトルはすでに存在しています。',
-            'title.max' => 'タイトルは最大255文字までです。',
-            'body.required' => '本文は必須です。',
+            'time.required' => '時間の選択は必須です。',
+            'name.required' => '名前は必須です。',
+            'phone_number.required' => '携帯電話番号の入力は必須です。',
+            'adult.min' => '大人の人数は1人以上が必須です。',
+            'name.max' => '名前は最大20文字までです。'
         ];
 
         // バリデータの作成
@@ -78,7 +79,6 @@ class ReserveController extends Controller
                         ->withErrors($validator)
                         ->withInput();
 }
-
 
         $reserve = new Reserve();
         $reserve->date = $request->input('date');
