@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::get('table/edit', 'edit')->name('table.edit');
         Route::post('table/edit/{count}', 'store')->name('table.store');
         Route::put('table/{id}', 'update')->name('table.update');
-        Route::delete('table/edit', 'destroy')->name('table.destroy');
+        Route::delete('table/edit/{count}', 'destroy')->name('table.destroy');
     });
 
 });

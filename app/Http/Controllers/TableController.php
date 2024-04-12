@@ -114,22 +114,18 @@ class TableController extends Controller
     public function destroy(Request $request)
     {
         $seatGroup = $request->input('name');
+        $count = $request->count;
+        // dd($request);
 
         if($seatGroup == 'A-'){
-            $findLastAseat = Table::where('name', 'like', "A-%")->orderBy('name', 'desc')->first();
 
-            if($findLastAseat){
-                // 削除するときはその該当する情報すべてを取得してからでないとテーブルから削除されない（nameカラムがA-3を取得するだけでは、削除できない。必ずA-3のidやstatusなど全ての情報を取得する！）
-                $findLastAseat->delete();
-            }
+            $LastAseat = $seatGroup . $count;
+            Table::where('name', $LastAseat)->delete();
         }
 
         if($seatGroup == 'B-'){
-            $findLastBseat = Table::where('name', 'like', "B-%")->orderBy('name', 'desc')->first();
-
-            if($findLastBseat){
-                $findLastBseat->delete();
-            }
+            $LastBseat = $seatGroup . $count;
+            Table::where('name', $LastBseat)->delete();
         }
 
         return redirect()->route('table.edit')->with(['message' => '座席を1つ削除しました。', 'type' => 'danger']);

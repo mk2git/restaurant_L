@@ -13,7 +13,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="{{route('table.destroy')}}" method="post">
+          <form action="{{route('table.destroy', count($Atables))}}" method="post">
               @csrf
               @method('delete')
               <input type="hidden" name="name" value="A-">
@@ -39,7 +39,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="{{route('table.destroy')}}" method="post">
+          <form action="{{route('table.destroy', count($Btables))}}" method="post">
               @csrf
               @method('delete')
               <input type="hidden" name="name" value="B-">
