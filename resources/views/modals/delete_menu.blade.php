@@ -29,7 +29,6 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-danger text-white w-50">削除</button>
                     </div>
-
                 </form>
             </div>
         </div>

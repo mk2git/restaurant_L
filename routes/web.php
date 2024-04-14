@@ -5,6 +5,7 @@ use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -68,6 +69,11 @@ Route::middleware('auth')->group(function () {
         Route::post('table/edit/{count}', 'store')->name('table.store');
         Route::put('table/{id}', 'update')->name('table.update');
         Route::delete('table/edit/{count}', 'destroy')->name('table.destroy');
+    });
+
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('order', 'index')->name('order.index');
+        Route::get('order/create/{table_id}', )->name('order.create');
     });
 
 });
