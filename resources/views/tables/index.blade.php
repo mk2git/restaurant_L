@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
 {{-- 座席を簡易的なレストラン図に並べる --}}
-    <div class="container w-75 mx-auto mt-5">
+    <div class="container w-75 mx-auto my-5">
         <h3 class="text-center mb-5"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;座席</h3>
 
-        <div class="container border bg-light p-5">
+        <div class="container border bg-light p-5 mb-5">
             <div class="row bg-white">
-                <div class="col-10 d-flex flex-wrap">
+                <div class="col-10 d-flex justify-content-between flex-wrap">
                     @foreach ($Atables as $Atable)
                       @if ($Atable->status == '未使用')
                         <button type="button" class="btn edit-unused-Atable" data-bs-toggle="modal" data-bs-target="#unusedTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
@@ -57,7 +57,7 @@
             <hr class="w-75 m-0">
 
             <div class="row bg-white">
-                <div class="col-10 d-flex flex-wrap">
+                <div class="col-10 d-flex justify-content-between flex-wrap">
                     @foreach ($Btables as $Btable)
                     {{-- @dd($Btable) --}}
                         @if ($Btable->status == '未使用')
