@@ -15,16 +15,18 @@ class OrderController extends Controller
     {
         $Atables = Table::where('name', 'like', 'A-%')->get();
         $Btables = Table::where('name', 'like', 'B-%')->get();
-        
+
         return view('orders.index', compact('Atables', 'Btables'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($table_id)
     {
-        //
+        $table = Table::where('id', $table_id)->get();
+// dd($table);
+        return view('orders.create', compact('table'));
     }
 
     /**
