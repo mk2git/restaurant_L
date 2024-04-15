@@ -46,13 +46,13 @@
                                         <button type="button" class="edit-menu" data-toggle="modal" data-target="#editMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
-                                        @include('modals.edit_menu')
+                                        <x-modal-edit-menu :menu-id="$menu->id" :menu-name="$menu->name" :menu-price="$menu->price" :menu-description="$menu->description" :menu-photo="$menu->photo" :menu-category-id="$menu->category_id" :categories="$categories" />
                                     </div>
                                     <div class="col-2">
                                         <button type="button" data-toggle="modal" data-target="#deleteMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}" class="delete-menu">
                                             <i class="fa-regular fa-trash-can text-danger"></i>
                                         </button>
-                                        @include('modals.delete_menu')
+                                        <x-modal-delete-menu :menu-id="$menu->id" :menu-name="$menu->name" />
                                     </div>
                                 </div>
                             </li>
@@ -90,13 +90,13 @@
                                                     <button type="button" class="edit-menu" data-toggle="modal" data-target="#editMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
                                                         <i class="fa-solid fa-pencil"></i>
                                                     </button>
-                                                    @include('modals.edit_menu')
+                                                    <x-modal-edit-menu :menu-id="$menu->id" :menu-name="$menu->name" :menu-price="$menu->price" :menu-description="$menu->description" :menu-photo="$menu->photo" :menu-category-id="$menu->category_id" :categories="$categories" />
                                                 </div>
                                                 <div class="col-2">
                                                     <button type="button" class="delete-menu" data-toggle="modal" data-target="#deleteMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
                                                         <i class="fa-regular fa-trash-can text-danger"></i>
                                                     </button>
-                                                    @include('modals.delete_menu')
+                                                    <x-modal-delete-menu :menu-id="$menu->id" :menu-name="$menu->name" />
                                                 </div>
                                             </div>
                                         </li>

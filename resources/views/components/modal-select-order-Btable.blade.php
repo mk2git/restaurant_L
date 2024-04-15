@@ -10,7 +10,7 @@
   });
 </script>
 
-<div class="modal fade" id="selectTableBModal{{$Btable->id}}" tabindex="-1" role="dialog" aria-labelledby="selectTableBModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectTableBModal{{$btableId}}" tabindex="-1" role="dialog" aria-labelledby="selectTableBModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -20,9 +20,9 @@
               </button>
           </div>
           <div class="modal-body">
-              <p class="text-center">「 {{$Btable->name}} 」の注文を始めますか？</p>
+              <p class="text-center">「 {{$btableName}} 」の注文を始めますか？</p>
               <div class="text-center">
-                <a href="{{route('orders.create', $Btable->id)}}" class="btn btn-success">
+                <a href="{{route('orders.create', $btableId)}}" class="btn btn-success">
                 注文を始める
               </a>
               </div>

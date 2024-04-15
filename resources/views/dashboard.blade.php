@@ -42,7 +42,7 @@
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="change-reserve-status" data-reserve-id="{{$reserve->id}}" data-toggle="modal" data-target="#changeReserveModal{{$reserve->id}}">
-                                                @include('modals.check_reserve', ['reserveId' => $reserve->id])
+                                                <x-modal-check-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" />
                                             </td>
                                             <td>{{\Carbon\Carbon::parse($reserve->time)->format('H:i')}}</td>
                                             <td>{{$reserve->name}}</td>

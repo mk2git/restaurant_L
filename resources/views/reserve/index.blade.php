@@ -11,10 +11,8 @@
         @endif
         
         <x-card-reserve />
+        <x-modal-add-reserve />
     </div>
-
-    <!-- モーダル -->
-    @include('modals.add_reserve')
 
     <div class="my-5 d-flex justify-content-center aline-center">
        <hr class="w-75">
@@ -61,16 +59,16 @@
                             <td>大人：{{$reserve->adult}}人 &nbsp;&nbsp;子供：{{$reserve->kid}}人</td>
                             <td>{{$reserve->phone_number}}</td>
                             <td>
-                                <button type="button" class="btn" data-toggle="modal" data-target="#editReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
+                                <button type="button" class="btn edit-reserve" data-toggle="modal" data-target="#editReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
                                     <i class="fa-solid fa-pencil"></i>
                                 </button>
-                                @include('modals.edit_reserve')
+                                <x-modal-edit-reserve :reserve-id="$reserve->id"  :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" :reserve-phone-number="$reserve->phone_number" />
                             </td>
                             <td>
                                 <button type="button" class="btn" data-toggle="modal" data-target="#deleteReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
                                     <i class="fa-regular fa-trash-can text-danger"></i>
                                 </button>
-                                @include('modals.delete_reserve')
+                                <x-modal-delete-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" />
                             </td>
                         </tr>
                     @endforeach
@@ -85,16 +83,16 @@
                                     <td>大人：{{ $reserve->adult }}人 &nbsp;&nbsp;子供：{{ $reserve->kid }}人</td>
                                     <td>{{ $reserve->phone_number }}</td>
                                     <td>
-                                        <button type="button" class="btn" data-toggle="modal" data-target="#editReserveModal" data-reserve-id="{{ $reserve->id }}">
+                                        <button type="button" class="btn edit-reserve" data-toggle="modal" data-target="#editReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
-                                        @include('modals.edit_reserve')
+                                        <x-modal-edit-reserve :reserve-id="$reserve->id"  :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" :reserve-phone-number="$reserve->phone_number" />
                                     </td>
                                     <td>
                                         <button type="button" class="btn" data-toggle="modal" data-target="#deleteReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
                                             <i class="fa-regular fa-trash-can text-danger"></i>
                                         </button>
-                                        @include('modals.delete_reserve')
+                                        <x-modal-delete-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" />
                                     </td>
 
                                 </tr>
@@ -107,4 +105,5 @@
         </table>
     </div>
 </x-app-layout>
+
 

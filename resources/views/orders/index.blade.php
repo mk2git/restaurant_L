@@ -38,7 +38,7 @@
                       </div>
                   </div>
                 </button>
-              @include('modals.select_order_Atable')
+              <x-modal-select-order-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
                 @endif
               @endforeach
           </div>
@@ -83,7 +83,7 @@
                           </div>
                       </div>
                   </button>
-                  @include('modals.select_order_Btable')
+                  <x-modal-select-order-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                   @endif
               @endforeach
           </div>

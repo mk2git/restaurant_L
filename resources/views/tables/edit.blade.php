@@ -4,7 +4,7 @@
         @if(session('message'))
             <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
-        
+
         <div class="container border bg-light w-75 mt-3">
             <div class="row m-5">
                 <div class="col-10">
@@ -70,7 +70,8 @@
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
                             <button type="submit" class="btn" data-toggle="modal" data-target="#deleteASeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
-                            @include('modals.delete_seat')
+                            {{-- @include('modals.delete_seat') --}}
+                            <x-modal-delete-Atable :atables="$Atables" />
                         </div>
                     </div>
 
@@ -83,7 +84,9 @@
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
                             <button type="submit" class="btn" data-toggle="modal" data-target="#deleteBSeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
-                            @include('modals.delete_seat')
+                            {{-- @include('modals.delete_seat') --}}
+                            {{-- <x-modal-delete-seat /> --}}
+                            <x-modal-delete-Btable :btables="$Btables" />
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </button>
-                        @include('modals.using_unused_Atable')
+                        <x-modal-unused-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
                       @else
                       <button type="button" class="btn edit-using-Atable" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
                             <div class="m-3 using-table">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                       </button>
-                    @include('modals.using_unused_Atable')
+                    <x-modal-using-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
                       @endif
                     @endforeach
                 </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                         </button>
-                        @include('modals.using_unused_Btable')
+                        <x-modal-unused-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                         @else
                         <button type="button" class="btn edit-using-Btable" data-bs-toggle="modal" data-bs-target="#usingTableBModal{{$Btable->id}}" data-table-id="{{ $Btable->id }}">
                              <div class="m-3 using-table">
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </button>
-                        @include('modals.using_unused_Btable')
+                        <x-modal-using-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                         @endif
                     @endforeach
                 </div>
