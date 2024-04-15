@@ -22,7 +22,7 @@
           <div class="modal-body">
               <p class="text-center">「 {{$Atable->name}} 」の注文を始めますか？</p>
               <div class="text-center">
-                <a href="{{route('order.create', $Atable->id)}}" class="btn btn-success">
+                <a href="{{route('orders.create', $Atable->id)}}" class="btn btn-success">
                 注文を始める
               </a>
               </div>
