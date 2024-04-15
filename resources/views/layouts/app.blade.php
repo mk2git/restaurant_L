@@ -33,7 +33,7 @@
 
     </head>
     <body class="font-sans antialiased @yield('background-class')">
-        @include('layouts.navigation')
+        <x-navigation />
 
         <!-- Page Heading -->
         @if (isset($header))
