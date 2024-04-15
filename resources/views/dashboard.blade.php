@@ -1,5 +1,5 @@
 @extends('layouts.app')
-    @if ($role == 'admin')
+    {{-- @if ($role == 'admin')
 
     @else
 
@@ -8,7 +8,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 @section('background-class', 'top-bg')
 @section('content')
     <div class="container-dash">
