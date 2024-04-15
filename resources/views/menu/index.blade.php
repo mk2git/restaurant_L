@@ -2,10 +2,9 @@
     <div class="container mt-5">
 
         @if (session('message'))
-            <div class="w-50 mx-auto">
-                <p class="alert alert-{{session('type')}} text-center">{{session('message')}}</p>
-            </div>
+           <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
+        
         <form action="{{route('category.getCategory')}}" method="post">
             @csrf
             <div class="w-25 mb-3 mx-auto">

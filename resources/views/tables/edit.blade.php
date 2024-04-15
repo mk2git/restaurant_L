@@ -2,8 +2,9 @@
     <div class="container my-5">
         <h2 class="text-center"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;座席編集</h2>
         @if(session('message'))
-        <p class="text-center w-25 mx-auto alert alert-{{session('type')}}">{{session('message')}}</p>
+            <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
+        
         <div class="container border bg-light w-75 mt-3">
             <div class="row m-5">
                 <div class="col-10">

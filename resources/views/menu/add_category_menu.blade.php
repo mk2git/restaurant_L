@@ -12,7 +12,7 @@
 
         {{-- 確認メッセージ --}}
         @if (session('message'))
-            <div class="alert alert-{{session('type')}} w-50 mx-auto p-2 mb-4 text-center" role="alert">{{session('message')}}</div>
+            <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
 
         <div class="row">

@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $user->role = $request->input('role');
         $user->save();
 
-        return redirect()->back()->with(['message' => $user->name.'の権限が変更されました']);
+        return redirect()->back()->with(['message' => $user->name.'の権限が変更されました', 'type' => 'success']);
     }
 
     /**

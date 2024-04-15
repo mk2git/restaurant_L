@@ -29,7 +29,7 @@
 
     <div class="container m-5">
         @if (session('message'))
-          <p class="alert alert-success w-50 text-center mx-auto">{{session('message')}}</p>
+          <x-alert-message :type="session('type')" :message="session('message')" />
         @else
 
         @endif
