@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
     <div class="container text-center mt-5">
         @if ($errors->any())
             <div class="alert alert-danger w-50 mx-auto p-2">
@@ -110,4 +109,4 @@
         </div>
 
     </div>
-@endsection
+</x-app-layout>

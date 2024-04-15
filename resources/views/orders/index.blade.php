@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
 <div class="container w-75 mx-auto my-5">
   <h3 class="text-center mb-5"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;どのテーブルの注文を受け付けますか？</h3>
 
@@ -94,4 +93,4 @@
       </div>
   </div>
 </div>
-@endsection
+</x-app-layout>

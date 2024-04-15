@@ -1,16 +1,5 @@
-@extends('layouts.app')
-    {{-- @if ($role == 'admin')
-
-    @else
-
-    @endif
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
+<x-app-layout>
 @section('background-class', 'top-bg')
-@section('content')
     <div class="container-dash">
         <a href="{{route('reserve.index')}}"class="circle "><i class="fa-solid fa-phone"></i>
             <span>予約</span></a>
@@ -82,5 +71,5 @@
           </div>
         @endif
     </div>
-@endsection
+</x-app-layout>
 

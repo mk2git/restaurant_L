@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
     <div class="container mt-5 w-50">
         {{-- エラーメッセージ --}}
         @if ($errors->any())
@@ -162,9 +161,5 @@
             </tbody>
         </table>
     </div>
-
-
-
-
-@endsection
+</x-app-layout>
 

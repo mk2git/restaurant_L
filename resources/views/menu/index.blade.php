@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-app-layout>
     <div class="container mt-5">
 
         @if (session('message'))
@@ -112,5 +111,4 @@
             @endif
         </div>
     </div>
-
-@endsection
+</x-app-layout>

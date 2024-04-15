@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
     <div class="container my-5">
         <h2 class="text-center"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;座席編集</h2>
         @if(session('message'))
@@ -91,4 +89,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
