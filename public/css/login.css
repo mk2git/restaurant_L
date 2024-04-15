@@ -74,6 +74,18 @@ h1{
 }
 
 .using-table .border{
-    background-color: coral;
+    background-color: coral !important;
 }
 
+.seat{
+    height: 25px;
+    width: 25px;
+}
+.seat-Atable{
+    height: 70px;
+    width: 70px;
+}
+.seat-Btable{
+    height: 70px;
+    width: 50px;
+}

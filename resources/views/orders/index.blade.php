@@ -8,34 +8,13 @@
               @foreach ($Atables as $Atable)
                 @if ($Atable->status == '未使用')
                     <div class="m-3">
-                        <div class="d-flex">
-                            <div class="bg-light border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                            <div class="bg-light border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                        </div>
-
-                        <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 70px; width: 70px;">
-                            <span>{{$Atable->name}}</span>
-                        </div>
-                        <div class="d-flex">
-                            <div class="bg-light border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                            <div class="bg-light border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                        </div>
+                        <x-Atable-style :atable-name="$Atable->name" />
                     </div>
+                    
                 @else
                 <button type="button" class="btn select-Atable" data-bs-toggle="modal" data-bs-target="#selectTableAModal{{$Atable->id}}" data-Atable-id="{{ $Atable->id }}">
-                      <div class="m-3 using-table">
-                      <div class="d-flex">
-                          <div class="border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                          <div class="border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                      </div>
-
-                      <div class="border d-flex align-items-center justify-content-center" style="height: 70px; width: 70px;">
-                          <span>{{$Atable->name}}</span>
-                      </div>
-                      <div class="d-flex">
-                          <div class="border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                          <div class="border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                      </div>
+                    <div class="m-3 using-table">
+                        <x-Atable-style :atable-name="$Atable->name" />
                   </div>
                 </button>
               <x-modal-select-order-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
@@ -57,31 +36,13 @@
               {{-- @dd($Btable) --}}
                   @if ($Btable->status == '未使用')
                       <div class="m-3">
-                          <div class="d-flex">
-                              <div class="bg-light border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                          </div>
-
-                          <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 70px; width: 50px;">
-                              <span>{{$Btable->name}}</span>
-                          </div>
-                          <div class="d-flex">
-                              <div class="bg-light border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                          </div>
+                        <x-Btable-style :btable-name="$Btable->name" />
                       </div>
                   @else
                   <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectTableBModal{{$Btable->id}}" data-Btable-id="{{ $Btable->id }}">
                        <div class="m-3 using-table">
-                          <div class="d-flex">
-                              <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                          </div>
-
-                          <div class="border d-flex align-items-center justify-content-center" style="height: 70px; width: 50px;">
-                              <span>{{$Btable->name}}</span>
-                          </div>
-                          <div class="d-flex">
-                              <div class="border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                          </div>
-                      </div>
+                            <x-Btable-style :btable-name="$Btable->name" />
+                       </div>
                   </button>
                   <x-modal-select-order-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                   @endif

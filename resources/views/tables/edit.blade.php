@@ -18,18 +18,7 @@
                         <div class="container border bg-white d-flex flex-wrap">
                         @foreach ($Atables as $Atable)
                             <div class="m-3">
-                                <div class="d-flex">
-                                    <div class="bg-light border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                                    <div class="bg-light border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                                </div>
-
-                                <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 70px; width: 70px;">
-                                    <span>{{$Atable->name}}</span>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="bg-light border rounded-circle ms-1 seat1" style="height: 25px; width: 25px;"></div>
-                                    <div class="bg-light border rounded-circle ms-3 seat2" style="height: 25px; width: 25px;"></div>
-                                </div>
+                                <x-Atable-style :atable-name="$Atable->name" />
                             </div>
                         @endforeach
                         </div>
@@ -43,16 +32,7 @@
                         <div class="container border bg-white d-flex flex-wrap mt-2">
                         @foreach ($Btables as $Btable)
                             <div class="m-3">
-                                <div class="d-flex">
-                                    <div class="bg-light border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                                </div>
-
-                                <div class="bg-light border d-flex align-items-center justify-content-center" style="height: 70px; width: 50px;">
-                                    <span>{{$Btable->name}}</span>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="bg-light border rounded-circle ms-3 seat1" style="height: 25px; width: 25px;"></div>
-                                </div>
+                                <x-Btable-style :btable-name="$Btable->name" />
                             </div>
                         @endforeach
                         </div>
