@@ -2,18 +2,12 @@
     <div class="container mt-5 w-50">
         {{-- エラーメッセージ --}}
         @if ($errors->any())
-            <div class="alert alert-danger w-50 mx-auto p-2">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+          <x-error-message />
         @endif
 
         {{-- 予約確定メッセージ --}}
         @if (session('message'))
-             <x-alert-message :type="session('type')" :message="session('message')" />
+           <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
         
         <x-card-reserve />

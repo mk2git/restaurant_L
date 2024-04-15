@@ -1,13 +1,7 @@
 <x-app-layout>
     <div class="container text-center mt-5">
         @if ($errors->any())
-            <div class="alert alert-danger w-50 mx-auto p-2">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+           <x-error-message />
         @endif
 
         {{-- 確認メッセージ --}}

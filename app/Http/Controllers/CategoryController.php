@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -49,9 +50,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request -> validate([
+
+        $rules = [
             'name' => 'required|unique:categories'
-        ]);
+        ];
+
+        $messages = [
+            'name.required' => 'カテゴリー名を入力してください。',
+            'name.unique' => 'すでにそのカテゴリー名は登録されています。'
+        ];
+         // バリデータの作成
+         $validator = Validator::make($request->all(), $rules, $messages);
+                 // バリデーションエラー時の処理
+                 if ($validator->fails()) {
+                     return redirect('menu/add')
+                                 ->withErrors($validator)
+                                 ->withInput();
+         }
 
         $category = new Category();
         $category->name = $request->input('name');
@@ -68,10 +83,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $request->validate([
+        $rule = [
             'name' => 'required'
-        ]);
-        
+        ];
+
+        $message = [
+            'name.required' => 'カテゴリー名は必須です。'
+        ];
+         // バリデータの作成
+         $validator = Validator::make($request->all(), $rule, $message);
+                 // バリデーションエラー時の処理
+                 if ($validator->fails()) {
+                     return redirect('menu/add')
+                                 ->withErrors($validator)
+                                 ->withInput();
+         }
+
         $category = Category::find($request->id);
         $category->name = $request->input('name');
         $category->save();

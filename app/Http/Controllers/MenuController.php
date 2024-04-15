@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
 {
@@ -32,14 +33,31 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $request->validate([
+        $rules = [
             'name' => 'required|unique:menus',
             'price' => 'required|min:0',
             'category_id' => 'required',
             'description' => 'required',
             'photo' => 'required'
 
-        ]);
+        ];
+
+        $messages = [
+            'name.required' => '料理名は必須です。',
+            'name.unique' => 'すでにその料理名は登録されています。',
+            'price.required' => '価格は必須です。',
+            'category_id.required' => 'カテゴリーの選択は必須です。',
+            'description.required' => '料理の説明文は必須です。',
+            'photo.required' => '写真の選択は必須です。',
+        ];
+         // バリデータの作成
+         $validator = Validator::make($request->all(), $rules, $messages);
+                 // バリデーションエラー時の処理
+                 if ($validator->fails()) {
+                     return redirect('menu/add')
+                                 ->withErrors($validator)
+                                 ->withInput();
+         }
 
          // ファイルがアップロードされた場合は保存する
     if ($request->hasFile('photo')) {

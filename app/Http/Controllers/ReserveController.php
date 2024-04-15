@@ -97,14 +97,31 @@ class ReserveController extends Controller
      */
     public function update(Request $request, Reserve $reserve)
     {
-        $request->validate([
+        $rules = [
             'date' => 'required',
             'time' => 'required',
-            'adult' => 'required|integer|min:0',
+            'adult' => 'required|integer|min:1',
             'kid' => 'required|integer|min:0',
             'name' => 'required|max:20',
             'phone_number' => 'required'
-        ]);
+        ];
+        $messages = [
+            'date.required' => '日付は必須です。',
+            'time.required' => '時間の選択は必須です。',
+            'phone_number.required' => '携帯電話番号の入力は必須です。',
+            'adult.min' => '大人の人数は1人以上が必須です。',
+            'name.max' => '名前は最大20文字までです。'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rules, $messages);
+// dd($validator);
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('reserve')
+                        ->withErrors($validator)
+                        ->withInput();
+}
         // dd($request);
         $reserve = Reserve::find($request->id);
         $reserve->name = $request->input('name');
