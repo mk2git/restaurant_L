@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(OrderController::class)->group(function(){
         Route::get('order', 'index')->name('order.index');
         Route::get('order/create/{table_id}', 'create')->name('orders.create');
+        Route::post('order/create/{table_id}', 'store')->name('orders.store');
     });
 
 });
