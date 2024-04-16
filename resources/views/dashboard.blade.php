@@ -1,5 +1,11 @@
 <x-app-layout>
     @section('background-class', 'top-bg')
+    @if (request()->has('message'))
+        <div class="alert alert-{{ request()->get('type', 'info') }} text-center">
+            {{ request()->get('message') }}
+        </div>
+    @endif
+
     <x-button-link />
 
     <div class="container-reserve rounded bg-light p-4 mb-5 float-end me-5">

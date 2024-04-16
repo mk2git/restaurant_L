@@ -72,34 +72,37 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit($table_id)
     {
-        //
+         $orders = Order::where('table_id', $table_id)->get();
+        // dd($orders); 
+        return view('orders.edit', compact('orders'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update($order_id, Request $request)
     {
-        //
+        $order = Order::find($order_id);
+        $order->quantity = $request->input('quantity');
+        $order->save();
+
+        $message = $order->menu->name.'の注文数が変更されました。';
+
+        return redirect()->route('orders.edit', ['table_id' => $request->input('table_id')])->with(['message' => $message, 'type' => 'success']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy($order_id, Request $request)
     {
-        //
+        $order = Order::find($order_id);
+        $order->delete();
+
+        return redirect()->route('orders.edit', ['table_id' => $request->input('table_id')])->with(['message' => '注文が1件削除されました。', 'type' => 'danger']);
     }
 }

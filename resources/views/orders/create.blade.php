@@ -53,5 +53,8 @@
       </ul>
     @endforeach
   </div>
-    
+
+  <div class="w-50 mx-auto mb-5 text-center">
+    <a href="{{route('orders.edit', $table->id)}}" class="btn btn-success w-50">注文確認</a>
+  </div>
 </x-app-layout>
