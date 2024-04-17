@@ -78,8 +78,7 @@ class OrderController extends Controller
      */
     public function edit($table_id)
     {
-         $orders = Order::where('table_id', $table_id)->get();
-        // dd($orders); 
+         $orders = Order::where('table_id', $table_id)->where('order_status', 'new')->get();
          $table_id = $table_id;
         // dd($table_id);
         return view('orders.edit', compact('orders', 'table_id'));
