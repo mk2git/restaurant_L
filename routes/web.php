@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::post('order/create/{table_id}', 'store')->name('orders.store');
         Route::get('order/edit/{table_id}', 'edit')->name('orders.edit');
         Route::put('order/show/{table_id}', 'update')->name('orders.update');
+        Route::put('order/edit', 'changeOrderStatus')->name('orders.changeOrderStatus');
         Route::delete('order/edit/{order_id}', 'destroy')->name('orders.destroy');
     });
 

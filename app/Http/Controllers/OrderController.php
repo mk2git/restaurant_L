@@ -78,7 +78,9 @@ class OrderController extends Controller
     {
          $orders = Order::where('table_id', $table_id)->get();
         // dd($orders); 
-        return view('orders.edit', compact('orders'));
+         $table_id = $table_id;
+        // dd($table_id);
+        return view('orders.edit', compact('orders', 'table_id'));
     }
 
     /**
@@ -93,6 +95,19 @@ class OrderController extends Controller
         $message = $order->menu->name.'の注文数が変更されました。';
 
         return redirect()->route('orders.edit', ['table_id' => $request->input('table_id')])->with(['message' => $message, 'type' => 'success']);
+    }
+
+    public function changeOrderStatus(Request $request){
+        // dd($request->table_id);
+        $table_id = $request->table_id;
+        $orders = Order::where('table_id', $table_id)->get();
+        // dd($order);
+        foreach($orders as $order){
+            $order->order_status = 'old';
+            $order->save();
+        }
+        
+        return redirect()->route('dashboard')->with(['message' => '注文が確定しました', 'type' => 'success']);
     }
 
     /**

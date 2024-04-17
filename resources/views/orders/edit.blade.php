@@ -46,11 +46,16 @@
     <hr>
 
     <div class="mt-5 text-center">
-      <a href="{{route('dashboard', ['message' => '注文が確定しました', 'type' => 'success'])}}" class="btn btn-success w-50">注文確定</a>
+        <form action="{{route('orders.changeOrderStatus')}}" method="post">
+          @csrf
+          @method('put')
+          <input type="hidden" name="table_id" value="{{$table_id}}">
+          <button type="submit" class="btn btn-success w-50">注文確定</button>
+        </form>
     </div>
 
     <div class="mt-5">
-      <a href="{{route('orders.create', $order->table_id)}}" class="btn btn-primary">
+      <a href="{{route('orders.create', $table_id)}}" class="btn bg-light">
         <i class="fa-solid fa-angles-left"></i>
         <span>注文画面へ戻る</span>
       </a>
