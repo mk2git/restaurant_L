@@ -7,7 +7,12 @@
       <span>注文</span></a>
   <a href="" class="circle"><i class="fa-regular fa-clipboard"></i>
       <span>Takeout</span></a>
-  <a href="" class="circle"><i class="fa-solid fa-bell-concierge"></i>
+  <a href="" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
+     @if ($orders)
+          <span class="serve-count">{{count($orders)}}</span>
+     @else
+        <span class="serve-count">0</span>
+     @endif
       <span>配膳状況</span></a>
   <a href=""class="circle"><i class="fa-solid fa-cash-register"></i>
       <span>会計</span></a>

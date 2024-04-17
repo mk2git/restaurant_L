@@ -59,6 +59,22 @@ h1{
 .circle span {
     margin-top: 5px;
 }
+.serve-botton{
+    position: relative;
+}
+.serve-count{
+    position: absolute;
+    top: -15px;
+    right: 0;
+    font-weight: bold;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: rgb(224, 164, 72);
+    text-align:center;
+    line-height: 30px;
+    color: brown;
+}
 .container-dash {
     margin-top: 100px;
     display: flex;

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
 use App\Models\Reserve;
+use App\Models\Order;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,8 +22,10 @@ Route::get('/dashboard', function () {
     $unusedSeats = Table::where('status', '未使用')->get();
     $usingSeats = Table::where('status', '使用中')->get();
     $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
+    $orders = Order::distinct()->pluck('table_id');
+    // dd($orders);
 
-    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves'));
+    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
