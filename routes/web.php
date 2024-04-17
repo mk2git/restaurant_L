@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ServeController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -22,7 +23,7 @@ Route::get('/dashboard', function () {
     $unusedSeats = Table::where('status', '未使用')->get();
     $usingSeats = Table::where('status', '使用中')->get();
     $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
-    $orders = Order::distinct()->pluck('table_id');
+    $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
     // dd($orders);
 
     return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders'));
@@ -81,6 +82,11 @@ Route::middleware('auth')->group(function () {
         Route::get('order/edit/{table_id}', 'edit')->name('orders.edit');
         Route::put('order/show/{table_id}', 'update')->name('orders.update');
         Route::delete('order/edit/{order_id}', 'destroy')->name('orders.destroy');
+    });
+
+    Route::controller(ServeController::class)->group(function(){
+        Route::get('serve', 'index')->name('serve.index');
+        Route::put('serve', 'update')->name('serve.update');
     });
 
 });

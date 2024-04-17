@@ -7,7 +7,7 @@
       <span>注文</span></a>
   <a href="" class="circle"><i class="fa-regular fa-clipboard"></i>
       <span>Takeout</span></a>
-  <a href="" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
+  <a href="{{route('serve.index')}}" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
      @if ($orders)
           <span class="serve-count">{{count($orders)}}</span>
      @else
