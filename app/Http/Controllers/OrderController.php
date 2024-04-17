@@ -68,7 +68,9 @@ class OrderController extends Controller
         $order->quantity = $request->input('quantity');
         $order->save();
 
-        return redirect()->route('orders.create', ['table_id' => $request->input('table_id')])->with(['message' => '注文が追加されました。', 'type' => 'success']);
+        $message = '「'.$order->menu->name.'」の注文が追加されました。';
+
+        return redirect()->route('orders.create', ['table_id' => $request->input('table_id')])->with(['message' => $message, 'type' => 'success']);
     }
 
     /**
