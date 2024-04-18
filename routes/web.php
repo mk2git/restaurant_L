@@ -26,8 +26,10 @@ Route::get('/dashboard', function () {
     $usingSeats = Table::where('status', '使用中')->get();
     $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
     $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
+    $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
+    // dd($checkouts);
 
-    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders'));
+    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders', 'checkouts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

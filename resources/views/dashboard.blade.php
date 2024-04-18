@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <x-button-link :orders="$orders" />
+    <x-button-link :orders="$orders" :checkouts="$checkouts" />
 
     <div class="container-reserve rounded bg-light p-4 mb-5 float-end me-5">
         <p class=""><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;空席状況</p>

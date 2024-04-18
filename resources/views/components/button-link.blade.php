@@ -15,10 +15,10 @@
      @endif
       <span>配膳状況</span></a>
   <a href=""class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
-    {{-- @if ($checkTables)
-          <span class="serve-count">{{count($checkTables)}}</span>
+    @if ($checkouts)
+          <span class="serve-count">{{count($checkouts)}}</span>
      @else
         <span class="serve-count">0</span>
-     @endif --}}
+     @endif
       <span>会計</span></a>
 </div>
