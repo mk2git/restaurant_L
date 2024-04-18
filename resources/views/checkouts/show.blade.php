@@ -77,8 +77,6 @@
             <button type="submit" class="btn btn-success w-25">CheckOut</button>
         </form>
       </div>
-     
     </div>
-    
   </div>
 </x-app-layout>

@@ -62,8 +62,8 @@ class CheckoutController extends Controller
     public function update(Request $request)
     {
         $table_id = $request->input('table_id');
+        
         $orders = Order::where('table_id', $table_id)->get();
-        // dd($order);
         foreach($orders as $order){
             $order->check_status = 'done';
             $order->save();
@@ -76,18 +76,11 @@ class CheckoutController extends Controller
         $table_id = $request->input('table_id');
         
         $checkout = Checkout::where('table_id', $table_id)->first();
-        // dd($checkout);
         $checkout->check_status = 'done';
         $checkout->save();
 
         return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Checkout $checkout)
-    {
-        //
-    }
+ 
 }
