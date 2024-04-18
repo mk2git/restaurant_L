@@ -1,8 +1,8 @@
 <x-app-layout>
     @section('background-class', 'top-bg')
-    @if (request()->has('message'))
-        <div class="alert alert-{{ request()->get('type', 'info') }} text-center">
-            {{ request()->get('message') }}
+    @if (session('message'))
+        <div class="alert alert-{{ session('type') }} text-center">
+            {{ session('message') }}
         </div>
     @endif
 

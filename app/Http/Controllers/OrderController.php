@@ -108,7 +108,7 @@ class OrderController extends Controller
             $order->save();
         }
         
-        return redirect()->route('dashboard')->with(['message' => '注文が確定しました', 'type' => 'success']);
+        return redirect()->route('dashboard')->with(['message' => '注文が確定しました', 'type' => 'info']);
     }
 
     /**
