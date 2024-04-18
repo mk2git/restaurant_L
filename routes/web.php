@@ -94,6 +94,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(CheckoutController::class)->group(function(){
+        Route::get('checkout', 'index')->name('checkout.index');
+        Route::get('checkout/show/{table_id}', 'show')->name('checkout.show');
         Route::post('serve', 'storeAndUpdate')->name('checkout.store');
     });
 

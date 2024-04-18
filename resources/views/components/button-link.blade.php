@@ -14,7 +14,7 @@
         <span class="serve-count">0</span>
      @endif
       <span>配膳状況</span></a>
-  <a href=""class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
+  <a href="{{route('checkout.index')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
     @if ($checkouts)
           <span class="serve-count">{{count($checkouts)}}</span>
      @else

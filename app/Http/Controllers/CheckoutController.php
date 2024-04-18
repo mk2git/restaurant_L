@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Checkout;
 use App\Models\Order;
+use App\Models\Table;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -13,15 +14,19 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        $Atables = Table::where('name', 'like', 'A-%')->get();
+        $Btables = Table::where('name', 'like', 'B-%')->get();
+        $checkoutTables = Checkout::all();
+
+        return view('checkouts.index', compact('Atables', 'Btables', 'checkoutTables'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function show()
     {
-        //
+        return view('checkouts.show');
     }
 
     public function storeAndUpdate(Request $request){
