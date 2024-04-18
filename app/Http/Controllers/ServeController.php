@@ -14,13 +14,14 @@ class ServeController extends Controller
      */
     public function index()
     {
-        $table_ids = Order::where('status', 'cooking')
-                        ->distinct()
-                        ->get('table_id');
+        $table_ids = Order::where('check_status', 'not yet')->distinct()->get('table_id');
+        // dd($table_ids);
         $order_tables = Table::whereIn('id', $table_ids)->select('id', 'name')->get();
 
         $orders = Order::all();
-        // dd($orders);
+
+        // $checkTables = Order::where('status', 'done')->distinct()->get();
+        // dd($checkTables);
         return view('serve.index', compact('order_tables', 'orders'));
     }
 

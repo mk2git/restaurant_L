@@ -10,7 +10,9 @@
         @foreach ($orders as $order)
           @if ($order->table_id == $orderTableId)
             <div class="row mb-3">
-                <div class="col-sm-7"><small>{{$order->menu->name}}</small></div>
+                <div class="col-sm-7">
+                  <small @if($order->status == 'done') class="text-decoration-line-through" @endif>{{$order->menu->name}}</small>
+                </div>
                 <div class="col-sm-2">×&nbsp;{{$order->quantity}}</div>
                 <div class="col-sm-3">
                   @if ($order->status == 'cooking')
@@ -22,7 +24,32 @@
                 </div>
             </div>
           @endif
-        @endforeach
+        @endforeach    
+        
+        <hr>
+        <div class="text-center">
+          @foreach ($orders as $order)
+            @if ($order->table_id == $orderTableId)
+              @php
+                 $allDone = $orders->where('table_id', $orderTableId)->every(function ($item) {
+                    return $item->status == 'done';
+                });
+              @endphp
+              @if ($allDone)
+                <form action="{{route('checkout.store')}}" method="post">
+                  @csrf
+                  <input type="hidden" name="table_id" value="{{$orderTableId}}">
+                  <button type="submit" class="btn btn-success text-white w-50">会計へ</button>
+                </form>
+                
+                @break
+              @else
+                <button type="submit" class="btn btn-success text-white w-50" disabled>会計へ</button>
+                @break
+              @endif
+            @endif
+          @endforeach
+        </div>
       </div>
     </div>
   </div>

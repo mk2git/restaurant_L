@@ -12,4 +12,8 @@ class Table extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function checkout(){
+        return $this->hasOne('Checkout::class');
+    }
 }

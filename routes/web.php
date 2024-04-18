@@ -7,11 +7,13 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServeController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
 use App\Models\Reserve;
 use App\Models\Order;
+use App\Models\Checkout;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +26,6 @@ Route::get('/dashboard', function () {
     $usingSeats = Table::where('status', '使用中')->get();
     $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
     $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
-    // dd($orders);
 
     return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders'));
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -88,6 +89,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(ServeController::class)->group(function(){
         Route::get('serve', 'index')->name('serve.index');
         Route::put('serve', 'update')->name('serve.update');
+    });
+
+    Route::controller(CheckoutController::class)->group(function(){
+        Route::post('serve', 'storeAndUpdate')->name('checkout.store');
     });
 
 });

@@ -1,6 +1,7 @@
 <x-app-layout>
   <div class="container mt-5">
     <p class="h3 text-center"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;配膳状況</p>
+    <hr class="w-75 mx-auto">
   </div>
 
   @if (session('message'))
