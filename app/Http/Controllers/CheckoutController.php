@@ -24,9 +24,13 @@ class CheckoutController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function show()
+    public function show($table_id)
     {
-        return view('checkouts.show');
+        $orders = Order::where('table_id', $table_id)->get();
+        $table = Table::where('id', $table_id)->first();
+        $checkoutTime = Checkout::where('table_id', $table_id)->select('created_at')->first();
+
+        return view('checkouts.show', compact('orders', 'table', 'checkoutTime'));
     }
 
     public function storeAndUpdate(Request $request){
@@ -65,6 +69,18 @@ class CheckoutController extends Controller
             $order->save();
         }
         
+    }
+
+    public function updateCheckStatus(Request $request)
+    {
+        $table_id = $request->input('table_id');
+        
+        $checkout = Checkout::where('table_id', $table_id)->first();
+        // dd($checkout);
+        $checkout->check_status = 'done';
+        $checkout->save();
+
+        return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
     }
 
     /**
