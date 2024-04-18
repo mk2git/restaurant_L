@@ -35,7 +35,7 @@ class ServeController extends Controller
         // dd($order);
         $order->status = 'done';
         $order->save();
-        $message = $order->menu->name.'の配膳を確認しました';
+        $message = '「'.$order->menu->name.'」の配膳を確認しました';
         return redirect()->route('serve.index')->with(['message' => $message, 'type' => 'success']);
     }
 
