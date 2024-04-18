@@ -62,7 +62,7 @@ class CheckoutController extends Controller
     public function update(Request $request)
     {
         $table_id = $request->input('table_id');
-        
+
         $orders = Order::where('table_id', $table_id)->get();
         foreach($orders as $order){
             $order->check_status = 'done';
@@ -79,6 +79,11 @@ class CheckoutController extends Controller
         $checkout->check_status = 'done';
         $checkout->save();
 
+        $table = Table::where('id', $table_id)->first();
+        $table->status = '未使用';
+        $table->save();
+
+        
         return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
     }
 
