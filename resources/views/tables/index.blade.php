@@ -9,17 +9,12 @@
                     @foreach ($Atables as $Atable)
                       @if ($Atable->status == '未使用')
                             <button type="button" class="btn edit-unused-Atable" data-bs-toggle="modal" data-bs-target="#unusedTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
-                                <div class="m-3">
-                                    <x-Atable-style :atable-name="$Atable->name" />
-                                </div>
-                                
+                                <x-Atable-style :atable-name="$Atable->name" />
                             </button>
                             <x-modal-unused-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
                       @else
                             <button type="button" class="btn edit-using-Atable" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
-                                <div class="m-3 using-table">
-                                     <x-Atable-style :atable-name="$Atable->name" />
-                                </div>
+                                <x-Atable-style :atable-name="$Atable->name" class="using-table" colorA="blue" />
                            
                         
                         {{-- <div class="m-3 using-table">
