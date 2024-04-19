@@ -8,6 +8,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServeController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SalesBookController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -98,6 +99,10 @@ Route::middleware('auth')->group(function () {
         Route::get('checkout/show/{table_id}', 'show')->name('checkout.show');
         Route::post('serve', 'storeAndUpdate')->name('checkout.store');
         Route::put('checkout', 'updateCheckStatus')->name('checkout.updateCheckStatus');
+    });
+
+    Route::controller(SalesBookController::class)->group(function(){
+        Route::get('salesbook', 'index')->name('salesbook.index');
     });
 
 });
