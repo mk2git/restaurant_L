@@ -16,11 +16,11 @@
            <span class="border-bottom"> &yen;{{number_format($total)}}</span>
           </p>
         </section>
-        <section class="border rounded p-5 mb-5">
+        <section class="border rounded px-5 py-4 mb-5">
           <h3 class="text-center mb-3">本日の注文詳細</h3>
           {{-- 売り上げの詳細 --}}
           @foreach ($categories as $category)
-            <p class="fw-bold border-bottom">{{$category->name}}</p>
+            <p class="fw-bold border-bottom mt-3">{{$category->name}}</p>
             @php
                 $foundCategoryMenu = false;
             @endphp
@@ -69,11 +69,14 @@
         </section>
       </div>
       <div class="col">
-        <section>
-          <h3></h3>
-        </section>
         <section class="border rounded p-4 mb-3">
-          <h3 class="mb-4">前月比</h3>
+            <h3 class="text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;個別料理ランキング&nbsp;&nbsp;<i class="fa-solid fa-utensils"></i></h3>
+
+
+        </section>
+
+        <section class="border rounded p-4 mb-3">
+          <h3 class="mb-4 text-center">前月比</h3>
           <div class="row">
             <div class="col-sm-5">
               <span class="badge rounded-pill text-bg-info text-white">先月</span>
@@ -149,6 +152,5 @@
         </section>
       </div>
     </div>
-    
   </div>
 </x-app-layout>
