@@ -50,7 +50,7 @@
                 @php
                     $found = true;
                 @endphp
-                <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectCheckTableAModal{{$Btable->id}}" data-Btable-id="{{ $Btable->id }}">
+                <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectCheckTableBModal{{$Btable->id}}" data-Btable-id="{{ $Btable->id }}">
                   <div class="m-3 check-table">
                       <x-Btable-style :btable-name="$Btable->name" />
                     </div>
