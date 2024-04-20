@@ -29,7 +29,7 @@
             @csrf
             @method('put')
             <input type="hidden" name="name" value="{{$btableId}}">
-            <button type="submit" class="btn btn-danger">使用する</button>
+            <button type="submit" class="btn btn-success">使用する</button>
         </form>
       </div>
     </div>
