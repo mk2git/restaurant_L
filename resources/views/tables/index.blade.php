@@ -35,16 +35,12 @@
                     {{-- @dd($Btable) --}}
                         @if ($Btable->status == '未使用')
                             <button type="button" class="btn edit-unused-Btable" data-bs-toggle="modal" data-bs-target="#unusedTableBModal{{$Btable->id}}" data-table-id="{{ $Btable->id }}">
-                                <div class="m-3">
-                                    <x-Btable-style :btable-name="$Btable->name" />
-                                </div>
+                                 <x-Btable-style :btable-name="$Btable->name" />
                             </button>
                             <x-modal-unused-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                         @else
                             <button type="button" class="btn edit-using-Btable" data-bs-toggle="modal" data-bs-target="#usingTableBModal{{$Btable->id}}" data-table-id="{{ $Btable->id }}">
-                                <div class="m-3 using-table">
-                                     <x-Btable-style :btable-name="$Btable->name" />
-                                </div>
+                                 <x-Btable-style :btable-name="$Btable->name" class="using-table" />
                             </button>
                             <x-modal-using-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                         @endif

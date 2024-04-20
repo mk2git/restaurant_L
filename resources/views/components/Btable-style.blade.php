@@ -1,4 +1,4 @@
-{{-- <div class="m-3"> --}}
+<div {{ $attributes->merge(['class' => 'm-3'])}}>
   <div class="d-flex">
       <div class="bg-light border rounded-circle ms-3 seat"></div>
   </div>
@@ -9,4 +9,4 @@
   <div class="d-flex">
       <div class="bg-light border rounded-circle ms-3 seat"></div>
   </div>
-{{-- </div> --}}
+</div>
