@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained();
             $table->foreignId('table_id')->constrained();
             $table->integer('quantity');
+            $table->string('order_status')->default('new');
             $table->string('status')->default('cooking');
+            $table->string('check_status')->default('not yet');
             $table->timestamps();
         });
     }

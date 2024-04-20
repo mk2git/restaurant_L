@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
-            $table->integer('table_id');
+            $table->foreignId('table_id')->constrained();
             $table->string('check_status')->default('not yet');
             $table->timestamps();
         });

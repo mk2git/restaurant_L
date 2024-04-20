@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('kid')->default(0);
             $table->date('date');
             $table->timestamp('time');
+            $table->string('status')->nullable()->default('null');
             $table->timestamps();
         });
     }

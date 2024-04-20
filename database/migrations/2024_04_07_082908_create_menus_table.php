@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('price')->unsigned();
-            $table->integer('category_id')->unsigned();
+            $table->foreignId('category_id')->constrained();
             // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->text('description');
+            $table->string('photo');
             $table->timestamps();
         });
     }
