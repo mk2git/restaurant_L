@@ -19,7 +19,9 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $one_user_admin = User::where('role', 'admin')->get();
+        // dd($one_user_admin);
+        return view('auth.register', compact('one_user_admin'));
     }
 
     /**
@@ -29,17 +31,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request);
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => ['required', 'unique:users', 'string', 'max:255'],
+            'role' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            // 'email' => $request->email,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
+        // dd($user);
 
         event(new Registered($user));
 
