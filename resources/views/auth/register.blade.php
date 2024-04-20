@@ -17,6 +17,24 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        @if($one_user_admin->isEmpty())
+            {{-- role --}}
+            <div class="mt-4">
+                <x-input-label for="role" :value="__('Role')" />
+                <div class="d-flex">
+                    <label for="admin" class="me-2">Admin</label>
+                    <x-text-input id="admin" class="block mt-1 me-3" type="radio" name="role" value="admin" required autofocus autocomplete="role" />
+
+                    <label for="staff" class="me-2">Staff</label>
+                    <x-text-input id="staff" class="block mt-1" type="radio" name="role" value="staff" required autofocus autocomplete="role" />
+                    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                </div>
+            </div>
+        @else
+            <input type="hidden" name="role" value="staff">
+        @endif
+        
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
