@@ -15,22 +15,6 @@
                       @else
                             <button type="button" class="btn edit-using-Atable" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$Atable->id}}" data-table-id="{{ $Atable->id }}">
                                 <x-Atable-style :atable-name="$Atable->name" class="using-table" colorA="blue" />
-                           
-                        
-                        {{-- <div class="m-3 using-table">
-                            <div class="d-flex">
-                                <div class="border rounded-circle ms-1 seat"></div>
-                                <div class="border rounded-circle ms-3 seat"></div>
-                            </div>
-
-                            <div class="border d-flex align-items-center justify-content-center seat-Atable">
-                                <span>{{$Atable->name}}</span>
-                            </div>
-                            <div class="d-flex">
-                                <div class="border rounded-circle ms-1 seat"></div>
-                                <div class="border rounded-circle ms-3 seat"></div>
-                            </div>
-                        </div> --}}
                             </button>
                             <x-modal-using-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
                       @endif
@@ -61,19 +45,6 @@
                                 <div class="m-3 using-table">
                                      <x-Btable-style :btable-name="$Btable->name" />
                                 </div>
-                           
-                             {{-- <div class="m-3 using-table">
-                                <div class="d-flex">
-                                    <div class="border rounded-circle ms-3 seat"></div>
-                                </div>
-
-                                <div class="border d-flex align-items-center justify-content-center seat-Btable">
-                                    <span>{{$Btable->name}}</span>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="border rounded-circle ms-3 seat"></div>
-                                </div>
-                            </div> --}}
                             </button>
                             <x-modal-using-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
                         @endif
