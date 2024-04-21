@@ -117,6 +117,8 @@ Route::middleware('auth')->group(function () {
         Route::get('takeout/order/{takeout_id}', 'create')->name('takeout-order.create');
         Route::post('takeout/order', 'store')->name('takeout-order.store');
         Route::get('takeout/edit/{takeout_id}', 'edit')->name('takeout-order.edit');
+        Route::put('takeout/edit/{takeout_id}', 'update')->name('takeout-order.update');
+        Route::delete('takeout/edit/{takeout_id}', 'destroy')->name('takeout-order.delete');
     });
 
 });

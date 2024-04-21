@@ -78,16 +78,34 @@ class TakeoutOrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Takeout_Order $takeout_Order)
+    public function update($takeout_order_id, Request $request)
     {
-        //
+        // dd($request);
+        $takeout_order = Takeout_Order::find($takeout_order_id);
+        $takeout_order->quantity = $request->input('quantity');
+        $takeout_order->save();
+
+        $menu_name = Menu::find($takeout_order->menu_id)->name;
+        $message = '「'.$menu_name.'」注文数が変更されました';
+        $takeout_id = $request->takeout_id;
+        // dd($takeout_id);
+
+        return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_id])->with(['message' => $message, 'type' => 'success']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Takeout_Order $takeout_Order)
+    public function destroy($takeout_order_id, Request $request)
     {
-        //
+        $takeout_order = Takeout_Order::find($takeout_order_id);
+        $menu_name = Menu::find($takeout_order->menu_id)->name;
+        $message = '「'.$menu_name.'」が削除されました';
+        $takeout_id = $request->takeout_id;
+
+        $takeout_order->delete();
+
+        
+        return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_id])->with(['message' => $message, 'type' => 'danger']);
     }
 }
