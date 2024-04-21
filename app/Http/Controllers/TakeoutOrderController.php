@@ -68,7 +68,11 @@ class TakeoutOrderController extends Controller
      */
     public function edit($takeout_id, Takeout_Order $takeout_Order)
     {
-        return view('takeout_orders.edit');
+        $takeout = Takeout::find($takeout_id);
+        $takeout_orders = Takeout_Order::where('takeout_id', $takeout_id)->get();
+        $menus = Menu::all();
+
+        return view('takeout_orders.edit', compact('takeout', 'takeout_orders', 'menus'));
     }
 
     /**
