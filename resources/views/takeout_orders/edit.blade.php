@@ -52,6 +52,22 @@
         @endforeach
       </tbody>
     </table>
+
+    <hr class="w-50 mx-auto">
+
+    <div class="mt-5 text-center">
+      <form action="{{route('takeout-order.sendMessage')}}" method="get">
+        @csrf
+        <button type="submit" class="btn btn-success w-25">注文確定</button>
+      </form>
+    </div>
+
+    <div class="mt-5">
+      <a href="{{route('takeout-order.create', $takeout->id)}}" class="btn bg-light">
+        <i class="fa-solid fa-angles-left"></i>
+        <span>注文画面へ戻る</span>
+      </a>
+    </div>
     
   </div>
 </x-app-layout>

@@ -92,4 +92,8 @@ class TakeoutOrderController extends Controller
         
         return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_id])->with(['message' => $message, 'type' => 'danger']);
     }
+
+    public function sendMessage(){
+        return redirect()->route('dashboard')->with(['message' => 'テイクアウトの注文が確定しました', 'type' => 'info']);
+    }
 }
