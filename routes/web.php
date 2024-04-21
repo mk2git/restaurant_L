@@ -115,6 +115,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(TakeoutOrderController::class)->group(function(){
         Route::get('takeout/order/{takeout_id}', 'create')->name('takeout-order.create');
+        Route::post('takeout/order', 'store')->name('takeout-order.store');
+        Route::get('takeout/edit/{takeout_id}', 'edit')->name('takeout-order.edit');
     });
 
 });

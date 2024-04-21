@@ -5,7 +5,7 @@
     <div class="container-menu mt-3 rounded w-75 mx-auto p-5 mb-5">
       <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;メニュー</p>
   
-      <form action="" method="post">
+      <form action="{{route('takeout-order.store')}}" method="post">
         @csrf
         @foreach ($categories as $category)
           <h5 class="text-start fw-bold ps-5">{{$category->name}}</h5>
@@ -24,9 +24,8 @@
                   </div>
                   <div class="col-4">
                       <input type="hidden" name="menu_id" value="{{$menu->id}}">
-                      <select name="quantity" class="form-control">
-                        <option value="" disabled selected>0</option>
-                        @for ($i=1; $i <= 10 ; $i++)
+                      <select name="quantity[{{$menu->id}}]" class="form-control">
+                        @for ($i=0; $i <= 10 ; $i++)
                           <option value="{{$i}}">{{$i}}</option>
                         @endfor
                       </select>
@@ -38,7 +37,9 @@
           </ul>
         @endforeach
         <input type="hidden" name="takeout_id" value="{{$takeout->id}}">
-        <button type="submit" class="btn btn-success">注文確認へ</button>
+        <div class="text-center mt-5">
+           <button type="submit" class="btn btn-success w-25">注文確認へ</button>
+        </div>
       </form>
     </div>
   </div>

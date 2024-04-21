@@ -35,10 +35,24 @@ class TakeoutOrderController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
 
-        // dd($request);
-        // $takeout_orders = new TakeoutOrders();
+         // メニューごとに注文を処理
+        foreach ($data['quantity'] as $menuId => $quantity) {
+        // quantityがnullまたは0の場合はスキップ
+        if ($quantity === null || $quantity == 0) {
+            continue;
+        }
 
+        // 注文を作成して保存
+        $takeoutOrder = new Takeout_Order();
+        $takeoutOrder->takeout_id = $data['takeout_id'];
+        $takeoutOrder->menu_id = $menuId;
+        $takeoutOrder->quantity = $quantity;
+        $takeoutOrder->save();
+    }
+
+        return redirect()->route('takeout-order.edit', ['takeout_id' => $request->takeout_id]);
     }
 
     /**
@@ -52,9 +66,9 @@ class TakeoutOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Takeout_Order $takeout_Order)
+    public function edit($takeout_id, Takeout_Order $takeout_Order)
     {
-        //
+        return view('takeout_orders.edit');
     }
 
     /**
