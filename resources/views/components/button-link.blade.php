@@ -5,7 +5,7 @@
       <span>座席</span></a>
   <a href="{{route('order.index')}}"class="circle"><i class="fa-solid fa-utensils"></i>
       <span>注文</span></a>
-  <a href="" class="circle"><i class="fa-regular fa-clipboard"></i>
+  <a href="{{route('takeout.create')}}" class="circle"><i class="fa-regular fa-clipboard"></i>
       <span>Takeout</span></a>
   <a href="{{route('serve.index')}}" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
      @if ($orders)

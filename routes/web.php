@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SalesBookController;
+use App\Http\Controllers\TakeoutController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -103,6 +104,10 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(SalesBookController::class)->group(function(){
         Route::get('salesbook', 'index')->name('salesbook.index');
+    });
+
+    Route::controller(TakeoutController::class)->group(function(){
+        Route::get('takeout', 'create')->name('takeout.create');
     });
 
 });
