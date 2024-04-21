@@ -3,25 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Takeout;
+use App\Models\Menu;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TakeoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('takeouts.create');
+        return view('takeout.create');
     }
 
     /**
@@ -51,22 +46,10 @@ class TakeoutController extends Controller
         $takeout->phone_number = $request->input('phone_number');
         $takeout->save();
         
-        return redirect()->route('takeout.order', ['takeout_id' => $takeout->id]);
+        return redirect()->route('takeout-order.create', ['takeout_id' => $takeout->id]);
 
     }
 
-    public function showMenu(){
-
-        return view('takeouts.show-menu');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Takeout $takeout)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -84,11 +67,4 @@ class TakeoutController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Takeout $takeout)
-    {
-        //
-    }
 }
