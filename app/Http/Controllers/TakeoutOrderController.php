@@ -11,14 +11,6 @@ use Illuminate\Http\Request;
 class TakeoutOrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create($takeout_id)
@@ -53,14 +45,6 @@ class TakeoutOrderController extends Controller
     }
 
         return redirect()->route('takeout-order.edit', ['takeout_id' => $request->takeout_id]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Takeout_Order $takeout_Order)
-    {
-        //
     }
 
     /**
