@@ -112,3 +112,18 @@ h1{
 .check-table .border{
     background-color: rgb(26, 190, 190) !important;
 }
+.container-takeout{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+.left-half{
+    flex: 1;
+    background-image: url(../images/takeout.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.right-half{
+    flex: 1;
+}
