@@ -126,4 +126,12 @@ h1{
 }
 .right-half{
     flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+    /* align-items: center; */
+}
+.form-border{
+    height: 50%;
+    background-color: white;
 }
