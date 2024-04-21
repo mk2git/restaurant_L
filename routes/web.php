@@ -10,6 +10,7 @@ use App\Http\Controllers\ServeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SalesBookController;
 use App\Http\Controllers\TakeoutController;
+use App\Http\Controllers\TakeoutOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -110,6 +111,10 @@ Route::middleware('auth')->group(function () {
         Route::get('takeout', 'create')->name('takeout.create');
         Route::post('takeout', 'store')->name('takeout.store');
         Route::get('takeout/order/{takeout_id}', 'showMenu')->name('takeout.order');
+    });
+
+    Route::controller(TakeoutOrderController::class)->group(function(){
+        Route::get('takeout/order/{takeout_id}', 'create')->name('takeout-order.create');
     });
 
 });
