@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Table;
 use App\Models\Menu;
+use App\Models\Takeout_Order;
+use App\Models\Takeout;
 
 class ServeController extends Controller
 {
@@ -15,14 +17,16 @@ class ServeController extends Controller
     public function index()
     {
         $table_ids = Order::where('check_status', 'not yet')->distinct()->get('table_id');
-        // dd($table_ids);
         $order_tables = Table::whereIn('id', $table_ids)->select('id', 'name')->get();
-
         $orders = Order::all();
+
+        $takeout_order_ids = Takeout_Order::where('check_status', 'not yet')->distinct()->get('takeout_id');
+        $takeout_order_names = Takeout::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
+        $takeout_orders = Takeout_Order::all();
 
         // $checkTables = Order::where('status', 'done')->distinct()->get();
         // dd($checkTables);
-        return view('serve.index', compact('order_tables', 'orders'));
+        return view('serve.index', compact('order_tables', 'orders', 'takeout_order_names', 'takeout_orders'));
     }
 
     /**

@@ -15,4 +15,17 @@
       </div>
     @endforeach
   </div>
+
+  <div class="container mt-5">
+    <p class="h3 text-center"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;テイクアウトの状況</p>
+    <hr class="w-75 mx-auto">
+  </div>
+
+  <div class="container w-75 mx-auto my-5 d-flex flex-wrap">
+    @foreach ($takeout_order_names as $takeout_order_name)
+      <div class="m-4 w-25">
+        <x-accordion-takeout-serve :takeout-order-id="$takeout_order_name->id" :takeout-order-name="$takeout_order_name->name" :takeout-orders="$takeout_orders" />
+      </div>
+    @endforeach
+  </div>
 </x-app-layout>
