@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Takeout_Checkout;
 use App\Models\Takeout_Order;
+use App\Models\Takeout;
 use Illuminate\Http\Request;
 
 class TakeoutCheckoutController extends Controller
@@ -20,13 +21,6 @@ class TakeoutCheckoutController extends Controller
         return view('takeout_checkouts.index', compact('takeout_order_ids', 'takeout_orders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     public function storeAndUpdate(Request $request){
        
@@ -54,17 +48,12 @@ class TakeoutCheckoutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Takeout_Checkout $takeout_Checkout)
+    public function show($takeout_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Takeout_Checkout $takeout_Checkout)
-    {
-        //
+        $takeout_orders = Takeout_Order::where('takeout_id' ,$takeout_id)->get();
+        $takeout = Takeout::where('id', $takeout_id)->first();
+        $checkoutTime = Takeout_Checkout::where('takeout_id', $takeout_id)->select('created_at')->first();
+        return view('takeout_checkouts.show', compact('takeout_orders', 'takeout', 'checkoutTime'));
     }
 
     /**
@@ -81,11 +70,13 @@ class TakeoutCheckoutController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Takeout_Checkout $takeout_Checkout)
-    {
-        //
-    }
+   public function updateCheckStatus(Request $request)
+   {
+       $takeout_id = $request->input('takeout_id');
+        $takeout_order = Takeout_Checkout::where('takeout_id' ,$takeout_id)->first();
+        $takeout_order->check_status = 'done';
+        $takeout_order->save();
+
+        return redirect()->route('dashboard')->with(['message' => 'テイクアウトのお会計が1件完了しました', 'type' => 'info']);
+   }
 }
