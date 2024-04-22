@@ -30,28 +30,53 @@
                         <div class="col-sm-5">{{$menu->name}}</div>
                         <div class="col-sm-3">
                           @php
-                             $menuQuantity = 0;
+                             $menuTableQuantity = 0;
+                             $menuTakeoutQuantity = 0;
+                             $totalQuantity = 0;
                           @endphp
                             @foreach ($todayOrders as $todayOrder)
                               @if ($todayOrder->menu_id == $menu->id)
                                 @php
-                                  $menuQuantity += $todayOrder->quantity; 
+                                  $menuTableQuantity += $todayOrder->quantity; 
                                 @endphp                             
                               @endif
                             @endforeach
-                             × {{$menuQuantity}}
+                            @foreach ($todayTakeoutOrders as $todayTakeoutOrder)
+                            {{-- @dump($todayTakeoutOrder) --}}
+                              @if ($todayTakeoutOrder->menu_id == $menu->id)
+                                @php
+                                  $menuTakeoutQuantity += $todayTakeoutOrder->quantity; 
+                                @endphp                             
+                              @endif
+                            @endforeach
+                            @php
+                              $totalQuantity = $menuTableQuantity + $menuTakeoutQuantity;
+                            @endphp
+                             × {{$totalQuantity}}
                         </div>
                         <div class="col-sm-4">
                           @php
+                            $tableTotal = 0;
+                            $takeoutTotal = 0;
                             $total = 0;
                           @endphp
                           @foreach ($todayOrders as $todayOrder)
                             @if ($todayOrder->menu_id == $menu->id)
                               @php
-                                $total += $todayOrder->quantity * $todayOrder->menu->price; 
+                                $tableTotal += $todayOrder->quantity * $todayOrder->menu->price; 
                               @endphp                             
                             @endif
                         @endforeach
+                        @foreach ($todayTakeoutOrders as $todayTakeoutOrder)
+                            @if ($todayTakeoutOrder->menu_id == $menu->id)
+                              @php
+                                $takeoutTotal += $todayTakeoutOrder->quantity * $todayTakeoutOrder->menu->price; 
+                              @endphp                             
+                            @endif
+                        @endforeach
+                        @php
+                          $total = $tableTotal + $takeoutTotal;
+                        @endphp
                         &yen;{{number_format($total)}}
                         </div>
                     </div>
