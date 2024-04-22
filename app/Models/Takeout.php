@@ -13,4 +13,8 @@ class Takeout extends Model
         'name',
         'phone_number'
     ];
+
+    public function takeout_orders(){
+        return $this->hasMany(Takeout_Order::class);
+    }
 }

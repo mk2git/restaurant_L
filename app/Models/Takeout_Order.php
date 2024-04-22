@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Takeout_Order extends Model
 {
     use HasFactory;
+
+    public function takeout(){
+        return $this->belongsTo(Takeout::class);
+    }
 }
