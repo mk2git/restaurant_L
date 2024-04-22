@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Checkout;
+use App\Models\Takeout_Checkout;
 use App\Models\Order;
 use App\Models\Table;
 use Illuminate\Http\Request;
@@ -22,7 +23,19 @@ class CheckoutController extends Controller
     }
 
     public function select(){
-        return view('checkouts.select_checkout');
+        $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
+    if($checkouts){
+        $count_checkouts = count($checkouts);
+    }else{
+        $count_checkouts = 0;
+    }
+    $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id');
+    if($takeout_checkouts){
+        $count_takeout_checkouts = count($takeout_checkouts);
+    }else{
+        $count_takeout_checkouts = 0;
+    }
+        return view('checkouts.select_checkout', compact('count_checkouts', 'count_takeout_checkouts'));
     }
 
     /**
