@@ -8,11 +8,12 @@
   <a href="{{route('takeout.create')}}" class="circle"><i class="fa-regular fa-clipboard"></i>
       <span>Takeout</span></a>
   <a href="{{route('serve.index')}}" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
-     @if ($orders)
-          <span class="serve-count">{{count($orders)}}</span>
-     @else
-        <span class="serve-count">0</span>
-     @endif
+        <span class="serve-count">
+            @php
+                $total_orders = $countOrders + $countTakeoutOrders;
+            @endphp
+            {{$total_orders}}
+        </span>
       <span>配膳状況</span></a>
   <a href="{{route('checkout.index')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
     @if ($checkouts)

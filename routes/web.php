@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Table;
 use App\Models\Reserve;
 use App\Models\Order;
+use App\Models\Takeout_Order;
 use App\Models\Checkout;
 
 Route::get('/', function () {
@@ -30,10 +31,22 @@ Route::get('/dashboard', function () {
     $usingSeats = Table::where('status', '使用中')->get();
     $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
     $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
+    if($orders){
+        $count_orders = count($orders);
+    }else{
+        $count_orders = 0;
+    }
+    
+    $takeout_orders = Takeout_Order::where('status', 'cooking')->distinct()->pluck('takeout_id');
+    if($takeout_orders){
+        $count_takeout_orders = count($takeout_orders);
+    }else{
+        $count_takeout_orders = 0;
+    }
     $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
     // dd($checkouts);
 
-    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'orders', 'checkouts'));
+    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'checkouts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
