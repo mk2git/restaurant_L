@@ -146,3 +146,6 @@ h1{
 .select-checkout:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+.font-small{
+    font-size: 15px;
+}
