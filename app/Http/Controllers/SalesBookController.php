@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\Menu;
+use App\Models\Takeout_Order;
+use Carbon\Carbon;
 
 class SalesBookController extends Controller
 {
@@ -15,11 +17,69 @@ class SalesBookController extends Controller
     public function index()
     {
         $todayOrders = Order::whereDate('created_at', today())->get();
-        $categories = Category::all();
+        $today_table_total = 0;
+        if($todayOrders){
+            foreach($todayOrders as $todayOrder){
+            $today_table_total += $todayOrder->quantity * $todayOrder->menu->price;
+        }
+        }else{
+            $today_table_total = 0;
+        }
+        
+        $todayTakeoutOrders = Takeout_Order::whereDate('created_at', today())->get();
+        $today_takeout_total = 0;
+        if($todayTakeoutOrders){
+            foreach($todayTakeoutOrders as $todayTakeoutOrder){
+            $today_takeout_total += $todayTakeoutOrder->quantity * $todayTakeoutOrder->menu->price;
+        }
+        }else{
+            $today_takeout_total = 0;
+        }
         $menus = Menu::all();
-        // dd($todayOrders);
-        return view('sales-book.index', compact('todayOrders', 'categories', 'menus'));
+        // $data['total'] = 0;
+        // $data['orders'] = [];
+        //  foreach($menus as $k => $menu){
+        //     foreach($todayOrders as $order ){
+        //          $data['orders'][$k]['name'] = $menu->name;
+        //             if($order->menu_id == $menu->id){
+                        
+        //                 $data['orders'][$k]['count'] = $order->quantity;
+        //             dump($data['orders'][$k]['name']);
+        //             dump($data['orders'][$k]['count']);
+        //             }else{
+        //                 $data['orders'][$k]['count'] = 0;
+        //             }
+                    
+                    
+    
+        //         }
+            // dump($data['orders'][$k]['count']);
+        // }
+        
+        // dd($data);
+        $categories = Category::all();
+        // 今月の最初の日を取得
+        $startDate = Carbon::now()->startOfMonth();
+        // 今月の最後の日を取得
+        $endDate = Carbon::now()->endOfMonth();
+        // 今月の範囲内の注文データを取得
+        $thisMonthOrders = Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        
+        // 先月の最初の日を取得
+        $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
+        // 先月の最後の日を取得
+        $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
+        $lastMonthOrders = Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        // dd($lastMonthOrders);
+        
+        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthOrders', 'lastMonthOrders'));
     }
+
+     // $request = Illuminate\Http\Request::capture();
+    // $request->merge(['valueId' => '99']);
+    // $sbc = new SalesBookController();
+    // $sbc->index();
+
 
     /**
      * Show the form for creating a new resource.
