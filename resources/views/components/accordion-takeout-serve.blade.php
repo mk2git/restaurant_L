@@ -46,7 +46,7 @@
               @endif
           @endforeach
           @if ($allDone)
-              <form action="{{ route('checkout.store') }}" method="post">
+              <form action="{{ route('takeout-check.store') }}" method="post">
                   @csrf
                   <input type="hidden" name="takeout_id" value="{{ $takeoutOrderId }}">
                   <button type="submit" class="btn btn-success text-white w-50">会計へ</button>

@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SalesBookController;
 use App\Http\Controllers\TakeoutController;
 use App\Http\Controllers\TakeoutOrderController;
+use App\Http\Controllers\TakeoutCheckoutController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Table;
@@ -121,6 +122,10 @@ Route::middleware('auth')->group(function () {
         Route::put('serve/{takeout_id}', 'updateStatusDone')->name('takeout-order.updateStatusDone');
         Route::delete('takeout/edit/{takeout_id}', 'destroy')->name('takeout-order.delete');
         Route::get('takeout/order', 'sendMessage')->name('takeout-order.sendMessage');
+    });
+
+    Route::controller(TakeoutCheckoutController::class)->group(function(){
+        Route::post('serve', 'storeAndUpdate')->name('takeout-check.store');
     });
 
 });
