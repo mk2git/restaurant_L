@@ -130,9 +130,7 @@ h1{
     height: 50%;
     background-color: white;
 }
-.container-select{
-    
-}
+
 .btn-color{
     color: rgb(224, 164, 72) !important;
     width: 150px;
@@ -140,6 +138,7 @@ h1{
     border-radius: 10%;
     background-color: brown !important;
     text-decoration: none;
+    position: relative;
 }
 .btn-color:hover{
     color: white;
