@@ -21,6 +21,10 @@ class CheckoutController extends Controller
         return view('checkouts.index', compact('Atables', 'Btables', 'checkoutTables'));
     }
 
+    public function select(){
+        return view('checkouts.select_checkout');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

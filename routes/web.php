@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CheckoutController::class)->group(function(){
         Route::get('checkout', 'index')->name('checkout.index');
+        Route::get('checkout/select', 'select')->name('checkout.select');
         Route::get('checkout/show/{table_id}', 'show')->name('checkout.show');
         Route::post('serve', 'storeAndUpdate')->name('checkout.store');
         Route::put('checkout', 'updateCheckStatus')->name('checkout.updateCheckStatus');
@@ -150,6 +151,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::controller(TakeoutCheckoutController::class)->group(function(){
+        Route::get('checkout/takeout', 'index')->name('takeout-check.index');
         Route::post('serve', 'storeAndUpdate')->name('takeout-check.store');
     });
 

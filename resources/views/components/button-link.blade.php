@@ -15,7 +15,7 @@
             {{$total_orders}}
         </span>
       <span>配膳状況</span></a>
-  <a href="{{route('checkout.index')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
+  <a href="{{route('checkout.select')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
       <span class="serve-count">
          @php
              $total_checkouts = $countCheckouts + $countTakeoutCheckouts;
