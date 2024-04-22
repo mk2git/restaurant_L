@@ -17,4 +17,8 @@ class Takeout extends Model
     public function takeout_orders(){
         return $this->hasMany(Takeout_Order::class);
     }
+
+    public function takeout_checkout(){
+        return $this->hasOne(Takeout_Checkout::class);
+    }
 }
