@@ -24,4 +24,8 @@ class Menu extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function takeout_orders(){
+        return $this->hasMany(Takeout_Order::class);
+    }
 }

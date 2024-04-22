@@ -12,4 +12,8 @@ class Takeout_Order extends Model
     public function takeout(){
         return $this->belongsTo(Takeout::class);
     }
+    
+    public function menu(){
+        return $this->belongsTo(Menu::class);
+    }
 }
