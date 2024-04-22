@@ -51,7 +51,6 @@ class ReserveController extends Controller
      */
     public function store(Request $request)
     {
-
         // バリデーションルールとカスタムメッセージ
         $rules = [
             'date' => 'required',
