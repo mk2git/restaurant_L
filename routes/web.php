@@ -152,9 +152,9 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(TakeoutCheckoutController::class)->group(function(){
         Route::get('checkout/takeout', 'index')->name('takeout-check.index');
-        Route::post('serve', 'storeAndUpdate')->name('takeout-check.store');
+        Route::post('serve/takeout', 'storeAndUpdate')->name('takeout-check.store');
         Route::get('checkout/takeout/{takeout_id}', 'show')->name('takeout-check.show');
-        Route::put('checkout' ,'updateCheckStatus')->name('takeout-check.updateCheckStatus');
+        Route::put('checkout/takeout' ,'updateCheckStatus')->name('takeout-check.updateCheckStatus');
     });
 
 });
