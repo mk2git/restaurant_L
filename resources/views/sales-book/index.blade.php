@@ -16,6 +16,9 @@
            <span class="border-bottom"> &yen;{{number_format($total)}}</span>
           </p>
         </section>
+        <div class="text-center mb-2">
+          <i class="fa-solid fa-angles-down h5"></i>
+        </div>
         <section class="border rounded px-5 py-4 mb-5">
           <h3 class="text-center mb-3">本日の注文詳細</h3>
           {{-- 売り上げの詳細 --}}
@@ -75,6 +78,82 @@
 
         </section>
 
+        <section class="border rounded p-4 mb-3">
+          <h3 class="mb-4 text-center">前日比</h3>
+          <div class="row">
+            <div class="col-sm-5">
+              <span class="badge rounded-pill text-bg-info text-white">昨日</span>
+            </div>
+            <div class="col-sm-2 text-center">
+               @php
+                  $gap = 0;
+                  $lastMonthTotal = 0;
+                @endphp
+                @foreach ($lastMonthOrders as $lastMonthOrder)
+                  @php
+                    $lastMonthTotal += $lastMonthOrder->quantity * $lastMonthOrder->menu->price
+                  @endphp
+                @endforeach
+
+                @php
+                  $thisMonthTotal = 0;
+                @endphp
+                @foreach ($thisMonthOrders as $thisMonthOrder)
+                  @php
+                    $thisMonthTotal += $thisMonthOrder->quantity * $thisMonthOrder->menu->price
+                  @endphp
+                @endforeach
+
+                @if ($lastMonthTotal = $thisMonthTotal || $lastMonthOrders->isEmpty())
+                  <span>±0</span> 
+                @endif
+                @if ($lastMonthTotal > $thisMonthTotal)
+                  @php
+                    $gap = $lastMonthTotal - $thisMonthTotal;
+                  @endphp
+                  <span class="text-primary">-{{number_format($gap)}}</span> 
+                @elseif ($lastMonthTotal < $thisMonthTotal)
+                  @php
+                    $gap = $thisMonthTotal - $lastMonthTotal;
+                  @endphp
+                  <span class="text-danger">+{{number_format($gap)}}</span>
+                @endif
+            </div>
+            <div class="col-sm-5">
+              <span class="badge rounded-pill text-bg-success">今日</span> 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5 h3 text-center">
+              @if ($lastMonthOrders->isEmpty())
+                <span class="h5">昨日の売り上げなし</span>
+              @else
+                @php
+                  $lastMonthTotal = 0;
+                @endphp
+                @foreach ($lastMonthOrders as $lastMonthOrder)
+                  @php
+                    $lastMonthTotal += $lastMonthOrder->quantity * $lastMonthOrder->menu->price
+                  @endphp
+                @endforeach
+                &yen;{{number_format($lastMonthTotal)}}
+              @endif
+            </div>
+            <div class="col-sm-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
+            <div class="col-sm-5 h3 text-center">
+              @php
+                $thisMonthTotal = 0;
+              @endphp
+              @foreach ($thisMonthOrders as $thisMonthOrder)
+                @php
+                  $thisMonthTotal += $thisMonthOrder->quantity * $thisMonthOrder->menu->price
+                @endphp
+              @endforeach
+              &yen;{{number_format($thisMonthTotal)}}
+            </div>
+          </div>
+        </section>
+        
         <section class="border rounded p-4 mb-3">
           <h3 class="mb-4 text-center">前月比</h3>
           <div class="row">
