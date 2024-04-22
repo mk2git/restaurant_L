@@ -23,10 +23,9 @@ class ServeController extends Controller
         $takeout_order_ids = Takeout_Order::where('check_status', 'not yet')->whereDate('created_at', today())->distinct()->get('takeout_id');
         $takeout_order_names = Takeout::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
         $takeout_orders = Takeout_Order::whereDate('created_at', today())->get();
+        $confirm_takeout_orders = Takeout_Order::whereDate('created_at', today())->where('status', 'done')->where('check_status', 'not yet')->get();
 
-        // $checkTables = Order::where('status', 'done')->distinct()->get();
-        // dd($checkTables);
-        return view('serve.index', compact('order_tables', 'orders', 'takeout_order_names', 'takeout_orders'));
+        return view('serve.index', compact('order_tables', 'orders', 'takeout_order_names', 'takeout_orders', 'confirm_takeout_orders'));
     }
 
     /**

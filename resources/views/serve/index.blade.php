@@ -22,8 +22,8 @@
   </div>
 
   <div class="container w-75 mx-auto my-5 d-flex flex-wrap">
-    @if ($takeout_orders->isEmpty())
-      <p>テイクアウトの注文はまだありません。</p>
+    @if ($confirm_takeout_orders->isEmpty())
+      <p class="text-center">テイクアウトの注文はありません。</p>
     @endif
     @foreach ($takeout_order_names as $takeout_order_name)
       <div class="m-4 w-25">
