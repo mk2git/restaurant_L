@@ -63,16 +63,59 @@ class SalesBookController extends Controller
         // 今月の最後の日を取得
         $endDate = Carbon::now()->endOfMonth();
         // 今月の範囲内の注文データを取得
-        $thisMonthOrders = Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        $thisMonthTableOrders = Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        $thisMonthTotalTableOrders = 0;
+        if($thisMonthTableOrders){
+            foreach($thisMonthTableOrders as $thisMonthTableOrder){
+                $thisMonthTotalTableOrders += $thisMonthTableOrder->quantity * $thisMonthTableOrder->menu->price;
+            }
+        }else{
+            $thisMonthTotalTableOrders = 0;
+        }
+        // 今月のテイクアウト注文データ
+        $thisMonthTakeoutOrders = Takeout_Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        $thisMonthTotalTakeoutOrders = 0;
+        if($thisMonthTakeoutOrders){
+            foreach($thisMonthTakeoutOrders as $thisMonthTakeoutOrder){
+                $thisMonthTotalTakeoutOrders += $thisMonthTakeoutOrder->quantity * $thisMonthTakeoutOrder->menu->price;
+            }
+        }else{
+            $thisMonthTotalTakeoutOrders = 0;
+        }
+        // 今月のtotal
+        $thisMonthTotalOrders = 0;
+        $thisMonthTotalOrders = $thisMonthTotalTableOrders + $thisMonthTotalTakeoutOrders;
         
+
         // 先月の最初の日を取得
         $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
         // 先月の最後の日を取得
         $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
-        $lastMonthOrders = Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        $lastMonthTableOrders = Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        $lastMonthTotalTableOrders = 0;
+        if($lastMonthTableOrders){
+            foreach($lastMonthTableOrders as $lastMonthTableOrder){
+                $lastMonthTotalTableOrders += $lastMonthTableOrder->quantity * $lastMonthTableOrder->menu->price;
+            }
+        }else{
+            $lastMonthTotalTableOrders = 0;
+        }
+
+        $lastMonthTakeoutOrders = Takeout_Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        $lastMonthTotalTakeoutOrders = 0;
+        if($lastMonthTakeoutOrders){
+            foreach($lastMonthTakeoutOrders as $lastMonthTakeoutOrder){
+                $lastMonthTotalTakeoutOrders += $lastMonthTakeoutOrder->quantity * $lastMonthTakeoutOrder->menu->price;
+            }
+        }else{
+            $lastMonthTotalTakeoutOrders = 0;
+        }
+        // 先月のtotal
+        $lastMonthTotalOrders = 0;
+        $lastMonthTotalOrders = $lastMonthTotalTableOrders + $lastMonthTotalTakeoutOrders;
         // dd($lastMonthOrders);
         
-        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthOrders', 'lastMonthOrders'));
+        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders'));
     }
 
      // $request = Illuminate\Http\Request::capture();
