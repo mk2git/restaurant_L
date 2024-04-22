@@ -8,12 +8,12 @@
       <div class="modal-body text-center">
        <p>{{$takeoutOrderMenuName}}を配膳しましたか？</p> 
        <div>
-         {{-- <form action="{{route('serve.update')}}" method="post"> --}}
+         <form action="{{route('takeout-order.updateStatusDone', $takeoutOrderId)}}" method="post">
             @csrf
             @method('put')
             <input type="hidden" name="takeout_order_id" value="{{$takeoutOrderId}}">
             <button type="submit" class="btn btn-success">配膳済み</button>
-        {{-- </form> --}}
+        </form>
        </div>
       </div>
     </div>

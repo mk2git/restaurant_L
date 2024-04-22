@@ -77,6 +77,16 @@ class TakeoutOrderController extends Controller
         return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_id])->with(['message' => $message, 'type' => 'success']);
     }
 
+    public function updateStatusDone(Request $request){
+
+        $takeout_order = Takeout_Order::find($request->takeout_order_id);
+        $takeout_order->status = 'done';
+        $takeout_order->save();
+
+        $message = 'テイクアウト「'.$takeout_order->menu->name.'」の準備が完了しました';
+        return redirect()->route('serve.index', ['takeout_id' => $takeout_order->takeout_id])->with(['message' => $message, 'type' => 'success']);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
