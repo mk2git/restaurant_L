@@ -16,10 +16,11 @@
         </span>
       <span>配膳状況</span></a>
   <a href="{{route('checkout.index')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
-    @if ($checkouts)
-          <span class="serve-count">{{count($checkouts)}}</span>
-     @else
-        <span class="serve-count">0</span>
-     @endif
+      <span class="serve-count">
+         @php
+             $total_checkouts = $countCheckouts + $countTakeoutCheckouts;
+         @endphp
+         {{$total_checkouts}}
+      </span>
       <span>会計</span></a>
 </div>

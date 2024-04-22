@@ -19,6 +19,7 @@ use App\Models\Reserve;
 use App\Models\Order;
 use App\Models\Takeout_Order;
 use App\Models\Checkout;
+use App\Models\Takeout_Checkout;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,9 +45,20 @@ Route::get('/dashboard', function () {
         $count_takeout_orders = 0;
     }
     $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
+    if($checkouts){
+        $count_checkouts = count($checkouts);
+    }else{
+        $count_checkouts = 0;
+    }
+    $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id');
+    if($takeout_checkouts){
+        $count_takeout_checkouts = count($takeout_checkouts);
+    }else{
+        $count_takeout_checkouts = 0;
+    }
     // dd($checkouts);
 
-    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'checkouts'));
+    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
