@@ -13,7 +13,11 @@ class TakeoutCheckoutController extends Controller
      */
     public function index()
     {
-        //
+        $takeout_order_ids = Takeout_Checkout::where('check_status', 'not yet')->get('takeout_id');
+        $takeout_orders = Takeout_Order::all();
+        // dd($takeout_orders);
+
+        return view('takeout_checkouts.index', compact('takeout_order_ids', 'takeout_orders'));
     }
 
     /**
