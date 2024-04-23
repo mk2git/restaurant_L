@@ -109,21 +109,19 @@
                @php
                   $gap = 0;
                 @endphp
-{{-- 
-                @if ($lastMonthTotal = $thisMonthTotal || $lastMonthOrders->isEmpty())
-                  <span>±0</span> 
-                @endif
-                @if ($lastMonthTotal > $thisMonthTotal)
+                @if ($yesterdayTotal > $todayTotal)
                   @php
-                    $gap = $lastMonthTotal - $thisMonthTotal;
+                    $gap = $yesterdayTotal - $todayTotal;
                   @endphp
                   <span class="text-primary">-{{number_format($gap)}}</span> 
-                @elseif ($lastMonthTotal < $thisMonthTotal)
+                @elseif ($yesterdayTotal < $todayTotal)
                   @php
-                    $gap = $thisMonthTotal - $lastMonthTotal;
+                    $gap = $todayTotal - $yesterdayTotal;
                   @endphp
                   <span class="text-danger">+{{number_format($gap)}}</span>
-                @endif --}}
+                @else
+                  <span>±0</span> 
+                @endif
             </div>
             <div class="col-sm-5">
               <span class="badge rounded-pill text-bg-success">今日</span> 
@@ -131,31 +129,19 @@
           </div>
           <div class="row">
             <div class="col-sm-5 h3 text-center">
-              {{-- @if ($lastMonthOrders->isEmpty())
-                <span class="h5">昨日の売り上げなし</span>
+              @if ($yesterdayTotal !== true)
+                &yen;{{number_format($yesterdayTotal)}}
               @else
-                @php
-                  $lastMonthTotal = 0;
-                @endphp
-                @foreach ($lastMonthOrders as $lastMonthOrder)
-                  @php
-                    $lastMonthTotal += $lastMonthOrder->quantity * $lastMonthOrder->menu->price
-                  @endphp
-                @endforeach
-                &yen;{{number_format($lastMonthTotal)}}
-              @endif --}}
+                <span class="h5">昨日の売り上げなし</span>
+              @endif
             </div>
             <div class="col-sm-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
             <div class="col-sm-5 h3 text-center">
-              {{-- @php
-                $thisMonthTotal = 0;
-              @endphp
-              @foreach ($thisMonthOrders as $thisMonthOrder)
-                @php
-                  $thisMonthTotal += $thisMonthOrder->quantity * $thisMonthOrder->menu->price
-                @endphp
-              @endforeach
-              &yen;{{number_format($thisMonthTotal)}} --}}
+              @if ($todayTotal !== true)
+                &yen;{{number_format($todayTotal)}}
+              @else
+                <span class="h5">今日の売り上げなし</span>
+              @endif
             </div>
           </div>
         </section>

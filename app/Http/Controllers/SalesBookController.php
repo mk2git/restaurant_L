@@ -113,9 +113,55 @@ class SalesBookController extends Controller
         // 先月のtotal
         $lastMonthTotalOrders = 0;
         $lastMonthTotalOrders = $lastMonthTotalTableOrders + $lastMonthTotalTakeoutOrders;
-        // dd($lastMonthOrders);
+
+
+        // 昨日の注文のtotal
+        $yesterdayTableOrders = Order::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
+        $yesterdayTotalTableOrders = 0;
+        if($yesterdayTableOrders){
+            foreach($yesterdayTableOrders as $yesterdayTableOrder){
+                 $yesterdayTotalTableOrders += $yesterdayTableOrder->quantity * $yesterdayTableOrder->menu->price;
+            }
+        }else{
+            $yesterdayTotalTableOrders = 0;
+        }
+        $yesterdayTakeoutOrders = Takeout_Order::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
+        $yesterdayTotalTakeoutOrders = 0;
+        if( $yesterdayTakeoutOrders){
+            foreach( $yesterdayTakeoutOrders as  $yesterdayTakeoutOrder){
+                $yesterdayTotalTakeoutOrders +=  $yesterdayTakeoutOrder->quantity *  $yesterdayTakeoutOrder->menu->price;
+            }
+        }else{
+            $yesterdayTotalTakeoutOrders = 0;
+        }
+        $yesterdayTotal = 0;
+        $yesterdayTotal = $yesterdayTotalTableOrders + $yesterdayTotalTakeoutOrders;
+
+        // 今日の注文total
+        $todayTableOrders = Order::whereDate('created_at',today())->get();
+        $todayTotalTableOrders = 0;
+        if($todayTableOrders){
+            foreach($todayTableOrders as $todayTableOrder){
+                 $todayTotalTableOrders += $todayTableOrder->quantity * $todayTableOrder->menu->price;
+            }
+        }else{
+            $todayTotalTableOrders = 0;
+        }
+        $todayTakeoutOrders = Takeout_Order::whereDate('created_at', today())->get();
+        $todayTotalTakeoutOrders = 0;
+        if($todayTakeoutOrders){
+            foreach($todayTakeoutOrders as $todayTakeoutOrder){
+                $todayTotalTakeoutOrders +=  $todayTakeoutOrder->quantity *  $todayTakeoutOrder->menu->price;
+            }
+        }else{
+            $todayTotalTakeoutOrders = 0;
+        }
+        $todayTotal = 0;
+        $todayTotal = $todayTotalTableOrders + $todayTotalTakeoutOrders;
+// dd($yesterdayTotal);
+       
         
-        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders'));
+        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal'));
     }
 
      // $request = Illuminate\Http\Request::capture();
