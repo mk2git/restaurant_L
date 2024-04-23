@@ -157,9 +157,6 @@
                   $gap = 0;
                @endphp
 
-                @if ($lastMonthTotalOrders = $thisMonthTotalOrders || $lastMonthTotalOrders == true)
-                  <span>±0</span> 
-                @endif
                 @if ($lastMonthTotalOrders > $thisMonthTotalOrders)
                   @php
                     $gap = $lastMonthTotalOrders - $thisMonthTotalOrders;
@@ -170,6 +167,8 @@
                     $gap = $thisMonthTotalOrders - $lastMonthTotalOrders;
                   @endphp
                   <span class="text-danger">+{{number_format($gap)}}</span>
+                @else
+                  <span>±0</span>
                 @endif
             </div>
             <div class="col-sm-5">
