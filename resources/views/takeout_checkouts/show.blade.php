@@ -1,5 +1,8 @@
 <x-app-layout>
   <div class="container mt-5 w-75">
+    @if ($errors->any())
+      <x-error-message />
+    @endif
     <div class="container bg-light p-5">
       <h3 class="text-center mb-4"><i class="fa-regular fa-credit-card"></i>&nbsp;&nbsp;お会計</h3>
 
@@ -67,14 +70,24 @@
                 </tr>
             </tfoot>
         </table>
-      </div>
-     
-      <div class="text-center">
+
+        <p>支払い方法</p>
          <form action="{{route('takeout-check.updateCheckStatus')}}" method="post">
             @csrf
             @method('put')
-            <input type="hidden" name="takeout_id" value="{{$takeout->id}}">
-            <button type="submit" class="btn btn-success w-25">CheckOut</button>
+            <div class="form-check">
+              <input type="radio" name="payment" id="cash" value="cash" class="form-check-input">
+              <label class="form-check-label" for="cash">現金</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" name="payment" id="card" value="card" class="form-check-input">
+              <label class="form-check-label" for="card">クレジットカード</label>
+            </div>
+      </div>
+     
+      <div class="text-center">
+          <input type="hidden" name="takeout_id" value="{{$takeout->id}}">
+          <button type="submit" class="btn btn-success w-25">CheckOut</button>
         </form>
       </div>
     </div>

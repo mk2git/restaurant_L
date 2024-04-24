@@ -6,6 +6,7 @@ use App\Models\Takeout_Checkout;
 use App\Models\Takeout_Order;
 use App\Models\Takeout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TakeoutCheckoutController extends Controller
 {
@@ -72,9 +73,28 @@ class TakeoutCheckoutController extends Controller
 
    public function updateCheckStatus(Request $request)
    {
+        $rule = [
+            'payment' => 'required'
+        ];
+
+        $message = [
+            'payment.required' => '支払い方法を選択してください'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('checkout/takeout/' . $request->takeout_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
        $takeout_id = $request->input('takeout_id');
         $takeout_order = Takeout_Checkout::where('takeout_id' ,$takeout_id)->first();
         $takeout_order->check_status = 'done';
+        $takeout_order->payment = $request->input('payment');
         $takeout_order->save();
 
         return redirect()->route('dashboard')->with(['message' => 'テイクアウトのお会計が1件完了しました', 'type' => 'info']);
