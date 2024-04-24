@@ -45,32 +45,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $rule = [
-            'quantity' => 'required|min:1'
-        ];
+        $data = $request->all();
+// dd($data);
+        // メニューごとに注文を処理
+       foreach ($data['quantity'] as $menuId => $quantity) {
+       // quantityがnullまたは0の場合はスキップ
+       if ($quantity === null || $quantity == 0) {
+           continue;
+       }
 
-        $message = [
-            'quantity.required' => '数量の指定をしてください。'
-        ];
-         // バリデータの作成
-         $validator = Validator::make($request->all(), $rule, $message);
+       // 注文を作成して保存
+       $Order = new Order();
+       $Order->table_id = $data['table_id'];
+       $Order->menu_id = $menuId;
+       $Order->quantity = $quantity;
+       $Order->save();
+   }
 
-        // バリデーションエラー時の処理
-        if ($validator->fails()) {
-            return redirect('order/create/'. $request->input('table_id'))
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $order = new Order();
-        $order->menu_id = $request->input('menu_id');
-        $order->table_id = $request->input('table_id');
-        $order->quantity = $request->input('quantity');
-        $order->save();
-
-        $message = '「'.$order->menu->name.'」の注文が追加されました。';
-
-        return redirect()->route('orders.create', ['table_id' => $request->input('table_id')])->with(['message' => $message, 'type' => 'success']);
+       return redirect()->route('orders.edit', ['table_id' => $request->table_id]);
     }
 
     /**
