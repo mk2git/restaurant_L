@@ -5,11 +5,7 @@
         <section class="border rounded p-3 mb-3">
           <h3 class="text-center">本日の売り上げ金額</h3>
           <p class="text-center">
-            @php
-              $total = 0;
-              $total = $today_table_total + $today_takeout_total;
-            @endphp
-           <span class="border-bottom h1"> &yen;{{number_format($total)}}<small class="font-small d-block mt-3">（ テイクアウト：&yen;{{number_format($today_takeout_total)}} ）</small></span>
+           <span class="border-bottom h1"> &yen;{{number_format($todayTotal)}}<small class="font-small d-block mt-3">（ テイクアウト：&yen;{{number_format($today_takeout_total)}} ）</small></span>
           </p>
         </section>
         <div class="text-center mb-2">
@@ -95,7 +91,6 @@
       <div class="col">
         <section class="border rounded p-4 mb-3">
             <h3 class="text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;個別料理ランキング&nbsp;&nbsp;<i class="fa-solid fa-utensils"></i></h3>
-
 
         </section>
 
