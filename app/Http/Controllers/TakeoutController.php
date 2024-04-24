@@ -10,15 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class TakeoutController extends Controller
 {
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('takeout.create');
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -48,23 +39,6 @@ class TakeoutController extends Controller
         
         return redirect()->route('takeout-order.create', ['takeout_id' => $takeout->id]);
 
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Takeout $takeout)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Takeout $takeout)
-    {
-        //
     }
 
 }
