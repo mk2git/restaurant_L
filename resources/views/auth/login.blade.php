@@ -41,6 +41,12 @@
                     </x-primary-button>
                 </small>
             </form>
+            <div class="mt-4 text-center">
+              <hr>   
+
+              <a href="{{route('register')}}" class="btn bg-gray-800 mt-3 w-25 text-white hover:bg-gray-700">新規登録</a>
+            </div>
+            
         </div>
     </div>
 @endsection
