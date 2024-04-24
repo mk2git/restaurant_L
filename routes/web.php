@@ -110,7 +110,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(OrderController::class)->group(function(){
         Route::get('order', 'index')->name('order.index');
         Route::get('order/create/{table_id}', 'create')->name('orders.create');
-        Route::post('order/create/{table_id}', 'store')->name('orders.store');
+        Route::post('order/create', 'store')->name('orders.store');
         Route::get('order/edit/{table_id}', 'edit')->name('orders.edit');
         Route::put('order/show/{table_id}', 'update')->name('orders.update');
         Route::put('order/edit', 'changeOrderStatus')->name('orders.changeOrderStatus');
