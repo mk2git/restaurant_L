@@ -54,7 +54,7 @@
         </form>
     </div>
 
-    <div class="mt-5">
+    <div class="my-5">
       <a href="{{route('orders.create', $table_id)}}" class="btn bg-light">
         <i class="fa-solid fa-angles-left"></i>
         <span>注文画面へ戻る</span>
