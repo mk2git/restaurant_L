@@ -35,6 +35,8 @@ class SalesBookController extends Controller
         }else{
             $today_takeout_total = 0;
         }
+        $todayTotal = 0;
+        $todayTotal = $today_table_total + $today_takeout_total;
         $menus = Menu::all();
         // $data['total'] = 0;
         // $data['orders'] = [];
@@ -161,7 +163,7 @@ class SalesBookController extends Controller
 // dd($yesterdayTotal);
        
         
-        return view('sales-book.index', compact('todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal'));
+        return view('sales-book.index', compact('todayTotal','todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal'));
     }
 
      // $request = Illuminate\Http\Request::capture();
