@@ -7,6 +7,7 @@ use App\Models\Takeout_Checkout;
 use App\Models\Order;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -90,10 +91,30 @@ class CheckoutController extends Controller
 
     public function updateCheckStatus(Request $request)
     {
+        // dd($request);
+        $rule = [
+            'payment' => 'required'
+        ];
+
+        $message = [
+            'payment.required' => '支払い方法を選択してください'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('checkout/show/' . $request->table_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $table_id = $request->input('table_id');
         
-        $checkout = Checkout::where('table_id', $table_id)->first();
+        $checkout = Checkout::where('table_id', $table_id)->where('check_status', 'not yet')->first();
+        
         $checkout->check_status = 'done';
+        $checkout->payment = $request->input('payment');
         $checkout->save();
 
         $table = Table::where('id', $table_id)->first();
@@ -102,7 +123,6 @@ class CheckoutController extends Controller
 
         
         return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
+   
     }
-
- 
 }
