@@ -24,11 +24,13 @@
   <div class="container w-75 mx-auto my-5 d-flex flex-wrap">
     @if ($confirm_takeout_orders->isEmpty())
       <p class="text-center">テイクアウトの注文はありません。</p>
+    @else
+      @foreach ($takeout_order_names as $takeout_order_name)
+        <div class="m-4 w-25">
+          <x-accordion-takeout-serve :takeout-order-id="$takeout_order_name->id" :takeout-order-name="$takeout_order_name->name" :takeout-orders="$takeout_orders" />
+        </div>
+      @endforeach
     @endif
-    @foreach ($takeout_order_names as $takeout_order_name)
-      <div class="m-4 w-25">
-        <x-accordion-takeout-serve :takeout-order-id="$takeout_order_name->id" :takeout-order-name="$takeout_order_name->name" :takeout-orders="$takeout_orders" />
-      </div>
-    @endforeach
+   
   </div>
 </x-app-layout>
