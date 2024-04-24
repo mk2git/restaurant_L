@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class TakeoutController extends Controller
 {
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('takeout.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
