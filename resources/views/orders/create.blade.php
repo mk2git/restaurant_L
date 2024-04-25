@@ -11,12 +11,10 @@
         @foreach ($categories as $category)
           <h5 class="text-start fw-bold ps-5">{{$category->name}}</h5>
           <hr class="w-25">
-          <ul>
             @foreach ($menus as $menu)
               @if($category->id == $menu->category_id)
-              <li class="mb-2">
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-4">
                     <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
                      <p>{{$menu->name}}</p>
                   </button>
@@ -26,7 +24,7 @@
                   <div class="col-3">
                     <span>{{number_format($menu->price)}}円</span>
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                       <input type="hidden" name="menu_id" value="{{$menu->id}}">
                       <select name="quantity[{{$menu->id}}]" class="form-control">
                         @for ($i=0; $i <= 10 ; $i++)
@@ -35,10 +33,8 @@
                       </select>
                   </div>
                 </div>
-              </li>
               @endif
             @endforeach
-          </ul>
         @endforeach
         <input type="hidden" name="table_id" value="{{$table->id}}">
         <div class="text-center mt-5">
