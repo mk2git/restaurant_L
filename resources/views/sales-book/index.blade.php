@@ -237,20 +237,7 @@
         <section class="border rounded p-4 mb-3">
             <p class="h5 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文数によるランキング</p>
                @if ($table_top_three_orders_q->isEmpty())               
-                  <p class="badge rounded-pill bg-success">レストラン</p>
-                  <table class="table table-hover table-borderless mx-auto text-center">
-                    <thead class="border-bottom">
-                      <tr>
-                        <th>順位</th>
-                        <th>料理名</th>
-                        <th>数量</th>
-                        <th>合計金額</th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-align-center">
-                      <td colspan="4">まだデータがありません</td>
-                    </tbody>
-                  </table>
+                  <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
                 @else
                   <p class="badge rounded-pill bg-success">レストラン</p>
                   <table class="table table-hover table-borderless mx-auto text-center">
@@ -277,20 +264,7 @@
                   </table>
                 @endif 
                 @if ($takeout_top_three_orders_q->isEmpty())  
-                  <p class="badge rounded-pill bg-warning">テイクアウト</p> 
-                  <table class="table table-hover table-borderless mx-auto text-center">
-                    <thead class="border-bottom">
-                      <tr>
-                        <th>順位</th>
-                        <th>料理名</th>
-                        <th>数量</th>
-                        <th>合計金額</th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-align-center">
-                      <td colspan="4">まだデータがありません</td>
-                    </tbody>
-                  </table>
+                  <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
               @else
                 <p class="badge rounded-pill bg-warning">テイクアウト</p> 
                 <table class="table table-hover table-borderless mx-auto text-center">
@@ -322,20 +296,7 @@
             <i class="fa-solid fa-sack-dollar"></i>&nbsp;&nbsp;合計金額によるランキング
           </p>
           @if ($table_top_three_prices->isEmpty()) 
-              <p class="badge rounded-pill bg-success">レストラン</p>
-              <table class="table table-hover table-borderless mx-auto text-center">
-                <thead class="border-bottom">
-                  <tr>
-                    <th>順位</th>
-                    <th>料理名</th>
-                    <th>数量</th>
-                    <th>合計金額</th>
-                  </tr>
-                </thead>
-                <tbody class="text-align-center">
-                  <td colspan="4">まだデータがありません</td>
-                </tbody>
-              </table>
+              <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
           @else
               <p class="badge rounded-pill bg-success">レストラン</p>
               <table class="table table-hover table-borderless mx-auto text-center">
@@ -362,20 +323,7 @@
               </table>
           @endif
           @if ($takeout_top_three_prices->isEmpty()) 
-              <p class="badge rounded-pill bg-warning">テイクアウト</p> 
-                <table class="table table-hover table-borderless mx-auto text-center">
-                  <thead class="border-bottom">
-                    <tr>
-                      <th>順位</th>
-                      <th>料理名</th>
-                      <th>数量</th>
-                      <th>合計金額</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-align-center">
-                    <td colspan="4">まだデータがありません</td>
-                  </tbody>
-                </table>
+              <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
               @else
                <p class="badge rounded-pill bg-warning">テイクアウト</p> 
                 <table class="table table-hover table-borderless mx-auto text-center">
