@@ -56,9 +56,6 @@ class CheckoutController extends Controller
         // store ロジックを実行
          $this->store($request);
 
-         // update ロジックを実行
-         $this->update($request);
-
          return redirect()->route('dashboard')->with(['message' => '1件会計可能なテーブルが出ました。', 'type' => 'info']);
     }
     /**
@@ -71,23 +68,16 @@ class CheckoutController extends Controller
         $checkout = new Checkout();
         $checkout->table_id = $table_id;
         $checkout->save();
-       
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        $table_id = $request->input('table_id');
+        $checkout_id = $checkout->id;
 
         $orders = Order::where('table_id', $table_id)->get();
         foreach($orders as $order){
             $order->check_status = 'done';
+            $order->checkout_id = $checkout_id;
             $order->save();
         }
-        
     }
+
 
     public function updateCheckStatus(Request $request)
     {
