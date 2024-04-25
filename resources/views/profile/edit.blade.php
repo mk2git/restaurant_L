@@ -55,9 +55,8 @@
                                      @csrf
                                      @method('put')
                                   <select name="role" class="form-control">
-                                      @foreach ($roles as $role)
-                                         <option value="{{$role}}" @if($role == $user->role)  selected @endif>{{$role}}</option>
-                                      @endforeach
+                                      <option value="admin" @if($user->role == 'admin') selected @endif>Admin</option>
+                                      <option value="staff" @if($user->role == 'staff') selected @endif>Staff</option>
                                   </select>
                               </td>
                               <td>
