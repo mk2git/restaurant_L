@@ -18,7 +18,7 @@ class CheckoutController extends Controller
     {
         $Atables = Table::where('name', 'like', 'A-%')->get();
         $Btables = Table::where('name', 'like', 'B-%')->get();
-        $checkoutTables = Checkout::all();
+        $checkoutTables = Checkout::where('check_status', 'not yet')->get();
 
         return view('checkouts.index', compact('Atables', 'Btables', 'checkoutTables'));
     }
@@ -44,7 +44,10 @@ class CheckoutController extends Controller
      */
     public function show($table_id)
     {
-        $orders = Order::where('table_id', $table_id)->get();
+        $checkout_ids = Checkout::where('table_id', $table_id)->where('check_status', 'not yet')->pluck('id');
+       
+       $orders = Order::whereIn('checkout_id', $checkout_ids)->get();
+        //  dd($orders);
         $table = Table::where('id', $table_id)->first();
         $checkoutTime = Checkout::where('table_id', $table_id)->select('created_at')->first();
 
@@ -70,7 +73,7 @@ class CheckoutController extends Controller
         $checkout->save();
         $checkout_id = $checkout->id;
 
-        $orders = Order::where('table_id', $table_id)->get();
+        $orders = Order::where('table_id', $table_id)->where('check_status', 'not yet')->get();
         foreach($orders as $order){
             $order->check_status = 'done';
             $order->checkout_id = $checkout_id;
@@ -101,11 +104,15 @@ class CheckoutController extends Controller
         }
         $table_id = $request->input('table_id');
         
-        $checkout = Checkout::where('table_id', $table_id)->where('check_status', 'not yet')->first();
+        $checkouts = Checkout::where('table_id', $table_id)->where('check_status', 'not yet')->get();
         
-        $checkout->check_status = 'done';
-        $checkout->payment = $request->input('payment');
-        $checkout->save();
+        foreach($checkouts as $checkout){
+            $checkout = Checkout::find($checkout->id);
+            $checkout->check_status = 'done';
+            $checkout->payment = $request->input('payment');
+            $checkout->save();
+        }
+        
 
         $table = Table::where('id', $table_id)->first();
         $table->status = '未使用';
