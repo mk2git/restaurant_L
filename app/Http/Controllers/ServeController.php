@@ -18,7 +18,7 @@ class ServeController extends Controller
     {
         $table_ids = Order::where('check_status', 'not yet')->distinct()->get('table_id');
         $order_tables = Table::whereIn('id', $table_ids)->select('id', 'name')->get();
-        $orders = Order::all();
+        $orders = Order::where('check_status', 'not yet')->get();
 
         $takeout_order_ids = Takeout_Order::where('check_status', 'not yet')->whereDate('created_at', today())->distinct()->get('takeout_id');
         $takeout_order_names = Takeout::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
