@@ -402,8 +402,12 @@
                 </table>
               @endif
         </section>
+      </div>
+    </div>
 
-        <section class="border rounded p-4 mb-3">
+    <div class="row mb-5">
+      <div class="col">
+         <section class="border rounded p-4 mb-3">
           <h3 class="mb-4 text-center">前日比</h3>
           <div class="row">
             <div class="col-sm-5">
@@ -449,8 +453,9 @@
             </div>
           </div>
         </section>
-
-        <section class="border rounded p-4 mb-3">
+      </div>
+      <div class="col">
+         <section class="border rounded p-4 mb-3">
           <h3 class="mb-4 text-center">前月比</h3>
           <div class="row">
             <div class="col-sm-5">
@@ -498,12 +503,6 @@
             </div>
           </div>
         </section>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        
       </div>
     </div>
   </div>
