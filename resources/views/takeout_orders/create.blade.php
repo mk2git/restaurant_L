@@ -16,7 +16,10 @@
               <li class="mb-2">
                 <div class="row">
                   <div class="col-3">
-                    <p>{{$menu->name}}</p>
+                      <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
+                        <p>{{$menu->name}}</p>
+                     </button>
+                      <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" />
                   </div>
                   <div class="col-2">・・・・・</div>
                   <div class="col-3">
