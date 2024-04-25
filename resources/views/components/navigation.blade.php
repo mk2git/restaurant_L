@@ -41,9 +41,9 @@
                             <x-dropdown-link :href="route('menu.index')">
                                 メニュー編集
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            {{-- <x-dropdown-link :href="route('profile.edit')">
                                在庫
-                            </x-dropdown-link>
+                            </x-dropdown-link> --}}
                             <x-dropdown-link :href="route('salesbook.index')">
                                 売上
                             </x-dropdown-link>
