@@ -179,8 +179,8 @@ class SalesBookController extends Controller
         ->get();
 
         // 金額ランキング
-        $table_top_three_prices = Order::select('menu_id', DB::raw('SUM(quantity * m.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
-        ->join('menus as m', 'orders.menu_id', '=', 'm.id')
+        $table_top_three_prices = Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
+        ->join('menus', 'orders.menu_id', '=', 'menus.id')
         ->groupBy('menu_id')
         ->orderByDesc('total_amount')
         ->take(3)
@@ -193,16 +193,15 @@ class SalesBookController extends Controller
         ->orderByDesc('total_amount')
         ->take(3)
         ->get();
-        dd($takeout_top_three_prices);
 
-        
+         $sbc = new SalesBookController();
+        $sbc->index();
         return view('sales-book.index', compact('todayTotal','todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal', 'table_top_three_orders_q', 'takeout_top_three_orders_q', 'table_top_three_prices', ));
     }
 
      // $request = Illuminate\Http\Request::capture();
     // $request->merge(['valueId' => '99']);
-    // $sbc = new SalesBookController();
-    // $sbc->index();
+   
 
 
 //     public function select(Request $request)
