@@ -235,7 +235,7 @@
 
         {{-- </section> --}}
         <section class="border rounded p-4 mb-3">
-            <p class="h5 text-center">注文数によるランキング</p>
+            <p class="h5 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文数によるランキング</p>
                @if (isset($table_top_three_orders_q))
                   <p class="badge rounded-pill bg-success">レストラン</p>
                   <table class="table table-hover table-borderless mx-auto text-center">
@@ -319,7 +319,7 @@
         </section>
         <section class="border rounded p-4 mb-3">
           <p class="h5 text-center">
-            合計金額によるランキング
+            <i class="fa-solid fa-sack-dollar"></i>&nbsp;&nbsp;合計金額によるランキング
           </p>
           @if (isset($table_top_three_prices))
              <p class="badge rounded-pill bg-success">レストラン</p>
@@ -361,7 +361,46 @@
                 </tbody>
               </table>
           @endif
-          
+          @if ($takeout_top_three_prices != null) 
+                <p class="badge rounded-pill bg-warning">テイクアウト</p> 
+                <table class="table table-hover table-borderless mx-auto text-center">
+                  <thead class="border-bottom">
+                    <tr>
+                      <th>順位</th>
+                      <th>料理名</th>
+                      <th>数量</th>
+                      <th>合計金額</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($takeout_top_three_prices as $takeout_top_three_price)
+                      <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{$takeout_top_three_price->menu->name}}</td>
+                        <td>{{$takeout_top_three_price->total_quantity}}</td>
+                        <td>
+                          &yen;{{number_format($takeout_top_three_price->total_quantity * $takeout_top_three_price->menu->price)}}
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              @else
+                <p class="badge rounded-pill bg-warning">テイクアウト</p> 
+                <table class="table table-hover table-borderless mx-auto text-center">
+                  <thead class="border-bottom">
+                    <tr>
+                      <th>順位</th>
+                      <th>料理名</th>
+                      <th>数量</th>
+                      <th>合計金額</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-align-center">
+                    <td colspan="4">まだデータがありません</td>
+                  </tbody>
+                </table>
+              @endif
         </section>
 
         <section class="border rounded p-4 mb-3">
@@ -459,6 +498,12 @@
             </div>
           </div>
         </section>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        
       </div>
     </div>
   </div>
