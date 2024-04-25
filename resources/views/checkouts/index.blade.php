@@ -10,7 +10,7 @@
                 $found = false;
             @endphp
             @foreach ($checkoutTables as $checkoutTable)
-              @if ($Atable->id == $checkoutTable->table_id && $checkoutTable->check_status == 'not yet')
+              @if ($Atable->id == $checkoutTable->table_id)
                 @php
                     $found = true;
                 @endphp
