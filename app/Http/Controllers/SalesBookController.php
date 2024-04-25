@@ -188,15 +188,16 @@ class SalesBookController extends Controller
         // $select = null;
         // $table_top_three_prices = null;
         $takeout_top_three_prices = Takeout_Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
-        ->join('menus', 'takeout_orders.menu_id', '=', 'menus.id')
+        ->join('menus', 'takeout__orders.menu_id', '=', 'menus.id')
         ->groupBy('menu_id')
         ->orderByDesc('total_amount')
         ->take(3)
         ->get();
+        // dd($takeout_top_three_prices);
 
-         $sbc = new SalesBookController();
-        $sbc->index();
-        return view('sales-book.index', compact('todayTotal','todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal', 'table_top_three_orders_q', 'takeout_top_three_orders_q', 'table_top_three_prices', ));
+        //  $sbc = new SalesBookController();
+        // $sbc->index();
+        return view('sales-book.index', compact('todayTotal','todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal', 'table_top_three_orders_q', 'takeout_top_three_orders_q', 'table_top_three_prices', 'takeout_top_three_prices'));
     }
 
      // $request = Illuminate\Http\Request::capture();
