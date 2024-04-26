@@ -24,9 +24,9 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($table_id)
+    public function create(Table $table_id)
     {
-        $table = Table::where('id', $table_id)->first();
+        $table = $table_id;
         $menus = Menu::all();
 
        // menuテーブルから使用されているカテゴリIDの一覧を取得
