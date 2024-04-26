@@ -1,4 +1,7 @@
 <x-app-layout>
+  <div class="mt-3 ms-5">
+    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"><i class="fa-solid fa-house"></i></a> > <a href="{{route('order.index')}}" class="text-black">テーブル選択</a> > {{$table->name}}の注文
+  </div>
   <div class="container mt-5">
     <p class="h3">テーブル名：{{$table->name}}</p>
   </div>
