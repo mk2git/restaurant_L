@@ -102,9 +102,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(TableController::class)->group(function(){
         Route::get('table', 'index')->name('table.index');
         Route::get('table/edit', 'edit')->name('table.edit');
-        Route::post('table/edit/{count}', 'store')->name('table.store');
+        Route::post('table/edit', 'store')->name('table.store');
         Route::put('table/{id}', 'update')->name('table.update');
-        Route::delete('table/edit/{count}', 'destroy')->name('table.destroy');
+        Route::delete('table/edit', 'destroy')->name('table.destroy');
     });
 
     Route::controller(OrderController::class)->group(function(){
