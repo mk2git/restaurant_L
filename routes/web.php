@@ -22,7 +22,7 @@ use App\Models\Checkout;
 use App\Models\Takeout_Checkout;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -132,6 +132,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(SalesBookController::class)->group(function(){
         Route::get('salesbook', 'index')->name('salesbook.index');
+        // Route::post('salesbook/select', 'select')->name('salesbook.select');
     });
 
     Route::controller(TakeoutController::class)->group(function(){
