@@ -36,7 +36,10 @@
                             <li class="mb-3">
                                 <div class="row me-4">
                                     <div class="col-3">
-                                        <span>{{$menu->name}}</span>
+                                        <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
+                                            <p>{{$menu->name}}</p>
+                                         </button>
+                                         <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" />
                                     </div>
                                     <div class="col-2">・・・・・</div>
                                     <div class="col-3">
@@ -80,7 +83,10 @@
                                         <li class="mb-3">
                                             <div class="row me-4">
                                                 <div class="col-3">
-                                                    <span>{{$menu->name}}</span>
+                                                    <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
+                                                        <p>{{$menu->name}}</p>
+                                                     </button>
+                                                     <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" />
                                                 </div>
                                                 <div class="col-2">・・・・・</div>
                                                 <div class="col-3">
