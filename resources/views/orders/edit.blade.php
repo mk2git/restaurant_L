@@ -18,8 +18,6 @@
               <form action="{{route('orders.update', $order->id)}}" method="post">
                 @csrf
                 @method('put')
-                <input type="hidden" name="order_id" value="{{$order->id}}">
-                <input type="hidden" name="table_id" value="{{$order->table_id}}">
                 <select name="quantity" class="form-control">
                   @for ($i=1; $i <= 10; $i++)
                     <option value="{{$i}}" @if($order->quantity == $i) selected @endif>{{$i}}</option>
