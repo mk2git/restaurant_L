@@ -11,7 +11,7 @@
 </script>
 
   {{-- 2人席使用中モーダル --}}
-  <div class="modal fade" id="usingTableBModal{{$btableId}}" tabindex="-1" role="dialog" aria-labelledby="usingTableBModalLabel" aria-hidden="true">
+  <div class="modal fade" id="usingTableBModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="usingTableBModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -21,14 +21,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <p class="text-center">{{$btableName}}の使用をやめますか？</p>
+            <p class="text-center">{{ $seatType }}-{{$seatNumber}}の使用をやめますか？</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <form action="{{route('table.update', $btableId)}}" method="post">
+            <form action="{{route('table.update', $tableId)}}" method="post">
                 @csrf
                 @method('put')
-                <input type="hidden" name="name" value="B-">
                 <button type="submit" class="btn btn-danger">使用しない</button>
             </form>
           </div>
