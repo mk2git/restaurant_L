@@ -45,6 +45,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -56,11 +57,16 @@ class OrderController extends Controller
                 continue;
             }
             // 注文を作成して保存
-            $Order = new Order();
-            $Order->table_id = $data['table_id'];
-            $Order->menu_id = $menuId;
-            $Order->quantity = $quantity;
-            $Order->save();
+            $order = new Order();
+            $order->table_id = $data['table_id'];
+            
+            $order->menu_id = $menuId;
+            
+            $order->quantity = $quantity;
+            // dd($order->quantity);
+    //   dd($order);      
+            $order->save();
+            DB::commit();
           }
         return redirect()->route('orders.edit', ['table_id' => $request->table_id]);  
         } catch (\Throwable $th){
@@ -124,11 +130,12 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($order_id, Request $request)
+    public function destroy(Order $order_id, Request $request)
     {
+        // dd($order_id);
         try {
             DB::beginTransaction();
-            $order = Order::find($order_id);
+            $order = $order_id;
             $order->delete();
             DB::commit();
             return redirect()->route('orders.edit', ['table_id' => $request->input('table_id')])->with(['message' => '注文が1件削除されました。', 'type' => 'danger']);
