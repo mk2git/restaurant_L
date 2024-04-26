@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('status')->default('未使用');
+            $table->string('seat_type');
+            $table->integer('seat_number');
+            $table->integer('status')->default(1);
             $table->integer('order_id')->nullable()->default(null);
             $table->timestamps();
         });
