@@ -18,7 +18,12 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $users = User::all();
+
+        // たぶん、これよりは、config定数を使ってあらかじめroleを定数にしておくとよい by candy
+        // roleシステムはGateがオススメ by candy
         $roles = User::distinct()->pluck('role');
+
+        
         return view('profile.edit', [
             'user' => $request->user(),
         ], compact('users', 'roles'));
