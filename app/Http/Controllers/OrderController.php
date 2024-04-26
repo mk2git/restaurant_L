@@ -113,9 +113,9 @@ class OrderController extends Controller
             DB::beginTransaction();
             $table_id = $request->table_id;
             $orders = Order::where('table_id', $table_id)->get();
-            // dd($order);
+
             foreach($orders as $order){
-                $order->order_status = 'old';
+                $order->order_status = config('order.old');
                 $order->save();
             }
             DB::commit();
