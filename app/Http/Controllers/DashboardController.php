@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $totalSeats = Table::all()->count();
         $unusedSeats = Table::where('status', config('table.未使用'))->count();
         $usingSeats = Table::where('status', config('table.使用中'))->count();
-        
+
         $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
         $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
         if($orders){
@@ -53,53 +53,5 @@ class DashboardController extends Controller
         // dd($checkouts);
     
         return view('dashboard', compact('role', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
