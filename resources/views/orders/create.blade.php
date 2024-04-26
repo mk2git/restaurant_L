@@ -1,9 +1,9 @@
 <x-app-layout>
   <div class="mt-3 ms-5">
-    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"><i class="fa-solid fa-house"></i></a> > <a href="{{route('order.index')}}" class="text-black">テーブル選択</a> > {{$table->name}}の注文
+    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"><i class="fa-solid fa-house"></i></a> > <a href="{{route('order.index')}}" class="text-black">テーブル選択</a> > {{$table->seat_type}}-{{$table->seat_number}}の注文
   </div>
   <div class="container mt-5">
-    <p class="h3">テーブル名：{{$table->name}}</p>
+    <p class="h3">テーブル名：{{$table->seat_type}}-{{$table->seat_number}}</p>
   </div>
 
   <div class="container-menu mt-3 rounded w-50 mx-auto p-5 mb-5">
