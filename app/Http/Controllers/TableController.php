@@ -32,40 +32,21 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $table = new Table();
-        $seat = $request->input('name');
-        $count = $request->count;
+        $seat_type = $request->input('seat_type');
+        // $count = $request->count;
         // dd($count);
 
-        // Aグループ席
-        if($seat == 'A-'){
-            $findLastAseat = Table::where('name', 'like', 'A-%')->select('name')->orderBy('name', 'desc')->first();
+        $findLastSeatNumber = Table::where('seat_type', $seat_type)->select('seat_number')->orderBy('seat_number', 'desc')->first();
+// dd($findLastSeatNumber);
+        if($findLastSeatNumber){
+            $newSeatNumber = $findLastSeatNumber->seat_number + 1;
+            $table->seat_type = $seat_type;
+            $table->seat_number = $newSeatNumber;
 
-
-             if($findLastAseat){
-                 $newNumber = $count +1;
-                 $newSeatName = 'A-' . $newNumber;
-
-            }else{
-                $newSeatName = 'A-1';
-            }
-           
+        }else{
+            $table->seat_type = $seat_type;
+            $table->seat_number = 1;
         }
-
-        // Bグループ席
-        if($seat == 'B-'){
-            $findLastBseat = Table::where('name', 'like', 'B-%')->select('name')->orderBy('name', 'desc')->first();
-
-            if ($findLastBseat) {
-                $newNumber = $count +1;
-                $newSeatName = 'B-' . $newNumber;
-
-                }
-             else {
-                $newSeatName = 'B-1';
-            }
-        }
-
-        $table->name = $newSeatName;
         $table->save();
 
         return redirect()->route('table.edit')->with(['message' => '席が追加されました。', 'type' => 'success']);
@@ -84,10 +65,9 @@ class TableController extends Controller
      */
     public function edit(Table $table)
     {
-        $Atables = Table::where('name', 'like', 'A-%')->get();
-        $Btables = Table::where('name', 'like', 'B-%')->get();
-        // dd($Atables);
-        return view('tables.edit', compact('Atables', 'Btables'));
+        $tables = Table::all();
+
+        return view('tables.edit', compact('tables'));
     }
 
     /**
