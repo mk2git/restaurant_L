@@ -8,35 +8,30 @@
         <div class="container border bg-light w-75 mt-3">
             <div class="row m-5">
                 <div class="col-10">
-                    {{-- ここにAとBを作成順にとりあえず並べる --}}
-                    {{-- seat --}}
-                    @if ($Atables->isEmpty())
-                        <div class="container border bg-white" style="height: 200px;">
-                            <p>現在4人席の座席はありません。</p>
-                        </div>
-                    @else
-                        <div class="container border bg-white d-flex flex-wrap">
-                        @foreach ($Atables as $Atable)
-                            <div class="m-3">
-                                <x-Atable-style :atable-name="$Atable->name" />
-                            </div>
+                    <div class="container border bg-white d-flex flex-wrap">
+                        @php $hasSeatTypeA = false; @endphp
+                        @foreach ($tables as $table)
+                            @if ($table->seat_type == 'A')
+                                <x-Atable-style :table-name="$table->name" />
+                                    @php $hasSeatTypeA = true; @endphp
+                            @endif
                         @endforeach
-                        </div>
-                    @endif
-
-                    @if ($Btables->isEmpty())
-                        <div class="container border bg-white mt-2 pt-2">
-                            <p>現在2人席の座席はありません。</p>
-                        </div>
-                    @else
-                        <div class="container border bg-white d-flex flex-wrap mt-2">
-                        @foreach ($Btables as $Btable)
-                            <div class="m-3">
-                                <x-Btable-style :btable-name="$Btable->name" />
-                            </div>
+                        @if (!$hasSeatTypeA)
+                             <p style="height: 100px;">現在4人席の座席はありません。</p>
+                        @endif
+                    </div>    
+                    <div class="container border bg-white d-flex flex-wrap">
+                        @php $hasSeatTypeB = false; @endphp
+                        @foreach ($tables as $table)
+                            @if ($table->seat_type == 'B')
+                                <x-Btable-style :table-name="$table->name" />
+                                    @php $hasSeatTypeB = true; @endphp
+                            @endif
                         @endforeach
-                        </div>
-                    @endif
+                        @if (!$hasSeatTypeB)
+                             <p style="height: 100px;">現在2人席の座席はありません。</p>
+                        @endif
+                    </div>                      
                 </div>
 
                 {{-- Aは4人席、Bは2人席用 --}}
@@ -44,26 +39,26 @@
                     <div class="bg-white p-3 border rounded mb-3">
                         <p>4人席</p>
                         <div class="d-flex">
-                            <form action="{{route('table.store', count($Atables))}}" method="post">
+                            <form action="{{route('table.store')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="name" value="A-">
+                                <input type="hidden" name="seat_type" value="A">
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
                             <button type="submit" class="btn" data-toggle="modal" data-target="#deleteASeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
-                            <x-modal-delete-Atable :atables="$Atables" />
+                            <x-modal-delete-Atable :atables="$tables" />
                         </div>
                     </div>
 
                     <div class="bg-white p-3 border rounded">
                         <p>2人席</p>
                         <div class="d-flex">
-                            <form action="{{route('table.store' , count($Btables))}}" method="post">
+                            <form action="{{route('table.store')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="name" value="B-">
+                                <input type="hidden" name="seat_type" value="B">
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
                             <button type="submit" class="btn" data-toggle="modal" data-target="#deleteBSeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
-                            <x-modal-delete-Btable :btables="$Btables" />
+                            <x-modal-delete-Btable :tables="$tables" />
                         </div>
                     </div>
                 </div>
