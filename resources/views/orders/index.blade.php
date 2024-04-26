@@ -1,7 +1,11 @@
 <x-app-layout>
-    <div class="mt-3 ms-5">
-        <a href="{{route('dashboard')}}" class="text-decoration-none text-black"> <i class="fa-solid fa-house"></i></a>&nbsp; > 注文受付
-    </div>
+
+    <x-breadcrumb :list="[
+            ['name' => '注文受付', 'link' => route('order.index')],
+            ['name' => 'A1', 'link' => '']
+        ]"
+    />
+
     <div class="container w-75 mx-auto my-5">
         <h3 class="text-center mb-5"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;どのテーブルの注文を受け付けますか？</h3>
 

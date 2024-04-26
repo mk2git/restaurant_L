@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -68,14 +69,19 @@ class CategoryController extends Controller
                                  ->withInput();
          }
 
-        // トランザクションをかけたほうがよい by candy
-        $category = new Category();
-        $category->name = $request->input('name');
-        $category->save();
-
-        $message = '「'.$category->name.'」カテゴリーが追加されました';
-
-        return redirect()->route('menu.add')->with(['message' => $message, 'type' => 'success']);
+        try {
+            DB::beginTransaction();
+            $category = new Category();
+            $category->name = $request->input('name');
+            $category->save();
+            DB::commit();
+            $message = '「'.$category->name.'」カテゴリーが追加されました';
+            return redirect()->route('menu.add')->with(['message' => $message, 'type' => 'success']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            logger('Error Category Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+        }
     }
 
 
@@ -110,11 +116,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($category_id) // 引数の中でCategoryモデルを使うとfindの必要がなくなる by candy
+    public function destroy(Category $category) // 引数の中でCategoryモデルを使うとfindの必要がなくなる by candy
     {
-        $category = Category::find($category_id);
-        $message = 'カテゴリー：「'.$category->name.'」が削除されました。';
         $category->delete();
+        
+        $message = 'カテゴリー：「'.$category->name.'」が削除されました。';
 
         return redirect()->route('menu.add')->with(['message'=> $message, 'type' => 'danger']);
     }
