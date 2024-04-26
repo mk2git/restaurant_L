@@ -68,11 +68,11 @@ class TableController extends Controller
             DB::beginTransaction();
             $table = Table::find($table_id);
 
-            if($table->status == 1){
-                $table->status = 2;
+            if($table->status == config('table.使用中')){
+                $table->status = config('table.未使用');
                 $table->save();
             }else{
-                $table->status = 1;
+                $table->status = config('table.使用中');
                 $table->save();
             }
             DB::commit();
