@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\CategoryController;
@@ -13,54 +14,17 @@ use App\Http\Controllers\TakeoutController;
 use App\Http\Controllers\TakeoutOrderController;
 use App\Http\Controllers\TakeoutCheckoutController;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-use App\Models\Table;
-use App\Models\Reserve;
-use App\Models\Order;
-use App\Models\Takeout_Order;
-use App\Models\Checkout;
-use App\Models\Takeout_Checkout;
+
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    $role = User::where('role')->get();
-    $seats = Table::all();
-    $unusedSeats = Table::where('status', '未使用')->get();
-    $usingSeats = Table::where('status', '使用中')->get();
-    $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
-    $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
-    if($orders){
-        $count_orders = count($orders);
-    }else{
-        $count_orders = 0;
-    }
-    
-    $takeout_orders = Takeout_Order::where('status', 'cooking')->distinct()->pluck('takeout_id');
-    if($takeout_orders){
-        $count_takeout_orders = count($takeout_orders);
-    }else{
-        $count_takeout_orders = 0;
-    }
-    $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
-    if($checkouts){
-        $count_checkouts = count($checkouts);
-    }else{
-        $count_checkouts = 0;
-    }
-    $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id');
-    if($takeout_checkouts){
-        $count_takeout_checkouts = count($takeout_checkouts);
-    }else{
-        $count_takeout_checkouts = 0;
-    }
-    // dd($checkouts);
-
-    return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::middleware('auth')->group(function(){
+    Route::controller(DashboardController::class)->group(function(){
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+});
 
 
 require __DIR__.'/auth.php';
