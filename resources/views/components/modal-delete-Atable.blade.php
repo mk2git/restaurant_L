@@ -13,10 +13,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="{{route('table.destroy', count($atables))}}" method="post">
+        <form action="{{route('table.destroy')}}" method="post">
             @csrf
             @method('delete')
-            <input type="hidden" name="name" value="A-">
+            <input type="hidden" name="seat_type" value="A">
             <button type="submit" class="btn btn-danger">削除</button>
         </form>
       </div>
