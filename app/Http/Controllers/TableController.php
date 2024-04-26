@@ -93,20 +93,13 @@ class TableController extends Controller
      */
     public function destroy(Request $request)
     {
-        $seatGroup = $request->input('name');
-        $count = $request->count;
-        // dd($request);
+        $seat_type = $request->input('seat_type');
+        $getLastSeatNumber = Table::where('seat_type', $seat_type)->select('seat_number')->orderBy('seat_number', 'desc')->first();
 
-        if($seatGroup == 'A-'){
+        $lastSeatNumber = $getLastSeatNumber->seat_number;
 
-            $LastAseat = $seatGroup . $count;
-            Table::where('name', $LastAseat)->delete();
-        }
+        Table::where('seat_type',$seat_type)->where('seat_number', $lastSeatNumber)->delete();
 
-        if($seatGroup == 'B-'){
-            $LastBseat = $seatGroup . $count;
-            Table::where('name', $LastBseat)->delete();
-        }
 
         return redirect()->route('table.edit')->with(['message' => '座席を1つ削除しました。', 'type' => 'danger']);
     }
