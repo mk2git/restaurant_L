@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('seat_type');
             $table->integer('seat_number');
             $table->integer('status')->default(1);
-            $table->integer('order_id')->nullable()->default(null);
             $table->timestamps();
         });
     }
