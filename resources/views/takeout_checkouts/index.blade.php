@@ -1,8 +1,15 @@
 <x-app-layout>
+  <div class="mt-3 ms-5">
+    <a href="{{route('checkout.select')}}">会計</a> > テイクアウト会計
+  </div>
+  
   <div class="container my-5">
     <h3 class="text-center">どのテイクアウトのお会計をしますか？</h3>
   </div>
 
+   @if ($takeout_order_ids->isEmpty())
+      <p class="text-center fw-bold mt-5">現在会計できるテイクアウトはありません。</p>
+    @endif
   <div class="container d-flex justity-content-between flex-wrap my-5">
     @foreach ($takeout_order_ids as $takeout_order_id)
       <a href="{{route('takeout-check.show', $takeout_order_id->takeout_id)}}" class="d-block border rounded w-25 p-0 m-3 text-decoration-none text-black select-checkout">
