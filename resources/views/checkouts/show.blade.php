@@ -1,4 +1,7 @@
 <x-app-layout>
+  <div class="mt-3 ms-5">
+    <a href="{{route('checkout.select')}}">会計</a> > <a href="{{route('checkout.index')}}">テーブル会計</a> > {{$table->name}}
+  </div>
   <div class="container mt-5 w-75">
       @if ($errors->any())
          <x-error-message />

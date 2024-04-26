@@ -1,4 +1,7 @@
 <x-app-layout>
+  <div class="mt-3 ms-5">
+    <a href="{{route('checkout.select')}}">会計</a> > テーブル会計
+  </div>
   <div class="container my-5 text-center w-75">
     <h3 class="mb-5"><i class="fa-solid fa-cash-register"></i>&nbsp;&nbsp;どのテーブルの会計を行いますか？</h3>
   

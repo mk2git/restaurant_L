@@ -1,8 +1,12 @@
 <x-app-layout>
+  <div class="mt-3 ms-5">
+      <a href="{{route('checkout.select')}}">会計</a> > <a href="{{route('takeout-check.index')}}">テイクアウト会計</a> > {{$takeout->name}} 様
+    </div>
   <div class="container mt-5 w-75">
     @if ($errors->any())
       <x-error-message />
     @endif
+    
     <div class="container bg-light p-5">
       <h3 class="text-center mb-4"><i class="fa-regular fa-credit-card"></i>&nbsp;&nbsp;お会計</h3>
 
