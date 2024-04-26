@@ -12,7 +12,7 @@
                         @php $hasSeatTypeA = false; @endphp
                         @foreach ($tables as $table)
                             @if ($table->seat_type == 'A')
-                                <x-Atable-style :table-name="$table->name" />
+                                <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                                     @php $hasSeatTypeA = true; @endphp
                             @endif
                         @endforeach
@@ -24,7 +24,7 @@
                         @php $hasSeatTypeB = false; @endphp
                         @foreach ($tables as $table)
                             @if ($table->seat_type == 'B')
-                                <x-Btable-style :table-name="$table->name" />
+                                <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                                     @php $hasSeatTypeB = true; @endphp
                             @endif
                         @endforeach
