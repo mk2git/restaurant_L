@@ -31,34 +31,8 @@
                             <p>該当するカテゴリーの料理はまだ登録されていません。</p>
                          @break
                         @endif
-
                         @if ($category->id == $menu->category_id)
-                            <li class="mb-3">
-                                <div class="row me-4">
-                                    <div class="col-3">
-                                        <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                                            <p>{{$menu->name}}</p>
-                                         </button>
-                                         <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" />
-                                    </div>
-                                    <div class="col-2">・・・・・</div>
-                                    <div class="col-3">
-                                        <span>{{number_format($menu->price)}}円</span>
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button" class="edit-menu" data-toggle="modal" data-target="#editMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </button>
-                                        <x-modal-edit-menu :menu-id="$menu->id" :menu-name="$menu->name" :menu-price="$menu->price" :menu-description="$menu->description" :menu-photo="$menu->photo" :menu-category-id="$menu->category_id" :categories="$categories" />
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button" data-toggle="modal" data-target="#deleteMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}" class="delete-menu">
-                                            <i class="fa-regular fa-trash-can text-danger"></i>
-                                        </button>
-                                        <x-modal-delete-menu :menu-id="$menu->id" :menu-name="$menu->name" />
-                                    </div>
-                                </div>
-                            </li>
+                            <x-menu-edit :menu-id="$menu->id" :menu-name="$menu->name" :menu-photo="$menu->photo" :menu-price="$menu->price" :menu-description="$menu->description" :menu-category-id="$menu->category_id" :categories="$categories" />
                         @endif
                     @endforeach
                 </ul>
@@ -80,32 +54,7 @@
                             <ul class="mb-5">
                                 @foreach ($menus as $menu)
                                     @if ($menu->category_id == $category->id)
-                                        <li class="mb-3">
-                                            <div class="row me-4">
-                                                <div class="col-3">
-                                                    <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                                                        <p>{{$menu->name}}</p>
-                                                     </button>
-                                                     <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" />
-                                                </div>
-                                                <div class="col-2">・・・・・</div>
-                                                <div class="col-3">
-                                                    <span>{{number_format($menu->price)}}円</span>
-                                                </div>
-                                                <div class="col-2">
-                                                    <button type="button" class="edit-menu" data-toggle="modal" data-target="#editMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                                                        <i class="fa-solid fa-pencil"></i>
-                                                    </button>
-                                                    <x-modal-edit-menu :menu-id="$menu->id" :menu-name="$menu->name" :menu-price="$menu->price" :menu-description="$menu->description" :menu-photo="$menu->photo" :menu-category-id="$menu->category_id" :categories="$categories" />
-                                                </div>
-                                                <div class="col-2">
-                                                    <button type="button" class="delete-menu" data-toggle="modal" data-target="#deleteMenuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                                                        <i class="fa-regular fa-trash-can text-danger"></i>
-                                                    </button>
-                                                    <x-modal-delete-menu :menu-id="$menu->id" :menu-name="$menu->name" />
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <x-menu-edit :menu-id="$menu->id" :menu-name="$menu->name" :menu-photo="$menu->photo" :menu-price="$menu->price" :menu-description="$menu->description" :menu-category-id="$menu->category_id" :categories="$categories" />
                                     @endif
                                 @endforeach
                             </ul>
