@@ -16,10 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $Atables = Table::where('name', 'like', 'A-%')->get();
-        $Btables = Table::where('name', 'like', 'B-%')->get();
+        $tables = Table::all();
 
-        return view('orders.index', compact('Atables', 'Btables'));
+        return view('orders.index', compact('tables'));
     }
 
     /**
