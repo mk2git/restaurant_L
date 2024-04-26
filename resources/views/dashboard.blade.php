@@ -10,12 +10,12 @@
 
     <div class="container-reserve rounded bg-light p-4 mb-5 float-end me-5">
         <p class=""><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;空席状況</p>
-        @if ($seats->isEmpty())
+        @if ($totalSeats == 0)
             <p>座席が作成されていません。</p>
-        @elseif ($unusedSeats->isEmpty())
+        @elseif ($unusedSeats == 0)
             <p class="text-danger">只今満席</p>
         @else
-            {{count($usingSeats)}} / {{count($seats)}}席 &nbsp;&nbsp;&nbsp;<span class="text-danger">残り{{count($unusedSeats)}}席</span>
+            {{$usingSeats}} / {{$totalSeats}}席 &nbsp;&nbsp;&nbsp;<span class="text-danger">残り{{$unusedSeats}}席</span>
         @endif
 
 

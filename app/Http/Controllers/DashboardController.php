@@ -19,9 +19,11 @@ class DashboardController extends Controller
     public function index()
     {
         $role = User::where('role')->get();
-        $seats = Table::all();
-        $unusedSeats = Table::where('status', '未使用')->get();
-        $usingSeats = Table::where('status', '使用中')->get();
+
+        $totalSeats = Table::all()->count();
+        $unusedSeats = Table::where('status', config('table.未使用'))->count();
+        $usingSeats = Table::where('status', config('table.使用中'))->count();
+        
         $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
         $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
         if($orders){
@@ -50,7 +52,7 @@ class DashboardController extends Controller
         }
         // dd($checkouts);
     
-        return view('dashboard', compact('role', 'seats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
+        return view('dashboard', compact('role', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
     }
 
     /**
