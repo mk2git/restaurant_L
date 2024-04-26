@@ -17,7 +17,7 @@
     @else
       @foreach ($order_tables as $order_table)
         <div class="m-4 w-25">
-          <x-accordion-serve :order-table-id="$order_table->id" :order-table-name="$order_table->name" :orders="$orders" />
+          <x-accordion-serve :order-table-id="$order_table->id" :order-table-seat-type="$order_table->seat_type" :order-table-seat-number="$order_table->seat_number" :orders="$orders" />
         </div>
       @endforeach
     @endif
