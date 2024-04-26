@@ -12,10 +12,9 @@ class TableController extends Controller
      */
     public function index()
     {
-        $Atables = Table::where('name', 'like', 'A-%')->get();
-        $Btables = Table::where('name', 'like', 'B-%')->get();
+        $tables = Table::all();
 
-        return view('tables.index', compact('Atables', 'Btables'));
+        return view('tables.index', compact('tables'));
     }
 
     /**
@@ -77,11 +76,11 @@ class TableController extends Controller
     {
         $table = Table::find($table_id);
         // dd($table);
-        if($table->status == '未使用'){
-            $table->status = '使用中';
+        if($table->status == 1){
+            $table->status = 2;
             $table->save();
         }else{
-            $table->status = '未使用';
+            $table->status = 1;
             $table->save();
         }
 
