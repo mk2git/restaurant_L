@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $selectedCategory = null;
+        $selectedCategory = null; // 使ってる？ by candy
 
         return view('menu.add_category_menu', compact('categories', 'selectedCategory'));
     }
@@ -40,7 +40,7 @@ class CategoryController extends Controller
         return view('menu.index', compact('categories', 'selectedAllCategories', 'selectedCategories', 'selectedCategoryId', 'menus', 'noMenu'));
     }
 
-    public function show($category_id){
+    public function show($category_id){ // これは？ by candy
         $category = Category::find($category_id);
 
         return response()->json($category);
@@ -68,6 +68,7 @@ class CategoryController extends Controller
                                  ->withInput();
          }
 
+        // トランザクションをかけたほうがよい by candy
         $category = new Category();
         $category->name = $request->input('name');
         $category->save();
@@ -109,7 +110,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($category_id)
+    public function destroy($category_id) // 引数の中でCategoryモデルを使うとfindの必要がなくなる by candy
     {
         $category = Category::find($category_id);
         $message = 'カテゴリー：「'.$category->name.'」が削除されました。';

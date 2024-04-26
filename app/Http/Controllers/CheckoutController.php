@@ -16,9 +16,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $Atables = Table::where('name', 'like', 'A-%')->get();
-        $Btables = Table::where('name', 'like', 'B-%')->get();
-        $checkoutTables = Checkout::where('check_status', 'not yet')->get();
+        $Atables = Table::where('name', 'like', 'A-%')->get(); // Aと%で２つのカラムにした方が良い by candy
+        $Btables = Table::where('name', 'like', 'B-%')->get(); // AとBと、この後もCやDなど増えていく可能性があるのなら拡張しやすいように設計したほうがよい by candy
+        $checkoutTables = Checkout::where('check_status', 'not yet')->get(); // ステータス系は数値でレコード格納したほうがよい by candy
 
         return view('checkouts.index', compact('Atables', 'Btables', 'checkoutTables'));
     }
@@ -68,7 +68,7 @@ class CheckoutController extends Controller
     {
         // dd($request);
         $table_id = $request->input('table_id');
-        $checkout = new Checkout();
+        $checkout = new Checkout(); // このあたりからトランザクションをかけて、try-catchを仕込んだ方が良い by candy
         $checkout->table_id = $table_id;
         $checkout->save();
         $checkout_id = $checkout->id;
