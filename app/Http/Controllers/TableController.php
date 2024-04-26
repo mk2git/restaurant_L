@@ -18,14 +18,6 @@ class TableController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -52,14 +44,6 @@ class TableController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Table $table)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Table $table)
@@ -75,7 +59,7 @@ class TableController extends Controller
     public function update($table_id)
     {
         $table = Table::find($table_id);
-        // dd($table);
+
         if($table->status == 1){
             $table->status = 2;
             $table->save();
