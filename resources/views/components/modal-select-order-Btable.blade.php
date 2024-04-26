@@ -1,16 +1,16 @@
 <script>
   $(document).ready(function() {
       $('.select-Btable').click(function() {
-          var BtableId = $(this).data('Btable-id');
-          $.get('/order/' + BtableId, function(data) {
-              $('#selectTableBModal' + BtableId).find('.modal-body').html(data);
-              $('#selectTableBModal' + BtableId).modal('show');
+          var tableId = $(this).data('table-id');
+          $.get('/order/' + tableId, function(data) {
+              $('#selectTableBModal' + tableId).find('.modal-body').html(data);
+              $('#selectTableBModal' + tableId).modal('show');
           });
       });
   });
 </script>
 
-<div class="modal fade" id="selectTableBModal{{$btableId}}" tabindex="-1" role="dialog" aria-labelledby="selectTableBModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectTableBModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="selectTableBModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -20,9 +20,9 @@
               </button>
           </div>
           <div class="modal-body">
-              <p class="text-center">「 {{$btableName}} 」の注文を始めますか？</p>
+              <p class="text-center">「 {{ $seatType }}-{{$seatNumber}} 」の注文を始めますか？</p>
               <div class="text-center">
-                <a href="{{route('orders.create', $btableId)}}" class="btn btn-success">
+                <a href="{{route('orders.create', $tableId)}}" class="btn btn-success">
                 注文を始める
               </a>
               </div>

@@ -12,19 +12,14 @@
         <div class="container border bg-light p-5 mb-5">
             <div class="row bg-white">
                 <div class="col-10 d-flex justify-content-between flex-wrap">
-                    @foreach ($Atables as $Atable)
-                        @if ($Atable->status == '未使用')
-                            <div class="m-3">
-                                <x-Atable-style :atable-name="$Atable->name" />
-                            </div>
-                            
-                        @else
-                        <button type="button" class="btn select-Atable" data-bs-toggle="modal" data-bs-target="#selectTableAModal{{$Atable->id}}" data-Atable-id="{{ $Atable->id }}">
-                            <div class="m-3 using-table">
-                                <x-Atable-style :atable-name="$Atable->name" />
-                        </div>
+                    @foreach ($tables as $table)
+                        @if ($table->seat_type == 'A' && $table->status == config('table.未使用'))
+                            <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
+                        @elseif($table->seat_type == 'A' && $table->status == config('table.使用中'))
+                        <button type="button" class="btn select-Atable" data-bs-toggle="modal" data-bs-target="#selectTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                             <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" />
                         </button>
-                        <x-modal-select-order-Atable :atable-id="$Atable->id" :atable-name="$Atable->name" />
+                        <x-modal-select-order-Atable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                         @endif
                     @endforeach
                 </div>
@@ -39,19 +34,14 @@
 
             <div class="row bg-white">
                 <div class="col-10 d-flex justify-content-between flex-wrap">
-                    @foreach ($Btables as $Btable)
-                    {{-- @dd($Btable) --}}
-                        @if ($Btable->status == '未使用')
-                            <div class="m-3">
-                                <x-Btable-style :btable-name="$Btable->name" />
-                            </div>
-                        @else
-                            <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectTableBModal{{$Btable->id}}" data-Btable-id="{{ $Btable->id }}">
-                                <div class="m-3 using-table">
-                                    <x-Btable-style :btable-name="$Btable->name" />
-                                </div>
+                    @foreach ($tables as $table)
+                        @if ($table->seat_type == 'B' && $table->status == config('table.未使用'))
+                             <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
+                        @elseif($table->seat_type == 'B' && $table->status == config('table.使用中'))
+                            <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                                <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" />
                             </button>
-                            <x-modal-select-order-Btable :btable-id="$Btable->id" :btable-name="$Btable->name" />
+                            <x-modal-select-order-Btable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                         @endif
                     @endforeach
                 </div>
