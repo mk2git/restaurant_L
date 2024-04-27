@@ -81,8 +81,8 @@ class MenuController extends Controller
 
          }catch(\Throwable $th){
             DB::rollBack();
-            logger('Error Category Store', ['message' => $th->getMessage()]);
-            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+            logger('Error Menu Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'メニューの追加に失敗しました');
          }      
     }
 
