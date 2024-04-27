@@ -33,7 +33,6 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $rules = [
             'name' => 'required|unique:menus',
             'price' => 'required|min:0',
@@ -60,24 +59,31 @@ class MenuController extends Controller
                                  ->withInput();
          }
 
-         // ファイルがアップロードされた場合は保存する
-    if ($request->hasFile('photo')) {
-        $image = $request->file('photo');
-        $imageName = time().'.'.$image->extension(); // ファイル名を生成
-        $image->move(public_path('images'), $imageName); // ファイルを保存
-    }
+         try{
+            DB::beginTransaction();
+             // ファイルがアップロードされた場合は保存する
+            if ($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $imageName = time().'.'.$image->extension(); // ファイル名を生成
+                $image->move(public_path('images'), $imageName); // ファイルを保存
+            }
 
-        $menu = new Menu();
-        $menu->name = $request->input('name');
-        $menu->price = $request->input('price');
-        $menu->category_id = $request->input('category_id');
-        $menu->description = $request->input('description');
-        $menu->photo = $imageName;
-        $menu->save();
+             $menu = new Menu();
+             $menu->name = $request->input('name');
+             $menu->price = $request->input('price');
+             $menu->category_id = $request->input('category_id');
+             $menu->description = $request->input('description');
+             $menu->photo = $imageName;
+             $menu->save();
+             DB::commit();
+            $message = '「'.$menu->name.'」がメニューに追加されました。';
+            return redirect()->route('menu.add')->with(['message' => $message, 'type' => 'success']);
 
-        $message = '「'.$menu->name.'」がメニューに追加されました。';
-
-        return redirect()->route('menu.add')->with(['message' => $message, 'type' => 'success']);
+         }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Category Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+         }      
     }
 
     /**
@@ -95,7 +101,6 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-    //   dd($request);
         $request->validate([
             // unique:menusを使ってしまうとデータが更新されないため、バリデーションに含まないように
             'name' => 'required',
