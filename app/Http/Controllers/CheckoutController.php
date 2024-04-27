@@ -73,9 +73,9 @@ class CheckoutController extends Controller
         $checkout->save();
         $checkout_id = $checkout->id;
 
-        $orders = Order::where('table_id', $table_id)->where('check_status', 'not yet')->get();
+        $orders = Order::where('table_id', $table_id)->where('check_status', config('order.not yet'))->get();
         foreach($orders as $order){
-            $order->check_status = 'done';
+            $order->check_status = config('order.done');
             $order->checkout_id = $checkout_id;
             $order->save();
         }
