@@ -8,16 +8,14 @@
     <div id="flush-collapseOne{{$takeoutOrderId}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
         @foreach ($takeoutOrders as $takeoutOrder)
-        {{-- @dd($takeoutOrder) --}}
-          @if ($takeoutOrder->takeout_id == $takeoutOrderId)
-          
+          @if ($takeoutOrder->takeout_id == $takeoutOrderId)         
             <div class="row mb-3">
                 <div class="col-sm-7">
                   <small @if($takeoutOrder->status == 'done') class="text-decoration-line-through" @endif>{{$takeoutOrder->menu->name}}</small>
                 </div>
                 <div class="col-sm-2">×&nbsp;{{$takeoutOrder->quantity}}</div>
                 <div class="col-sm-3">
-                  @if ($takeoutOrder->status == 'cooking')
+                  @if ($takeoutOrder->status == config('takeout_order.cooking'))
                     <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}"><i class="fa-solid fa-bell-concierge text-success"></i></button>
                     <x-modal-update-takeout-order-status-to-done :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
                   @else
@@ -36,7 +34,7 @@
 
           @foreach ($takeoutOrders as $takeoutOrder)
               @if ($takeoutOrder->takeout_id == $takeoutOrderId)
-                  @if ($takeoutOrder->status != 'done')
+                  @if ($takeoutOrder->status != config('takeout_order.done'))
                       @php
                           $allDone = false;
                       @endphp
