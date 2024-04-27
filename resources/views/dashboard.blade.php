@@ -44,7 +44,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($todayReserves as $reserve)
-                                    @if ($reserve->status !== 'arrived')
+                                    @if ($reserve->status !== config('reserve.arrived'))
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="change-reserve-status" data-reserve-id="{{$reserve->id}}" data-toggle="modal" data-target="#changeReserveModal{{$reserve->id}}">
