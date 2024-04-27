@@ -143,8 +143,8 @@ class ReserveController extends Controller
             return to_route('reserve.index')->with(['message' => '予約内容が更新されました', 'type' => 'success']);
         }catch(\Throwable $th){
             DB::rollBack();
-            logger('Error Category Store', ['message' => $th->getMessage()]);
-            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+            logger('Error Reserve Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約内容の更新に失敗しました');
         }
     }
 
