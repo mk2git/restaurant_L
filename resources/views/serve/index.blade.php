@@ -12,7 +12,7 @@
   @endif
 {{-- @dd($confirm_table_orders) --}}
   <div class="container w-75 mx-auto mt-5 d-flex flex-wrap">
-    @if ($confirm_table_orders->isEmpty())
+    @if ($orders->isEmpty())
       <p class="text-center">テーブルの注文はありません。</p>
     @else
       @foreach ($order_tables as $order_table)
@@ -30,7 +30,7 @@
   </div>
 
   <div class="container w-75 mx-auto my-5 d-flex flex-wrap">
-    @if ($confirm_takeout_orders->isEmpty())
+    @if ($takeout_orders->isEmpty())
       <p class="text-center">テイクアウトの注文はありません。</p>
     @else
       @foreach ($takeout_order_names as $takeout_order_name)
