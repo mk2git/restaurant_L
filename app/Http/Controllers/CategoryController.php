@@ -129,10 +129,17 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category) // 引数の中でCategoryモデルを使うとfindの必要がなくなる by candy
     {
-        $category->delete();
-        
-        $message = 'カテゴリー：「'.$category->name.'」が削除されました。';
+        try{
+            DB::beginTransaction();
+            $category->delete();
+            DB::commit();
+            $message = 'カテゴリー：「'.$category->name.'」が削除されました。';
+            return redirect()->route('menu.add')->with(['message'=> $message, 'type' => 'danger']);
 
-        return redirect()->route('menu.add')->with(['message'=> $message, 'type' => 'danger']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Category Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カテゴリーの削除に失敗しました');
+        }
     }
 }
