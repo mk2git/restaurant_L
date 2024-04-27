@@ -4,6 +4,9 @@
         @if (session('message'))
            <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
+        @if ($errors->any())
+           <x-error-message />
+        @endif
         
         <form action="{{route('category.getCategory')}}" method="post">
             @csrf
