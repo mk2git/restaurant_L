@@ -118,10 +118,6 @@ class CategoryController extends Controller
             logger('Error Category Update', ['message' => $th->getMessage()]);
             return redirect()->back()->with('error', 'カテゴリーの更新に失敗しました');
          }
-
-       
-
-        
     }
 
     /**
