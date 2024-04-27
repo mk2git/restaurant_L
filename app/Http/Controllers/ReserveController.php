@@ -149,11 +149,19 @@ class ReserveController extends Controller
     }
 
     public function changeStatus($reserve_id){
-        $reserve = Reserve::find($reserve_id);
-        $reserve->status = 'arrived';
-        $reserve->save();
+        try{
+            DB::beginTransaction();
+            $reserve = Reserve::find($reserve_id);
+            $reserve->status = config('reserve.arrived');
+            $reserve->save();
+            DB::commit();
+            return redirect()->back();
 
-        return redirect()->back();
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Reserve changeStatus', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約者の到着ステータスの更新に失敗しました'); 
+        }
     }
 
     /**
