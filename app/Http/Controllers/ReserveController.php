@@ -167,13 +167,18 @@ class ReserveController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($reserve_id)
+    public function destroy(Reserve $reserve_id)
     {
-        // dd($reserve_id);
-        $reserve = Reserve::find($reserve_id);
-        // dd($reserve);
-        $reserve->delete();
+        try{
+            DB::beginTransaction();
+            $reserve_id->delete();
+            DB::commit();
+            return redirect()->route('reserve.index')->with(['message' => '1件予約をキャンセルしました。', 'type' => 'danger']);
 
-        return redirect()->route('reserve.index')->with(['message' => '1件予約をキャンセルしました。', 'type' => 'danger']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Reserve Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約のキャンセルに失敗しました');
+        }
     }
 }
