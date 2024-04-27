@@ -7,6 +7,7 @@ use App\Models\Takeout_Order;
 use App\Models\Takeout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class TakeoutCheckoutController extends Controller
 {
@@ -32,6 +33,7 @@ class TakeoutCheckoutController extends Controller
          $this->update($request);
 
          return redirect()->route('dashboard')->with(['message' => '1件会計可能なテイクアウトが出ました。', 'type' => 'info']);
+
     }
 
     /**
@@ -40,10 +42,17 @@ class TakeoutCheckoutController extends Controller
     public function store(Request $request)
     {
         $takeout_id = $request->input('takeout_id');
-        $takeout_checkout = new Takeout_Checkout();
-        $takeout_checkout->takeout_id =  $takeout_id;
-        $takeout_checkout->save();
-
+        try{
+            DB::beginTransaction();
+            $takeout_checkout = new Takeout_Checkout();
+            $takeout_checkout->takeout_id =  $takeout_id;
+            $takeout_checkout->save();
+            DB::commit();
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error TakeoutCheckout Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'takeout_checkoutsテーブルへの追加に失敗しました');
+        }
     }
 
     /**
@@ -63,12 +72,21 @@ class TakeoutCheckoutController extends Controller
     public function update(Request $request)
     {
         $takeout_id = $request->input('takeout_id');
-
-        $takeout_orders = Takeout_Order::where('takeout_id', $takeout_id)->get();
-        foreach($takeout_orders as $takeout_order){
-            $takeout_order->check_status = config('takeout_order.done');
-            $takeout_order->save();
+        try{
+            DB::beginTransaction();
+             $takeout_orders = Takeout_Order::where('takeout_id', $takeout_id)->get();
+            foreach($takeout_orders as $takeout_order){
+                $takeout_order->check_status = config('takeout_order.done');
+                $takeout_order->save();
+            }
+            DB::commit();
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error TakeoutCheckout Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'takeout_ordersテーブルのcheck_statusの更新に失敗しました');
         }
+
+       
     }
 
    public function updateCheckStatus(Request $request)
