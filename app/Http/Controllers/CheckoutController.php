@@ -121,8 +121,8 @@ class CheckoutController extends Controller
 
         }catch(\Throwable $th){
             DB::rollBack();
-            logger('Error Category Store', ['message' => $th->getMessage()]);
-            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+            logger('Error Checkout updateCheckStatus', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '支払い方法やデータの更新に失敗しました');
         }
     }
 }
