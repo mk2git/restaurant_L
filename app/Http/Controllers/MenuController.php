@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -128,13 +129,19 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($menu_id)
+    public function destroy(Menu $menu_id)
     {
-        // dd($menu_id);
-        $menu = Menu::find($menu_id);
-        $message = '「'.$menu->name.'」が削除されました。';
-        $menu->delete();
-
-        return redirect()->route('menu.index')->with(['message' => $message, 'type' => 'danger']);
+        try{
+            DB::beginTransaction();
+            $menu = $menu_id;
+            $message = '「'.$menu->name.'」が削除されました。';
+            $menu->delete();
+            DB::commit();
+            return redirect()->route('menu.index')->with(['message' => $message, 'type' => 'danger']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Menu Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'メニューの削除に失敗しました');
+        }
     }
 }
