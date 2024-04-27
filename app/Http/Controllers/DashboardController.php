@@ -27,14 +27,14 @@ class DashboardController extends Controller
         $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
 
         $orders = Order::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
-        $takeout_orders = Takeout_Order::where('status', 'cooking')->distinct()->pluck('takeout_id')->count();
+        $takeout_orders = Takeout_Order::where('status', config('takeout_order.cooking'))->distinct()->pluck('takeout_id')->count();
         $total_orders = 0;
         $total_orders = $orders + $takeout_orders;
   
         $checkouts = Checkout::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
-        $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id')->count();
+        $takeout_checkouts = Takeout_Checkout::where('check_status', config('takeout_checkout.not yet'))->distinct()->pluck('takeout_id')->count();
         $total_checkouts = 0;
-        $takeout_checkouts = $checkouts + $takeout_checkouts;
+        $total_checkouts = $checkouts + $takeout_checkouts;
 
         // dd($checkouts);
     
