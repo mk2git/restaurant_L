@@ -36,10 +36,9 @@ class CheckoutController extends Controller
      */
     public function show($table_id)
     {
-        $checkout_ids = Checkout::where('table_id', $table_id)->where('check_status', config('check.not yet'))->pluck('id');
-       
-       $orders = Order::whereIn('checkout_id', $checkout_ids)->get();
-        //  dd($orders);
+        $checkout_ids = Checkout::where('table_id', $table_id)->where('check_status', config('check.not yet'))->pluck('id');  
+        $orders = Order::whereIn('checkout_id', $checkout_ids)->get();
+
         $table = Table::where('id', $table_id)->first();
         $checkoutTime = Checkout::where('table_id', $table_id)->select('created_at')->first();
 
