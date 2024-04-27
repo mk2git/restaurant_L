@@ -101,24 +101,28 @@ class CheckoutController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        $table_id = $request->input('table_id');
+
+        try{
+            DB::beginTransaction();
+            $table_id = $request->input('table_id');
+            $checkouts = Checkout::where('table_id', $table_id)->where('check_status', config('check.not yet'))->get();
         
-        $checkouts = Checkout::where('table_id', $table_id)->where('check_status', 'not yet')->get();
-        
-        foreach($checkouts as $checkout){
-            $checkout = Checkout::find($checkout->id);
-            $checkout->check_status = 'done';
-            $checkout->payment = $request->input('payment');
-            $checkout->save();
+            foreach($checkouts as $checkout){
+                $checkout = Checkout::find($checkout->id);
+                $checkout->check_status = config('check.done');
+                $checkout->payment = $request->input('payment');
+                $checkout->save();
+            }
+            $table = Table::where('id', $table_id)->first();
+            $table->status = config('table.未使用');
+            $table->save();
+            DB::commit();           
+            return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Category Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
         }
-        
-
-        $table = Table::where('id', $table_id)->first();
-        $table->status = '未使用';
-        $table->save();
-
-        
-        return redirect()->route('dashboard')->with(['message' => 'お会計が1件完了しました', 'type' => 'info']);
-   
     }
 }
