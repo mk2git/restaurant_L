@@ -30,11 +30,18 @@ class ProfileController extends Controller
     }
 
     public function updateRole($user_id, Request $request ){
-        $user = User::find($user_id);
-        $user->role = $request->input('role');
-        $user->save();
-
-        return redirect()->back()->with(['message' => $user->name.'の権限が変更されました', 'type' => 'success']);
+        try{
+            DB::beginTransaction();
+            $user = User::find($user_id);
+            $user->role = $request->input('role');
+            $user->save();
+            DB::commit();
+            return redirect()->back()->with(['message' => $user->name.'の権限が変更されました', 'type' => 'success']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Profile updateRole', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '権限の変更に失敗しました');
+        } 
     }
 
     /**
