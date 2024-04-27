@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ReserveController extends Controller
 {
@@ -77,24 +78,31 @@ class ReserveController extends Controller
             return redirect('reserve')
                         ->withErrors($validator)
                         ->withInput();
-}
+        }
+        try{
+            DB::beginTransaction();
+            $reserve = new Reserve();
+            $reserve->date = $request->input('date');
+            $reserve->time = $request->input('time');
+            $reserve->adult = $request->input('adult');
+            $reserve->kid = $request->input('kid');
+            $reserve->name = $request->input('name');
+            $reserve->phone_number = $request->input('phone_number');
+            $reserve->save();
+            DB::commit();
+            return redirect()->route('reserve.index')->with(['message' => '予約が確定しました。', 'type' => 'success']);
 
-        $reserve = new Reserve();
-        $reserve->date = $request->input('date');
-        $reserve->time = $request->input('time');
-        $reserve->adult = $request->input('adult');
-        $reserve->kid = $request->input('kid');
-        $reserve->name = $request->input('name');
-        $reserve->phone_number = $request->input('phone_number');
-        $reserve->save();
-
-        return redirect()->route('reserve.index')->with(['message' => '予約が確定しました。', 'type' => 'success']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Reserve Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約追加に失敗しました');
+        }        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reserve $reserve)
+    public function update(Reserve $reserve, Request $request)
     {
         $rules = [
             'date' => 'required',
@@ -114,25 +122,30 @@ class ReserveController extends Controller
 
         // バリデータの作成
         $validator = Validator::make($request->all(), $rules, $messages);
-// dd($validator);
+
         // バリデーションエラー時の処理
         if ($validator->fails()) {
             return redirect('reserve')
                         ->withErrors($validator)
                         ->withInput();
 }
-        // dd($request);
-        $reserve = Reserve::find($request->id);
-        $reserve->name = $request->input('name');
-        $reserve->date = $request->input('date');
-        $reserve->time = $request->input('time');
-        $reserve->adult = $request->input('adult');
-        $reserve->kid = $request->input('kid');
-        $reserve->phone_number = $request->input('phone_number');
-        $reserve->save();
-        // dd($reserve);
-
-        return to_route('reserve.index')->with(['message' => '予約内容が更新されました', 'type' => 'success']);
+        try{
+            DB::beginTransaction();
+            $reserve = Reserve::find($request->id);
+            $reserve->name = $request->input('name');
+            $reserve->date = $request->input('date');
+            $reserve->time = $request->input('time');
+            $reserve->adult = $request->input('adult');
+            $reserve->kid = $request->input('kid');
+            $reserve->phone_number = $request->input('phone_number');
+            $reserve->save();
+            DB::commit();
+            return to_route('reserve.index')->with(['message' => '予約内容が更新されました', 'type' => 'success']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Category Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+        }
     }
 
     public function changeStatus($reserve_id){
