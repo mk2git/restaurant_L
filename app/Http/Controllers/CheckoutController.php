@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -66,18 +67,25 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $table_id = $request->input('table_id');
-        $checkout = new Checkout(); // このあたりからトランザクションをかけて、try-catchを仕込んだ方が良い by candy
-        $checkout->table_id = $table_id;
-        $checkout->save();
-        $checkout_id = $checkout->id;
+        try{
+            DB::beginTransaction();
+            $checkout = new Checkout(); 
+            $checkout->table_id = $table_id;
+            $checkout->save();
+            $checkout_id = $checkout->id;
 
-        $orders = Order::where('table_id', $table_id)->where('check_status', config('order.not yet'))->get();
-        foreach($orders as $order){
-            $order->check_status = config('order.done');
-            $order->checkout_id = $checkout_id;
-            $order->save();
+            $orders = Order::where('table_id', $table_id)->where('check_status', config('order.not yet'))->get();
+            foreach($orders as $order){
+                $order->check_status = config('order.done');
+                $order->checkout_id = $checkout_id;
+                $order->save();
+            }
+            DB::commit();
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Checkout Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'checkoutsテーブルへのデータ挿入やordersテーブルのcheck_statusの変更に失敗しました');
         }
     }
 
