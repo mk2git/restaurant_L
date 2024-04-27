@@ -14,6 +14,6 @@ class Table extends Model
     }
 
     public function checkout(){
-        return $this->hasOne('Checkout::class');
+        return $this->hasOne(Checkout::class);
     }
 }
