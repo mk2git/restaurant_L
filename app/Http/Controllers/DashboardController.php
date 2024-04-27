@@ -25,33 +25,19 @@ class DashboardController extends Controller
         $usingSeats = Table::where('status', config('table.使用中'))->count();
 
         $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
-        $orders = Order::where('status', 'cooking')->distinct()->pluck('table_id');
-        if($orders){
-            $count_orders = count($orders);
-        }else{
-            $count_orders = 0;
-        }
-        
-        $takeout_orders = Takeout_Order::where('status', 'cooking')->distinct()->pluck('takeout_id');
-        if($takeout_orders){
-            $count_takeout_orders = count($takeout_orders);
-        }else{
-            $count_takeout_orders = 0;
-        }
-        $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
-        if($checkouts){
-            $count_checkouts = count($checkouts);
-        }else{
-            $count_checkouts = 0;
-        }
-        $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id');
-        if($takeout_checkouts){
-            $count_takeout_checkouts = count($takeout_checkouts);
-        }else{
-            $count_takeout_checkouts = 0;
-        }
+
+        $orders = Order::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
+        $takeout_orders = Takeout_Order::where('status', 'cooking')->distinct()->pluck('takeout_id')->count();
+        $total_orders = 0;
+        $total_orders = $orders + $takeout_orders;
+  
+        $checkouts = Checkout::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
+        $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id')->count();
+        $total_checkouts = 0;
+        $takeout_checkouts = $checkouts + $takeout_checkouts;
+
         // dd($checkouts);
     
-        return view('dashboard', compact('role', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_orders', 'count_takeout_orders', 'count_checkouts', 'count_takeout_checkouts'));
+        return view('dashboard', compact('role','total_orders', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'total_checkouts'));
     }
 }
