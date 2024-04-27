@@ -17,11 +17,10 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $Atables = Table::where('name', 'like', 'A-%')->get(); // Aと%で２つのカラムにした方が良い by candy
-        $Btables = Table::where('name', 'like', 'B-%')->get(); // AとBと、この後もCやDなど増えていく可能性があるのなら拡張しやすいように設計したほうがよい by candy
-        $checkoutTables = Checkout::where('check_status', config('check.not_yet'))->get(); // ステータス系は数値でレコード格納したほうがよい by candy
+        $tables = Table::all(); 
+        $checkoutTables = Checkout::where('check_status', config('check.not yet'))->get(); // ステータス系は数値でレコード格納したほうがよい by candy
 
-        return view('checkouts.index', compact('Atables', 'Btables', 'checkoutTables'));
+        return view('checkouts.index', compact('tables', 'checkoutTables'));
     }
 
     public function select(){
