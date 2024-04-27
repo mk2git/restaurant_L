@@ -33,13 +33,20 @@ class ServeController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
-        $order = Order::find($request->order_id);
-        // dd($order);
-        $order->status = 'done';
-        $order->save();
-        $message = '「'.$order->menu->name.'」の配膳を確認しました';
-        return redirect()->route('serve.index')->with(['message' => $message, 'type' => 'success']);
+        try{
+            DB::beginTransaction();
+            $order = Order::find($request->order_id);
+            $order->status = config('order.done');
+            $order->save();
+            DB::commit();
+            $message = '「'.$order->menu->name.'」の配膳を確認しました';
+            return redirect()->route('serve.index')->with(['message' => $message, 'type' => 'success']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Serve Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '料理の配膳済み処理に失敗しました');
+        }
     }
 
 }
