@@ -101,34 +101,57 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        $request->validate([
-            // unique:menusを使ってしまうとデータが更新されないため、バリデーションに含まないように
+        $rules = [
+             // unique:menusを使ってしまうとデータが更新されないため、バリデーションに含まないように
             'name' => 'required',
             'price' => 'required|min:0',
             'category_id' => 'required',
             'description' => 'required',
             'photo' => 'required'
-        ]);
+        ];
 
-             // ファイルがアップロードされた場合は保存する
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageName = time().'.'.$image->extension(); // ファイル名を生成
-            $image->move(public_path('images'), $imageName); // ファイルを保存
-        }
-        $category_name = Category::where('id', $request->category_id)->pluck('name');
-// dd($category_name);
-        $menu = Menu::find($request->id);
-        $menu->name = $request->input('name');
-        $menu->price = $request->input('price');
-        $menu->category_id = $request->input('category_id');
-        $menu->description = $request->input('description');
-        $menu->photo = $imageName;
-        $menu->save();
-// dd($menu);
-        $message = '「'.$menu->name.'」のメニュー内容が変更されました。';
+        $messages = [
+            'name.required' => '料理名は必須です。',
+            'name.unique' => 'すでにその料理名は登録されています。',
+            'price.required' => '価格は必須です。',
+            'category_id.required' => 'カテゴリーの選択は必須です。',
+            'description.required' => '料理の説明文は必須です。',
+            'photo.required' => '写真の選択は必須です。',
+        ];
+         // バリデータの作成
+         $validator = Validator::make($request->all(), $rules, $messages);
+                 // バリデーションエラー時の処理
+                 if ($validator->fails()) {
+                     return redirect('menu')
+                                 ->withErrors($validator)
+                                 ->withInput();
+         }
 
-        return redirect()->route('menu.index')->with(['message' => $message, 'type' => 'success']);
+         try{
+            DB::beginTransaction();
+            // ファイルがアップロードされた場合は保存する
+            if ($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $imageName = time().'.'.$image->extension(); // ファイル名を生成
+                $image->move(public_path('images'), $imageName); // ファイルを保存
+            }
+            $category_name = Category::where('id', $request->category_id)->pluck('name');
+            $menu = Menu::find($request->id);
+            $menu->name = $request->input('name');
+            $menu->price = $request->input('price');
+            $menu->category_id = $request->input('category_id');
+            $menu->description = $request->input('description');
+            $menu->photo = $imageName;
+            $menu->save();
+            DB::commit();
+            $message = '「'.$menu->name.'」のメニュー内容が変更されました。';
+            return redirect()->route('menu.index')->with(['message' => $message, 'type' => 'success']);
+
+         }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Menu Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'メニューの更新に失敗しました');
+         }
     }
 
     /**
