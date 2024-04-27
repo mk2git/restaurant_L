@@ -16,9 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $selectedCategory = null; // 使ってる？ by candy
 
-        return view('menu.add_category_menu', compact('categories', 'selectedCategory'));
+        return view('menu.add_category_menu', compact('categories'));
     }
 
     public function getCategory(Request $request){
