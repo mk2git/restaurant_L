@@ -25,18 +25,10 @@ class CheckoutController extends Controller
     }
 
     public function select(){
-        $checkouts = Checkout::where('check_status', 'not yet')->distinct()->pluck('table_id');
-    if($checkouts){
-        $count_checkouts = count($checkouts);
-    }else{
-        $count_checkouts = 0;
-    }
-    $takeout_checkouts = Takeout_Checkout::where('check_status', 'not yet')->distinct()->pluck('takeout_id');
-    if($takeout_checkouts){
-        $count_takeout_checkouts = count($takeout_checkouts);
-    }else{
-        $count_takeout_checkouts = 0;
-    }
+        $count_checkouts = Checkout::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
+
+        $count_takeout_checkouts = Takeout_Checkout::where('check_status', config('takeout_checkout.not yet'))->distinct()->pluck('takeout_id')->count();
+
         return view('checkouts.select_checkout', compact('count_checkouts', 'count_takeout_checkouts'));
     }
 
