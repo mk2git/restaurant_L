@@ -108,13 +108,19 @@ class TakeoutCheckoutController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
-       $takeout_id = $request->input('takeout_id');
-        $takeout_order = Takeout_Checkout::where('takeout_id' ,$takeout_id)->first();
-        $takeout_order->check_status = 'done';
-        $takeout_order->payment = $request->input('payment');
-        $takeout_order->save();
-
-        return redirect()->route('dashboard')->with(['message' => 'テイクアウトのお会計が1件完了しました', 'type' => 'info']);
+        try{
+            DB::beginTransaction();
+            $takeout_id = $request->input('takeout_id');
+            $takeout_order = Takeout_Checkout::where('takeout_id' ,$takeout_id)->first();
+            $takeout_order->check_status = config('takeout_checkout.done');
+            $takeout_order->payment = $request->input('payment');
+            $takeout_order->save();
+            DB::commit();
+            return redirect()->route('dashboard')->with(['message' => 'テイクアウトのお会計が1件完了しました', 'type' => 'info']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error TakeoutCheckout UpdateCheckStatus', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '支払い方法の追加に失敗しました');
+        }
    }
 }
