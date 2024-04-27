@@ -1,16 +1,16 @@
 <script>
   $(document).ready(function() {
       $('.select-Atable').click(function() {
-          var AtableId = $(this).data('Atable-id');
-          $.get('/order/' + AtableId, function(data) {
-              $('#selectCheckTableAModal' + AtableId).find('.modal-body').html(data);
-              $('#selectCheckTableAModal' + AtableId).modal('show');
+          var tableId = $(this).data('table-id');
+          $.get('/order/' + tableId, function(data) {
+              $('#selectCheckTableAModal' + tableId).find('.modal-body').html(data);
+              $('#selectCheckTableAModal' + tableId).modal('show');
           });
       });
   });
 </script>
 
-<div class="modal fade" id="selectCheckTableAModal{{$atableId}}" tabindex="-1" role="dialog" aria-labelledby="selectCheckTableAModalLabel" aria-hidden="true">
+<div class="modal fade" id="selectCheckTableAModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="selectCheckTableAModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -20,9 +20,9 @@
               </button>
           </div>
           <div class="modal-body">
-              <p class="text-center">「 {{$atableName}} 」の会計をしますか？</p>
+              <p class="text-center">「 {{$seatType}}-{{$seatNumber}} 」の会計をしますか？</p>
               <div class="text-center">
-                <a href="{{route('checkout.show', $atableId)}}" class="btn btn-success w-25">
+                <a href="{{route('checkout.show', $tableId)}}" class="btn btn-success w-25">
                 会計
               </a>
               </div>
