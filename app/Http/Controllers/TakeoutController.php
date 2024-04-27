@@ -7,6 +7,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class TakeoutController extends Controller
 {
@@ -40,14 +41,20 @@ class TakeoutController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
+        try{
+            DB::beginTransaction();
+            $takeout = new Takeout();
+            $takeout->name = $request->input('name');
+            $takeout->phone_number = $request->input('phone_number');
+            $takeout->save();
+            DB::commit();
+            return redirect()->route('takeout-order.create', ['takeout_id' => $takeout->id]);
 
-        $takeout = new Takeout();
-        $takeout->name = $request->input('name');
-        $takeout->phone_number = $request->input('phone_number');
-        $takeout->save();
-        
-        return redirect()->route('takeout-order.create', ['takeout_id' => $takeout->id]);
-
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Takeout Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'テイクアウト注文者の追加に失敗しました');
+        }
     }
 
 }
