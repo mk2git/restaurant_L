@@ -102,7 +102,7 @@ class ReserveController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Reserve $reserve, Request $request)
+    public function update(Reserve $reserve_id, Request $request)
     {
         $rules = [
             'date' => 'required',
@@ -131,7 +131,7 @@ class ReserveController extends Controller
 }
         try{
             DB::beginTransaction();
-            $reserve = Reserve::find($request->id);
+            $reserve = $reserve_id;
             $reserve->name = $request->input('name');
             $reserve->date = $request->input('date');
             $reserve->time = $request->input('time');
