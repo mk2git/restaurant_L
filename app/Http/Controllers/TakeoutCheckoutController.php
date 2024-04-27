@@ -66,7 +66,7 @@ class TakeoutCheckoutController extends Controller
 
         $takeout_orders = Takeout_Order::where('takeout_id', $takeout_id)->get();
         foreach($takeout_orders as $takeout_order){
-            $takeout_order->check_status = 'done';
+            $takeout_order->check_status = config('takeout_order.done');
             $takeout_order->save();
         }
     }
