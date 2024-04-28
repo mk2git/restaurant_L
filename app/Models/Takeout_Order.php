@@ -9,6 +9,12 @@ class Takeout_Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'takeout_id',
+        'menu_id',
+        'quantity'
+    ];
+
     public function takeout(){
         return $this->belongsTo(Takeout::class);
     }

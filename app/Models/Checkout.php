@@ -9,6 +9,10 @@ class Checkout extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'table_id'
+    ];
+
     public function table(){
         return $this->belongsTo(Table::class);
     }

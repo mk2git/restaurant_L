@@ -9,6 +9,12 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'menu_id',
+        'table_id',
+        'quantity'
+    ];
+
     public function menu(){
         return $this->belongsTo(Menu::class);
     }

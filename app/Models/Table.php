@@ -9,6 +9,11 @@ class Table extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'seat_type',
+        'seat_number'
+    ];
+
     public function orders(){
         return $this->hasMany(Order::class);
     }
