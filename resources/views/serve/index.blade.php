@@ -3,15 +3,14 @@
     ['name' => '配膳状況一覧', 'link' => '']
   ]" />
 
+  @if (session('message'))
+    <x-alert-message :type="session('type')" :message="session('message')" />
+  @endif
   <div class="container mt-5">
     <p class="h3 text-center"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;配膳状況</p>
     <hr class="w-75 mx-auto">
   </div>
 
-  @if (session('message'))
-    <x-alert-message :type="session('type')" :message="session('message')" />
-  @endif
-{{-- @dd($confirm_table_orders) --}}
   <div class="container w-75 mx-auto mt-5 d-flex flex-wrap">
     @if ($orders->isEmpty())
       <p class="text-center">テーブルの注文はありません。</p>
