@@ -16,4 +16,8 @@ class Takeout_Checkout extends Model
     public function takeout(){
         return $this->belongsTo(Takeout::class);
     }
+
+    public function countTakeoutCheckouts(){
+        return $this::where('check_status', config('takeout_checkout.not yet'))->distinct()->pluck('takeout_id')->count();
+    }
 }

@@ -16,4 +16,10 @@ class Checkout extends Model
     public function table(){
         return $this->belongsTo(Table::class);
     }
+
+    public function countCheckouts(){
+        return $this::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
+    }
+
+    
 }

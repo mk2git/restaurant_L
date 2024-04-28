@@ -23,10 +23,12 @@ class CheckoutController extends Controller
         return view('checkouts.index', compact('tables', 'checkoutTables'));
     }
 
-    public function select(){
-        $count_checkouts = Checkout::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
-
-        $count_takeout_checkouts = Takeout_Checkout::where('check_status', config('takeout_checkout.not yet'))->distinct()->pluck('takeout_id')->count();
+    public function select()
+    {
+        $checkout = new Checkout();
+        $count_checkouts = $checkout->countCheckouts();
+        $takeout_checkout = new Takeout_Checkout();
+        $count_takeout_checkouts = $takeout_checkout->countTakeoutCheckouts();
 
         return view('checkouts.select_checkout', compact('count_checkouts', 'count_takeout_checkouts'));
     }
