@@ -22,4 +22,8 @@ class Takeout_Order extends Model
     public function menu(){
         return $this->belongsTo(Menu::class);
     }
+
+    public function countTakeoutOrders(){
+        return $this::where('status', config('takeout_order.cooking'))->distinct()->pluck('takeout_id')->count();
+    }
 }

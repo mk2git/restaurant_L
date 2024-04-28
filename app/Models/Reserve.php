@@ -17,4 +17,8 @@ class Reserve extends Model
         'name',
         'phone_number'
     ];
+
+    public function todayReserves(){
+        return $this::orderBy('time', 'asc')->whereDate('date', today())->get();
+    }
 }

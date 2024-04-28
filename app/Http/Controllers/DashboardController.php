@@ -21,25 +21,30 @@ class DashboardController extends Controller
         $role = User::where('role')->get();
 
         $table = new Table();
+        $reserve = new Reserve();
+        $order = new Order();
+        $checkout = new Checkout();
+        $takeout_order = new Takeout_Order();
+        $takeout_checkout = new Takeout_Checkout();
 
         $totalSeats = $table->totalSeats();
         $unusedSeats = $table->unusedSeats();
         $usingSeats = $table->usingSeats();
 
-        $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
+        $todayReserves = $reserve->todayReserves();
 
-        $orders = Order::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
-        $takeout_orders = Takeout_Order::where('status', config('takeout_order.cooking'))->distinct()->pluck('takeout_id')->count();
-        $total_orders = 0;
-        $total_orders = $orders + $takeout_orders;
+        $count_orders = $order->countOrders();
+        $count_takeout_orders = $takeout_order->countTakeoutOrders();
+        $count_total_orders = 0;
+        $count_total_orders = $count_orders + $count_takeout_orders;
   
-        $checkouts = Checkout::where('check_status', config('check.not yet'))->distinct()->pluck('table_id')->count();
-        $takeout_checkouts = Takeout_Checkout::where('check_status', config('takeout_checkout.not yet'))->distinct()->pluck('takeout_id')->count();
-        $total_checkouts = 0;
-        $total_checkouts = $checkouts + $takeout_checkouts;
+        $count_checkouts = $checkout->countCheckouts();
+        $count_takeout_checkouts = $takeout_checkout->countTakeoutCheckouts();
+        $count_total_checkouts = 0;
+        $count_total_checkouts = $count_checkouts + $count_takeout_checkouts;
 
         // dd($checkouts);
     
-        return view('dashboard', compact('role','total_orders', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'total_checkouts'));
+        return view('dashboard', compact('role','count_total_orders', 'totalSeats', 'unusedSeats', 'usingSeats', 'todayReserves', 'count_total_checkouts'));
     }
 }

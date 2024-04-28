@@ -22,4 +22,8 @@ class Order extends Model
     public function table(){
         return $this->belongsTo(Table::class);
     }
+
+    public function countOrders(){
+        return $this::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
+    }
 }
