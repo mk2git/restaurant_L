@@ -87,16 +87,6 @@ class MenuController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show($menu_id)
-    {
-        $one_menu = Menu::find($menu_id);
-
-        return response()->json($one_menu);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Menu $menu)
