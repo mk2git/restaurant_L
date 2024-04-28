@@ -1,7 +1,8 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-    <a href="{{route('checkout.select')}}">会計</a> > テイクアウト会計
-  </div>
+  <x-breadcrumb :list="[
+    ['name' => '会計選択', 'link' => route('checkout.select')],
+    ['name' => 'テイクアウト会計', 'link' => '']
+  ]" />
   
   <div class="container my-5">
     <h3 class="text-center">どのテイクアウトのお会計をしますか？</h3>

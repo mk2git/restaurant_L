@@ -1,7 +1,10 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-      <a href="{{route('checkout.select')}}">会計</a> > <a href="{{route('takeout-check.index')}}">テイクアウト会計</a> > {{$takeout->name}} 様
-    </div>
+    <x-breadcrumb :list="[
+    ['name' => '会計選択', 'link' => route('checkout.select')],
+    ['name' => 'テイクアウト会計', 'link' => route('takeout-check.index')],
+    ['name' => $takeout->name . '様', 'link' => '']
+  ]" />
+  
   <div class="container my-5 w-75">
     @if ($errors->any())
       <x-error-message />
@@ -87,6 +90,7 @@
               <input type="radio" name="payment" id="card" value="card" class="form-check-input">
               <label class="form-check-label" for="card">クレジットカード</label>
             </div>
+         {{-- <x-payment-select-form /> --}}
       </div>
      
       <div class="text-center">

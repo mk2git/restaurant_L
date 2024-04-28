@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="mt-3 ms-5">
-        <a href="{{route('dashboard')}}" class="text-decoration-none text-black"><i class="fa-solid fa-house"></i></a> &nbsp;> 座席指定
-    </div>
+    <x-breadcrumb :list="[
+        ['name' => '座席指定', 'link' => '']
+        ]" />
 {{-- 座席を簡易的なレストラン図に並べる --}}
     <div class="container w-75 mx-auto my-5">
         <h3 class="text-center mb-5"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;座席</h3>

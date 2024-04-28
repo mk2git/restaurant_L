@@ -1,7 +1,8 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"> <i class="fa-solid fa-house"></i></a>&nbsp; >&nbsp; 配膳状況一覧
-  </div>
+  <x-breadcrumb :list="[
+    ['name' => '配膳状況一覧', 'link' => '']
+  ]" />
+
   <div class="container mt-5">
     <p class="h3 text-center"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;配膳状況</p>
     <hr class="w-75 mx-auto">

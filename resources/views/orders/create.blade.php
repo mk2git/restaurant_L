@@ -1,7 +1,8 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"><i class="fa-solid fa-house"></i></a> > <a href="{{route('order.index')}}" class="text-black">テーブル選択</a> > {{$table->seat_type}}-{{$table->seat_number}}の注文
-  </div>
+  <x-breadcrumb :list="[
+    ['name' => 'テーブル選択', 'link' => route('order.index')],
+    ['name' => $table->seat_type . '-' . $table->seat_number . 'の注文', 'link' => '']
+  ]" />
   @if ($errors->any())
       <x-error-message />
     @endif

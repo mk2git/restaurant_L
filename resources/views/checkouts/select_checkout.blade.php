@@ -1,7 +1,8 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-    <a href="{{route('dashboard')}}" class="text-decoration-none text-black"> <i class="fa-solid fa-house"></i></a>&nbsp; >&nbsp; 会計選択
-  </div>
+  <x-breadcrumb :list="[
+    ['name' => '会計選択', 'link' => '']
+  ]" />
+  
   <div class="container-select mt-5">
     <h3 class="text-center mb-5">どちらの会計を行いますか？</h3>
 

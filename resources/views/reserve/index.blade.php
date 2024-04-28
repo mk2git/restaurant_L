@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="mt-3 ms-5">
-        <a href="{{route('dashboard')}}" class="text-decoration-none text-black"> <i class="fa-solid fa-house"></i></a>&nbsp; > 予約
-    </div>
+    <x-breadcrumb :list="[
+        ['name' => '予約', 'link' => '']
+        ]" />
     <div class="container mt-5 w-50">
         {{-- エラーメッセージ --}}
         @if ($errors->any())
