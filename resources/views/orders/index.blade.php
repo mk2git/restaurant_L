@@ -1,8 +1,6 @@
 <x-app-layout>
-
     <x-breadcrumb :list="[
-            ['name' => '注文受付', 'link' => route('order.index')],
-            ['name' => 'A1', 'link' => '']
+            ['name' => '注文テーブル選択', 'link' => ''],
         ]"
     />
 
