@@ -32,7 +32,6 @@ class OrderController extends Controller
 
        // menuテーブルから使用されているカテゴリIDの一覧を取得
         $usedCategoryIds = Menu::pluck('category_id')->unique();
-
       // 取得したカテゴリIDを使用して、categoryテーブルからカテゴリ情報を取得
        $categories = Category::whereIn('id', $usedCategoryIds)->get();
         // dd($categories);
@@ -45,7 +44,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         try {
             DB::beginTransaction();
             $data = $request->all();
@@ -59,16 +57,13 @@ class OrderController extends Controller
             // 注文を作成して保存
             $order = new Order();
             $order->table_id = $data['table_id'];
-            
             $order->menu_id = $menuId;
-            
-            $order->quantity = $quantity;
-            // dd($order->quantity);
-    //   dd($order);      
+            $order->quantity = $quantity;   
             $order->save();
             DB::commit();
           }
-        return redirect()->route('orders.edit', ['table_id' => $request->table_id]);  
+            return redirect()->route('orders.edit', ['table_id' => $request->table_id]); 
+
         } catch (\Throwable $th){
             DB::rollBack();
             logger('Error Order Store', ['message' => $th->getMessage()]);
