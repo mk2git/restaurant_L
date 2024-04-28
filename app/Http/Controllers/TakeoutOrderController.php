@@ -14,9 +14,9 @@ class TakeoutOrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($takeout_id)
+    public function create(Takeout $takeout_id)
     {
-        $takeout = Takeout::find($takeout_id);
+        $takeout = $takeout_id;
         $menus = Menu::all();
         $categories = Category::all();
 
