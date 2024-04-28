@@ -21,4 +21,11 @@ class Reserve extends Model
     public function todayReserves(){
         return $this::orderBy('time', 'asc')->whereDate('date', today())->get();
     }
+
+    public function getAscReserves(){
+        return $this::orderBy('date', 'asc')->orderBy('time', 'asc')->get();
+    }
+    public function getAscDates(){
+        return $this::orderBy('date', 'asc')->distinct()->pluck('date');
+    }
 }

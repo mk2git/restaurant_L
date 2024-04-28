@@ -14,21 +14,21 @@ class ReserveController extends Controller
      */
     public function index()
     {
-        $reserves = Reserve::orderBy('date', 'asc')->orderBy('time', 'asc')->get();
-        $dates = Reserve::orderBy('date', 'asc')->distinct()->pluck('date');
+        $reserve = new Reserve();
+        $reserves = $reserve->getAscReserves();
+        $dates = $reserve->getAscDates();
         $selectedDate = null;
 
         return view('reserve.index', compact('reserves', 'dates', 'selectedDate'));
     }
 
-    public function getDate(Request $request){
-        // dd($request);
-        $reserves = Reserve::orderBy('date', 'asc')->orderBy('time', 'asc')->get();
-        $dates = Reserve::orderBy('date', 'asc')->distinct()->pluck('date');
-
+    public function getDate(Request $request)
+    {
+        $reserve = new Reserve();
+        $reserves = $reserve->getAscReserves();
+        $dates = $reserve->getAscDates();
 
         $selectedDate = $request->input('date');
-        // dd($selectedDate);
 
         // これにより、$selectedAllDatesがallでないときに未定義とならない
         $selectedAllDates = null;
@@ -36,15 +36,8 @@ class ReserveController extends Controller
             $selectedAllDates = $reserves;
         }
         $selectedDates = Reserve::where('date', $selectedDate)->get();
-// dd($selectedDates);
 
         return view('reserve.index', compact('reserves', 'dates', 'selectedDates', 'selectedDate', 'selectedAllDates'));
-    }
-
-    public function show($reserve_id){
-        $one_reserve = Reserve::find($reserve_id);
-
-        return response()->json($one_reserve);
     }
 
     /**
