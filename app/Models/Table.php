@@ -21,4 +21,14 @@ class Table extends Model
     public function checkout(){
         return $this->hasOne(Checkout::class);
     }
+
+    public function totalSeats(){
+        return $this::all()->count();
+    }
+    public function unusedSeats(){
+        return $this::where('status', config('table.未使用'))->count();
+    }
+    public function usingSeats(){
+        return $this::where('status', config('table.使用中'))->count();
+    }
 }

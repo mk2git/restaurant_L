@@ -20,9 +20,11 @@ class DashboardController extends Controller
     {
         $role = User::where('role')->get();
 
-        $totalSeats = Table::all()->count();
-        $unusedSeats = Table::where('status', config('table.未使用'))->count();
-        $usingSeats = Table::where('status', config('table.使用中'))->count();
+        $table = new Table();
+
+        $totalSeats = $table->totalSeats();
+        $unusedSeats = $table->unusedSeats();
+        $usingSeats = $table->usingSeats();
 
         $todayReserves = Reserve::orderBy('time', 'asc')->whereDate('date', today())->get();
 
