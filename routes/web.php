@@ -49,7 +49,6 @@ Route::middleware('auth')->group(function () {
         Route::get('menu', 'index')->name('menu.index');
         Route::get('menu/add', 'create')->name('menu.add');
         Route::post('menu/add', 'store')->name('menu.store');
-        Route::get('menu/{id}', 'show');
         Route::put('menu/{menu_id}', 'update')->name('menu.update');
         Route::delete('menu/{menu_id}', 'destroy')->name('menu.destroy');
     });
