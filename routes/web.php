@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function () {
         Route::get('reserve','index')->name('reserve.index');
         Route::post('reserve/date', 'getDate')->name('reserve.getDate');
         Route::post('reserve', 'store')->name('reserve.store');
-        // Route::get('reserve/{id}', 'show');
         Route::put('reserve/{reserve_id}', 'update')->name('reserve.update');
         Route::put('dashboard/{reserve_id}', 'changeStatus')->name('reserve.changeStatus');
         Route::delete('reserve/{reserve_id}', 'destroy')->name('reserve.destroy');
