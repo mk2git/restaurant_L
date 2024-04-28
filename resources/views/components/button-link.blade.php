@@ -9,12 +9,12 @@
       <span>Takeout</span></a>
   <a href="{{route('serve.index')}}" class="circle serve-botton"><i class="fa-solid fa-bell-concierge"></i>
         <span class="serve-count">
-            {{$totalOrders}}
+            {{$countTotalOrders}}
         </span>
       <span>配膳状況</span></a>
   <a href="{{route('checkout.select')}}"class="circle serve-botton"><i class="fa-solid fa-cash-register"></i>
       <span class="serve-count">
-         {{$totalCheckouts}}
+         {{$countTotalCheckouts}}
       </span>
       <span>会計</span></a>
 </div>
