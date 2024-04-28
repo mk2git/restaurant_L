@@ -18,6 +18,7 @@ class SalesBookController extends Controller
     public function index()
     {
         $order = new Order();
+        $takeout_order = new Takeout_Order();
         $todayOrders = $order->getTodayOrders();
         
         $today_table_total = 0;
@@ -29,7 +30,7 @@ class SalesBookController extends Controller
             $today_table_total = 0;
         }
         
-        $todayTakeoutOrders = Takeout_Order::whereDate('created_at', today())->get();
+        $todayTakeoutOrders =  $takeout_order->getTodayTakeoutOrders();
         $today_takeout_total = 0;
         if($todayTakeoutOrders){
             foreach($todayTakeoutOrders as $todayTakeoutOrder){
@@ -54,19 +55,12 @@ class SalesBookController extends Controller
         //             }else{
         //                 $data['orders'][$k]['count'] = 0;
         //             }
-                    
-                    
-    
         //         }
             // dump($data['orders'][$k]['count']);
         // }
-        
         // dd($data);
         $categories = Category::all();
-        // 今月の最初の日を取得
-        $startDate = Carbon::now()->startOfMonth();
-        // 今月の最後の日を取得
-        $endDate = Carbon::now()->endOfMonth();
+
         // 今月の範囲内の注文データを取得
         $thisMonthTableOrders = $order->getThisMonthOrders();
         $thisMonthTotalTableOrders = 0;
@@ -78,7 +72,7 @@ class SalesBookController extends Controller
             $thisMonthTotalTableOrders = 0;
         }
         // 今月のテイクアウト注文データ
-        $thisMonthTakeoutOrders = Takeout_Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        $thisMonthTakeoutOrders = $takeout_order->getThisMonthTakeoutOrders();
         $thisMonthTotalTakeoutOrders = 0;
         if($thisMonthTakeoutOrders){
             foreach($thisMonthTakeoutOrders as $thisMonthTakeoutOrder){
@@ -92,10 +86,6 @@ class SalesBookController extends Controller
         $thisMonthTotalOrders = $thisMonthTotalTableOrders + $thisMonthTotalTakeoutOrders;
         
 
-        // 先月の最初の日を取得
-        $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
-        // 先月の最後の日を取得
-        $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
         $lastMonthTableOrders = $order->getLastMonthOrders();
         $lastMonthTotalTableOrders = 0;
         if($lastMonthTableOrders){
@@ -106,7 +96,7 @@ class SalesBookController extends Controller
             $lastMonthTotalTableOrders = 0;
         }
 
-        $lastMonthTakeoutOrders = Takeout_Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        $lastMonthTakeoutOrders = $takeout_order->getLastMonthTakeoutOrders();
         $lastMonthTotalTakeoutOrders = 0;
         if($lastMonthTakeoutOrders){
             foreach($lastMonthTakeoutOrders as $lastMonthTakeoutOrder){
@@ -130,7 +120,7 @@ class SalesBookController extends Controller
         }else{
             $yesterdayTotalTableOrders = 0;
         }
-        $yesterdayTakeoutOrders = Takeout_Order::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
+        $yesterdayTakeoutOrders = $takeout_order->getYesterdayTakeoutOrders();
         $yesterdayTotalTakeoutOrders = 0;
         if( $yesterdayTakeoutOrders){
             foreach( $yesterdayTakeoutOrders as  $yesterdayTakeoutOrder){
@@ -152,8 +142,7 @@ class SalesBookController extends Controller
         }else{
             $todayTotalTableOrders = 0;
         }
-        $todayTakeoutOrders = Takeout_Order::whereDate('created_at', today())->get();
-        $todayTotalTakeoutOrders = 0;
+        $todayTakeoutOrders = $takeout_order->getTodayTakeoutOrders();
         if($todayTakeoutOrders){
             foreach($todayTakeoutOrders as $todayTakeoutOrder){
                 $todayTotalTakeoutOrders +=  $todayTakeoutOrder->quantity *  $todayTakeoutOrder->menu->price;
@@ -168,20 +157,11 @@ class SalesBookController extends Controller
         // 数量ランキング
         $table_orders = Order::all();
         $table_top_three_orders_q = $order->topThreeOrderQuantity();
-        $takeout_top_three_orders_q = Takeout_Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
-        ->groupBy('menu_id')
-        ->orderByDesc('total_quantity')
-        ->take(3)
-        ->get();
+        $takeout_top_three_orders_q = $takeout_order->topThreeTakeoutOrderQuantity();
 
         // 金額ランキング
         $table_top_three_prices = $order->topThreeOrderPrice();
-        $takeout_top_three_prices = Takeout_Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
-        ->join('menus', 'takeout__orders.menu_id', '=', 'menus.id')
-        ->groupBy('menu_id')
-        ->orderByDesc('total_amount')
-        ->take(3)
-        ->get();
+        $takeout_top_three_prices = $takeout_order->topThreeTakeoutOrderPrice();
 
         //  $sbc = new SalesBookController();
         // $sbc->index();
