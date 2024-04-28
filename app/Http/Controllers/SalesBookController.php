@@ -7,8 +7,6 @@ use App\Models\Order;
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Takeout_Order;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class SalesBookController extends Controller
 {
@@ -143,6 +141,7 @@ class SalesBookController extends Controller
             $todayTotalTableOrders = 0;
         }
         $todayTakeoutOrders = $takeout_order->getTodayTakeoutOrders();
+        $todayTotalTakeoutOrders = 0;
         if($todayTakeoutOrders){
             foreach($todayTakeoutOrders as $todayTakeoutOrder){
                 $todayTotalTakeoutOrders +=  $todayTakeoutOrder->quantity *  $todayTakeoutOrder->menu->price;
