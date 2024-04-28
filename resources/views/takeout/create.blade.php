@@ -32,6 +32,8 @@
             
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-success w-50 form-btn">注文へ</button>
+            <hr class="w-75 mx-auto">
+            <a href="{{route('dashboard')}}" class="btn btn-light d-block mt-3 w-50 mx-auto">ホームへ戻る</a>
           </div>
           
         </form>
