@@ -170,8 +170,6 @@ class SalesBookController extends Controller
             ->orderByDesc('total_quantity')
             ->take(3)
             ->get();
-        // $table_top_three_orders_q = null;
-        // $takeout_top_three_orders_q = null;
         $takeout_top_three_orders_q = Takeout_Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
         ->groupBy('menu_id')
         ->orderByDesc('total_quantity')
@@ -185,75 +183,16 @@ class SalesBookController extends Controller
         ->orderByDesc('total_amount')
         ->take(3)
         ->get();
-        // $select = null;
-        // $table_top_three_prices = null;
         $takeout_top_three_prices = Takeout_Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
         ->join('menus', 'takeout__orders.menu_id', '=', 'menus.id')
         ->groupBy('menu_id')
         ->orderByDesc('total_amount')
         ->take(3)
         ->get();
-        // dd($takeout_top_three_prices);
 
         //  $sbc = new SalesBookController();
         // $sbc->index();
         return view('sales-book.index', compact('todayTotal','todayOrders', 'today_table_total', 'todayTakeoutOrders', 'today_takeout_total', 'categories', 'menus', 'thisMonthTotalTableOrders', 'thisMonthTotalTakeoutOrders', 'lastMonthTotalTableOrders', 'lastMonthTotalTakeoutOrders', 'thisMonthTotalOrders', 'lastMonthTotalOrders', 'yesterdayTotal', 'todayTotal', 'table_top_three_orders_q', 'takeout_top_three_orders_q', 'table_top_three_prices', 'takeout_top_three_prices'));
-    }
-
-     // $request = Illuminate\Http\Request::capture();
-    // $request->merge(['valueId' => '99']);
-   
-
-
-//     public function select(Request $request)
-//     {
-//         $select = $request->input('quantityOrTotal');
-//         $table_top_three_orders_q = null;
-//         $takeout_top_three_orders_q = null;
-//         $table_top_three_prices = null;
-
-
-//         if($select == 'quantity'){
-//              // 数量ランキング
-//             //  dd($select);
-//             $table_top_three_orders_q = Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
-//             ->groupBy('menu_id')
-//             ->orderByDesc('total_quantity')
-//             ->take(3)
-//             ->get();
-//             if($table_top_three_orders_q->isEmpty()){
-//                 $table_top_three_orders_q = null;
-//             }
-//         // dd($table_top_three_orders_q);
-//             $takeout_top_three_orders_q = Takeout_Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
-//             ->groupBy('menu_id')
-//             ->orderByDesc('total_quantity')
-//             ->take(3)
-//             ->get();
-//             if($takeout_top_three_orders_q->isEmpty()){
-//                 $takeout_top_three_orders_q = null;
-//             }
-
-//         }elseif($select == 'total'){
-//              $table_top_three_prices = Order::select('menu_id', DB::raw('SUM(quantity * m.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
-//              ->join('menus as m', 'orders.menu_id', '=', 'm.id')
-//              ->groupBy('menu_id')
-//              ->orderByDesc('total_amount')
-//              ->take(3)
-//              ->get();
-//                 }
-
-            
-// // dd($select);
-
-//         return redirect()->route('salesbook.index', compact('select', 'table_top_three_orders_q', 'takeout_top_three_orders_q', 'table_top_three_prices'));
-//     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
 }
