@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -31,5 +33,39 @@ class Order extends Model
     }
     public function getOrders(){
         return $this::whereDate('created_at', today())->where('check_status', config('order.not yet'))->get();
+    }
+
+    public function getTodayOrders(){
+        return $this::whereDate('created_at', today())->get();
+    }
+    public function getThisMonthOrders()
+    {
+        $startDate = Carbon::now()->startOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
+
+        return $this::whereBetween('created_at', [$startDate, $endDate])->get();
+    }
+    public function getLastMonthOrders(){
+        $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
+        $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
+
+        return $this::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+    }
+    public function getYesterdayOrders(){
+        return $this::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
+    }
+    public function topThreeOrderQuantity(){
+        return $this::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))->groupBy('menu_id')
+         ->orderByDesc('total_quantity')
+         ->take(3)
+         ->get();
+    }
+    public function topThreeOrderPrice(){
+        return $this::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
+        ->join('menus', 'orders.menu_id', '=', 'menus.id')
+        ->groupBy('menu_id')
+        ->orderByDesc('total_amount')
+        ->take(3)
+        ->get();
     }
 }

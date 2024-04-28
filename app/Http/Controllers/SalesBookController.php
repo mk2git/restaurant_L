@@ -17,7 +17,9 @@ class SalesBookController extends Controller
      */
     public function index()
     {
-        $todayOrders = Order::whereDate('created_at', today())->get();
+        $order = new Order();
+        $todayOrders = $order->getTodayOrders();
+        
         $today_table_total = 0;
         if($todayOrders){
             foreach($todayOrders as $todayOrder){
@@ -66,7 +68,7 @@ class SalesBookController extends Controller
         // 今月の最後の日を取得
         $endDate = Carbon::now()->endOfMonth();
         // 今月の範囲内の注文データを取得
-        $thisMonthTableOrders = Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        $thisMonthTableOrders = $order->getThisMonthOrders();
         $thisMonthTotalTableOrders = 0;
         if($thisMonthTableOrders){
             foreach($thisMonthTableOrders as $thisMonthTableOrder){
@@ -94,7 +96,7 @@ class SalesBookController extends Controller
         $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
         // 先月の最後の日を取得
         $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
-        $lastMonthTableOrders = Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+        $lastMonthTableOrders = $order->getLastMonthOrders();
         $lastMonthTotalTableOrders = 0;
         if($lastMonthTableOrders){
             foreach($lastMonthTableOrders as $lastMonthTableOrder){
@@ -119,7 +121,7 @@ class SalesBookController extends Controller
 
 
         // 昨日の注文のtotal
-        $yesterdayTableOrders = Order::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
+        $yesterdayTableOrders = $order->getYesterdayOrders();
         $yesterdayTotalTableOrders = 0;
         if($yesterdayTableOrders){
             foreach($yesterdayTableOrders as $yesterdayTableOrder){
@@ -141,7 +143,7 @@ class SalesBookController extends Controller
         $yesterdayTotal = $yesterdayTotalTableOrders + $yesterdayTotalTakeoutOrders;
 
         // 今日の注文total
-        $todayTableOrders = Order::whereDate('created_at',today())->get();
+        $todayTableOrders = $order->getTodayOrders();
         $todayTotalTableOrders = 0;
         if($todayTableOrders){
             foreach($todayTableOrders as $todayTableOrder){
@@ -165,11 +167,7 @@ class SalesBookController extends Controller
 
         // 数量ランキング
         $table_orders = Order::all();
-        $table_top_three_orders_q = Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
-            ->groupBy('menu_id')
-            ->orderByDesc('total_quantity')
-            ->take(3)
-            ->get();
+        $table_top_three_orders_q = $order->topThreeOrderQuantity();
         $takeout_top_three_orders_q = Takeout_Order::select('menu_id', DB::raw('SUM(quantity) as total_quantity'))
         ->groupBy('menu_id')
         ->orderByDesc('total_quantity')
@@ -177,12 +175,7 @@ class SalesBookController extends Controller
         ->get();
 
         // 金額ランキング
-        $table_top_three_prices = Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
-        ->join('menus', 'orders.menu_id', '=', 'menus.id')
-        ->groupBy('menu_id')
-        ->orderByDesc('total_amount')
-        ->take(3)
-        ->get();
+        $table_top_three_prices = $order->topThreeOrderPrice();
         $takeout_top_three_prices = Takeout_Order::select('menu_id', DB::raw('SUM(quantity * menus.price) as total_amount'), DB::raw('SUM(quantity) as total_quantity'))
         ->join('menus', 'takeout__orders.menu_id', '=', 'menus.id')
         ->groupBy('menu_id')
