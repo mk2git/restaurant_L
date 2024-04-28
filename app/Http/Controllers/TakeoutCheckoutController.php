@@ -16,9 +16,9 @@ class TakeoutCheckoutController extends Controller
      */
     public function index()
     {
-        $takeout_order_ids = Takeout_Checkout::where('check_status', config('takeout_checkout.not yet'))->get('takeout_id');
+        $takeout_checkout = new Takeout_Checkout();
+        $takeout_order_ids = $takeout_checkout->getTakeoutOrderIds();
         $takeout_orders = Takeout_Order::all();
-        // dd($takeout_orders);
 
         return view('takeout_checkouts.index', compact('takeout_order_ids', 'takeout_orders'));
     }
