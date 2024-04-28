@@ -26,4 +26,10 @@ class Order extends Model
     public function countOrders(){
         return $this::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
     }
+    public function getTableId(){
+        return $this::where('check_status', config('order.not yet'))->distinct()->get('table_id');
+    }
+    public function getOrders(){
+        return $this::whereDate('created_at', today())->where('check_status', config('order.not yet'))->get();
+    }
 }

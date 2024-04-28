@@ -21,4 +21,10 @@ class Takeout extends Model
     public function takeout_checkout(){
         return $this->hasOne(Takeout_Checkout::class);
     }
+
+    public function getNames(){
+        $takeout_order_ids = Takeout_Order::where('check_status', config('takeout_order.not yet'))->distinct()->get('takeout_id');
+        
+        return $this::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
+    }
 }

@@ -17,13 +17,18 @@ class ServeController extends Controller
      */
     public function index()
     {
-        $table_ids = Order::where('check_status', config('order.not yet'))->distinct()->get('table_id');
-        $order_tables = Table::whereIn('id', $table_ids)->select('id', 'seat_type', 'seat_number')->get();
-        $orders = Order::whereDate('created_at', today())->where('check_status', config('order.not yet'))->get();
+        $order = new Order();
+        $table = new Table();
+        $takeout = new Takeout();
+        $takeout_order = new Takeout_Order();
 
-        $takeout_order_ids = Takeout_Order::where('check_status', config('takeout_order.not yet'))->distinct()->get('takeout_id');
-        $takeout_order_names = Takeout::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
-        $takeout_orders = Takeout_Order::whereDate('created_at', today())->where('check_status', config('takeout_order.not yet'))->get();
+        $table_ids = $order->getTableId();
+        $order_tables = $table->getOrderTables();
+        $orders = $order->getOrders();
+
+        $takeout_order_ids = $takeout_order->getTakeoutOrderIds();
+        $takeout_order_names = $takeout->getNames();
+        $takeout_orders = $takeout_order->getTakeoutOrders();
 
         return view('serve.index', compact('order_tables', 'orders', 'takeout_order_names', 'takeout_orders'));
     }

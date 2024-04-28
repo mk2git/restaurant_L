@@ -31,4 +31,10 @@ class Table extends Model
     public function usingSeats(){
         return $this::where('status', config('table.使用中'))->count();
     }
+    public function getOrderTables()
+    {
+        $table_ids = Order::where('check_status', config('order.not yet'))->distinct()->get('table_id');
+
+        return $this::whereIn('id', $table_ids)->select('id', 'seat_type', 'seat_number')->get();
+    }
 }
