@@ -9,9 +9,9 @@
   </a>
   @foreach ($list as $item)
     @if ($item['link'])
-      <a href="{{$item['link']}}">{{$item['name']}}</a>
+      &nbsp;&nbsp;&nbsp;>&nbsp;<a href="{{$item['link']}}" class="text-black">{{$item['name']}}</a>
     @else
-      <span>{{$item['name']}}</span>
+    &nbsp;&nbsp;&nbsp;>&nbsp;<span>{{$item['name']}}</span>
     @endif
   @endforeach
 </div>
