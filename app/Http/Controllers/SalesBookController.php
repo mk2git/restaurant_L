@@ -17,7 +17,7 @@ class SalesBookController extends Controller
     {
         $order = new Order();
         $takeout_order = new Takeout_Order();
-        $todayOrders = $order->getTodayOrders();
+        $todayOrders = getTodayOrders();
         
         $today_table_total = 0;
         if($todayOrders){
@@ -84,7 +84,7 @@ class SalesBookController extends Controller
         $thisMonthTotalOrders = $thisMonthTotalTableOrders + $thisMonthTotalTakeoutOrders;
         
 
-        $lastMonthTableOrders = $order->getLastMonthOrders();
+        $lastMonthTableOrders = getLastMonthOrders();
         $lastMonthTotalTableOrders = 0;
         if($lastMonthTableOrders){
             foreach($lastMonthTableOrders as $lastMonthTableOrder){
@@ -131,7 +131,7 @@ class SalesBookController extends Controller
         $yesterdayTotal = $yesterdayTotalTableOrders + $yesterdayTotalTakeoutOrders;
 
         // 今日の注文total
-        $todayTableOrders = $order->getTodayOrders();
+        $todayTableOrders = getTodayOrders();
         $todayTotalTableOrders = 0;
         if($todayTableOrders){
             foreach($todayTableOrders as $todayTableOrder){
