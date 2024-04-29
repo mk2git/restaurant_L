@@ -16,5 +16,16 @@
         return Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
       }
    }
+
+   if(!function_exists('getThisMonthOrders')){
+      function getThisMonthOrders()
+        {
+            $startDate = Carbon::now()->startOfMonth();
+            $endDate = Carbon::now()->endOfMonth();
+
+            return Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        }
+   }
+   
    
     
