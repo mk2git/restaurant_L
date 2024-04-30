@@ -2,11 +2,6 @@
   use App\Models\Order;
   use Carbon\Carbon;
 
-  if(!function_exists('getTodayOrders')){
-       function getTodayOrders(){
-      return Order::whereDate('created_at', today())->get();
-    }
-   }
 
    if(!function_exists('getLastMonthOrders')){
       function getLastMonthOrders(){

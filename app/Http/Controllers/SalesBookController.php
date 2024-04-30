@@ -17,7 +17,7 @@ class SalesBookController extends Controller
     {
         $order = new Order();
         $takeout_order = new Takeout_Order();
-        $todayOrders = getTodayOrders();
+        $todayOrders = $order->getTodayOrders();
         
         $today_table_total = 0;
         if($todayOrders){
@@ -131,7 +131,7 @@ class SalesBookController extends Controller
         $yesterdayTotal = $yesterdayTotalTableOrders + $yesterdayTotalTakeoutOrders;
 
         // 今日の注文total
-        $todayTableOrders = getTodayOrders();
+        $todayTableOrders = $order->getTodayOrders();
         $todayTotalTableOrders = 0;
         if($todayTableOrders){
             foreach($todayTableOrders as $todayTableOrder){

@@ -25,6 +25,10 @@ class Order extends Model
         return $this->belongsTo(Table::class);
     }
 
+    public function getTodayOrders(){
+        return Order::whereDate('created_at', today())->get();
+      }
+
     public function countOrders(){
         return $this::where('status', config('order.cooking'))->distinct()->pluck('table_id')->count();
     }
