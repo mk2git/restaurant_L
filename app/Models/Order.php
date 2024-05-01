@@ -39,6 +39,21 @@ class Order extends Model
         return $this::whereDate('created_at', today())->where('check_status', config('order.not yet'))->get();
     }
 
+    function getThisMonthOrders()
+        {
+            $startDate = getThisMonthStartDay();
+            $endDate = getThisMonthEndDay();
+
+            return Order::whereBetween('created_at', [$startDate, $endDate])->get();
+        }
+
+    public function getLastMonthOrders(){
+        $startDateLastMonth = getLastMonthStartDay();
+        $endDateLastMonth = getLastMonthEndDay();
+
+        return Order::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
+      }
+
     public function getYesterdayOrders(){
         return $this::whereDate('created_at', \Carbon\Carbon::yesterday())->get();
     }

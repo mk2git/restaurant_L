@@ -60,7 +60,7 @@ class SalesBookController extends Controller
         $categories = Category::all();
 
         // 今月の範囲内の注文データを取得
-        $thisMonthTableOrders = getThisMonthOrders();
+        $thisMonthTableOrders = $order->getThisMonthOrders();
         $thisMonthTotalTableOrders = 0;
         if($thisMonthTableOrders){
             foreach($thisMonthTableOrders as $thisMonthTableOrder){
@@ -84,7 +84,7 @@ class SalesBookController extends Controller
         $thisMonthTotalOrders = $thisMonthTotalTableOrders + $thisMonthTotalTakeoutOrders;
         
 
-        $lastMonthTableOrders = getLastMonthOrders();
+        $lastMonthTableOrders = $order->getLastMonthOrders();
         $lastMonthTotalTableOrders = 0;
         if($lastMonthTableOrders){
             foreach($lastMonthTableOrders as $lastMonthTableOrder){
