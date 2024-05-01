@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/admin/dashboard', function () {
+    return view('admin-dashboard');
+})->middleware(['auth', 'can:admin', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function(){
     Route::controller(DashboardController::class)->group(function(){
