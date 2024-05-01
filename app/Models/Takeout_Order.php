@@ -39,14 +39,14 @@ class Takeout_Order extends Model
         return $this::whereDate('created_at', today())->get();
     }
     public function getThisMonthTakeoutOrders(){
-        $startDate = Carbon::now()->startOfMonth();
-        $endDate = Carbon::now()->endOfMonth();
+        $startDate = getThisMonthStartDay();
+        $endDate = getThisMonthEndDay();
 
         return $this::whereBetween('created_at', [$startDate, $endDate])->get();
     }
     public function getLastMonthTakeoutOrders(){
-        $startDateLastMonth = Carbon::now()->subMonth()->startOfMonth();
-        $endDateLastMonth = Carbon::now()->subMonth()->endOfMonth();
+        $startDateLastMonth = getLastMonthStartDay();
+        $endDateLastMonth = getLastMonthEndDay();
 
         return $this::whereBetween('created_at', [$startDateLastMonth, $endDateLastMonth])->get();
     }
