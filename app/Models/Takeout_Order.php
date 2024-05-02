@@ -28,9 +28,7 @@ class Takeout_Order extends Model
     public function countTakeoutOrders(){
         return $this::whereDate('created_at', today())->where('status', config('takeout_order.cooking'))->distinct()->pluck('takeout_id')->count();
     }
-    // public function getTakeoutOrderIds(){
-    //     return $this::where('check_status', config('takeout_order.not yet'))->distinct()->get('takeout_id');
-    // }
+
     public function getTakeoutOrders(){
         return $this::whereDate('created_at', today())->where('check_status', config('takeout_order.not yet'))->get();
     }
