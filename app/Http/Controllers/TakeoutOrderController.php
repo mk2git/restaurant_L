@@ -80,7 +80,7 @@ class TakeoutOrderController extends Controller
             $menu_name = Menu::find($takeout_order->menu_id)->name;
             $message = '「'.$menu_name.'」注文数が変更されました';
             $takeout_id = $request->takeout_id;
-            return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_id])->with(['message' => $message, 'type' => 'success']);
+            return redirect()->route('takeout-order.edit', ['takeout_id' => $takeout_order->takeout_id])->with(['message' => $message, 'type' => 'success']);
 
         }catch(\Throwable $th){
             DB::rollBack();
