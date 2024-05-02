@@ -84,8 +84,8 @@ class TakeoutOrderController extends Controller
 
         }catch(\Throwable $th){
             DB::rollBack();
-            logger('Error Category Store', ['message' => $th->getMessage()]);
-            return redirect()->back()->with('error', 'カテゴリー追加に失敗しました');
+            logger('Error TakeoutOrder Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '注文数の変更に失敗しました');
         }
     }
 
