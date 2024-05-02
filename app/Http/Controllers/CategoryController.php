@@ -40,11 +40,6 @@ class CategoryController extends Controller
         return view('menu.index', compact('categories', 'selectedAllCategories', 'selectedCategories', 'selectedCategoryId', 'menus', 'noMenu'));
     }
 
-    public function show($category_id){ // これは？ by candy
-        $category = Category::find($category_id);
-
-        return response()->json($category);
-    }
     /**
      * Store a newly created resource in storage.
      */
