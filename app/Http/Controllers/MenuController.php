@@ -89,7 +89,7 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, Menu $menu_id)
     {
         $rules = [
              // unique:menusを使ってしまうとデータが更新されないため、バリデーションに含まないように
@@ -126,7 +126,7 @@ class MenuController extends Controller
                 $image->move(public_path('images'), $imageName); // ファイルを保存
             }
             $category_name = Category::where('id', $request->category_id)->pluck('name');
-            $menu = Menu::find($request->id);
+            $menu = $menu_id;
             $menu->name = $request->input('name');
             $menu->price = $request->input('price');
             $menu->category_id = $request->input('category_id');
