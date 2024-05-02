@@ -91,6 +91,7 @@ class TakeoutCheckoutController extends Controller
 
    public function updateCheckStatus(Request $request)
    {
+    //    dd($request);
         $rule = [
             'payment' => 'required'
         ];
@@ -115,6 +116,12 @@ class TakeoutCheckoutController extends Controller
             $takeout_order->check_status = config('takeout_checkout.done');
             $takeout_order->payment = $request->input('payment');
             $takeout_order->save();
+
+            $takeout_id = $request->input('takeout_id');        
+            $takeout = Takeout::where('id', $takeout_id)->first();                 
+            $takeout->status = config('takeout.done');  
+            $takeout->save();
+
             DB::commit();
             return redirect()->route('dashboard')->with(['message' => 'テイクアウトのお会計が1件完了しました', 'type' => 'info']);
         }catch(\Throwable $th){
