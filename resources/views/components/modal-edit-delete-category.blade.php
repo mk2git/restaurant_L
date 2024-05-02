@@ -1,4 +1,4 @@
-<script>
+{{-- <script>
   $(document).ready(function() {
       $('.edit-category').click(function() {
           var categoryId = $(this).data('category-id');
@@ -8,7 +8,7 @@
           });
       });
   });
-</script>
+</script> --}}
 
 
 <div class="modal fade" id="editCategoryModal{{$categoryId}}" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
@@ -24,7 +24,6 @@
               <form action="{{route('category.update', $categoryId)}}" method="post">
                   @csrf
                   @method('put')
-                  <input type="hidden" name="id" value="{{$categoryId}}">
                   <input type="text" name="name" id="name" value="{{$categoryName}}" class="form-control w-50 mb-4 mx-auto">
                   <button type="submit" class="btn btn-success w-25">更新</button>
               </form>
