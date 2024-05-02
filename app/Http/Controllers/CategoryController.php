@@ -117,8 +117,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category) // 引数の中でCategoryモデルを使うとfindの必要がなくなる by candy
+    public function destroy(Category $category_id) 
     {
+        $category = $category_id;
         try{
             DB::beginTransaction();
             $category->delete();
