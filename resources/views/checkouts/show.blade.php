@@ -1,7 +1,9 @@
 <x-app-layout>
-  <div class="mt-3 ms-5">
-    <a href="{{route('checkout.select')}}">会計</a> > <a href="{{route('checkout.index')}}">テーブル会計</a> > {{$table->name}}
-  </div>
+  <x-breadcrumb :list="[
+    ['name' => '会計選択', 'link' => route('checkout.select')],
+    ['name' => 'テーブル会計', 'link' => route('checkout.index')],
+    ['name' => $table->seat_type . '-' . $table->seat_number, 'link' => '']
+  ]" />
   <div class="container mt-5 w-75">
       @if ($errors->any())
          <x-error-message />
@@ -14,79 +16,13 @@
         <p class="h4">テーブル：{{$table->name}}<small class="float-end h6 pt-3">{{$checkoutTime->created_at->format('Y-m-d H:i')}}</small></p>
         
         <hr>
-        <table class="table table-borderless">
-          <thead class="border-buttom-black">
-            <tr>
-              <th>料理名</th>
-              <th>数量</th>
-              <th>単価</th>
-            </tr>
-          </thead>
-          <tbody  class="border-bottom">
-             @foreach ($orders as $order)
-                <tr>
-                  <td>{{$order->menu->name}}</td>
-                  <td>× {{$order->quantity}}</td>
-                  <td>{{number_format($order->menu->price)}}</td>
-                </tr>
-              @endforeach
-           </tbody> 
-            <tfoot>
-              <tr>
-                  <td></td>
-                  <td>内税</td>
-                  <td>
-                    @php
-                      $sum = 0;
-                      $total = 0;
-                      $tax = 0.1;
-                    @endphp
-                    @foreach ($orders as $order)
-                      @php
-                        $sum += $order->menu->price * $order->quantity;
-                      @endphp
-                    @endforeach
-                    @php
-                      $onlyTax = $sum * $tax;
-                    @endphp
-                    {{number_format($onlyTax)}}
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td class="fw-bold">合計</td>
-                  <td class="fw-bold">
-                    @php
-                      $sum = 0;
-                      $total = 0;
-                      $tax = 0.1;
-                    @endphp
-                    @foreach ($orders as $order)
-                      @php
-                        $sum += $order->menu->price * $order->quantity;
-                      @endphp
-                    @endforeach
-                    @php
-                      $total = $sum + ($sum * $tax);
-                    @endphp
-                    &yen;{{number_format($total)}}
-                  </td>
-                </tr>
-            </tfoot>
-        </table>
+        <x-show-bill :orders="$orders" />
 
         <p>支払い方法</p>
         <form action="{{route('checkout.updateCheckStatus')}}" method="post">
             @csrf
             @method('put') 
-            <div class="form-check">
-              <input type="radio" name="payment" id="cash" value="cash" class="form-check-input">
-              <label class="form-check-label" for="cash">現金</label>
-            </div>
-            <div class="form-check">
-              <input type="radio" name="payment" id="card" value="card" class="form-check-input">
-              <label class="form-check-label" for="card">クレジットカード</label>
-            </div>
+            <x-payment-form />
       </div>
      
       <div class="text-center">
