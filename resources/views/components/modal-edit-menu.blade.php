@@ -1,4 +1,4 @@
-<script>
+{{-- <script>
   $(document).ready(function() {
       $('.edit-menu').click(function() {
           var menuId = $(this).data('menu-id');
@@ -8,7 +8,7 @@
           });
       });
   });
-</script>
+</script> --}}
 
 <div class="modal fade" id="editMenuModal{{$menuId}}" tabindex="-1" role="dialog" aria-labelledby="editMenuModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -48,12 +48,7 @@
                       <div class="col-sm-8">
                           <select name="category_id" class="form-control">
                              @foreach ($categories as $category)
-                               @if ($category->id == $menuCategoryId)
-                                  <option value="{{$category->id}}" selected>{{$category->name}}</option>
-                               @else
-                                  <option value="{{$category->id}}">{{$category->name}}</option>
-                               @endif
-
+                               <option value="{{$category->id}}"  @if ($category->id == $menuCategoryId) selected @endif>{{$category->name}}</option>
                              @endforeach
                           </select>
                       </div>
