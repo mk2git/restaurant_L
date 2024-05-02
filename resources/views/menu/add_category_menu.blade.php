@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <div class="container text-center mt-5">
         @if ($errors->any())
            <x-error-message />
@@ -103,4 +103,4 @@
         </div>
 
     </div>
-</x-app-layout>
+</x-admin-layout>

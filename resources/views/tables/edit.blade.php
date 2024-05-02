@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <div class="container my-5">
         <h2 class="text-center"><i class="fa-solid fa-chair"></i>&nbsp;&nbsp;座席編集</h2>
         @if(session('message'))
@@ -65,4 +65,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

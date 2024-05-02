@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
   <div class="container mt-5">
     <div class="row">
       <div class="col">
@@ -218,4 +218,4 @@
       </div>
     </div>
   </div>
-</x-app-layout>
+</x-admin-layout>
