@@ -20,59 +20,10 @@
               </button>
           </div>
           <div class="modal-body">
-              {{-- @dd($menu) --}}
               <form action="{{route('menu.update', $menuId)}}" method="post" enctype="multipart/form-data">
                   @csrf
                   @method('put')
-                  <input type="hidden" name="id" value="{{$menuId}}">
-                  <div class="form-group row mb-2">
-                      <div class="col-sm-4">
-                          <label for="name" class=" col-form-label">料理名：</label>
-                      </div>
-                      <div class="col-sm-8">
-                          <input type="text" name="name" id="name" value="{{$menuName}}" class="form-control mb-4 mx-auto">
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <div class="col-sm-4">
-                          <label for="price" class=" col-form-label">価格：</label>
-                      </div>
-                      <div class="col-sm-8">
-                          <input type="text" name="price" id="price" value="{{$menuPrice}}" class="form-control mb-4 mx-auto" min="0">
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <div class="col-sm-4">
-                          <label class=" col-form-label">カテゴリー：</label>
-                      </div>
-                      <div class="col-sm-8">
-                          <select name="category_id" class="form-control">
-                             @foreach ($categories as $category)
-                               <option value="{{$category->id}}"  @if ($category->id == $menuCategoryId) selected @endif>{{$category->name}}</option>
-                             @endforeach
-                          </select>
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <div class="col-sm-4">
-                          <label class=" col-form-label">説明文：</label>
-                      </div>
-                      <div class="col-sm-8">
-                          <textarea name="description" cols="20" rows="5" class="form-control">{{$menuDescription}}</textarea>
-                      </div>
-                  </div>
-                  <div class="form-group row mb-2">
-                      <div class="col-sm-4">
-                          <label for="photo" class=" col-form-label">写真：</label>
-                      </div>
-                      <div class="col-sm-8">
-                          <input type="file" name="photo" id="photo" value="{{$menuPhoto}}" class="form-control">
-                      </div>
-                  </div>
-                  <hr>
-                  <div class="form-group text-center">
-                      <button type="submit" class="btn btn-success w-75">更新</button>
-                  </div>
+                  <x-menu-form :categories="$categories" :menu-name="$menuName" :menu-price="$menuPrice" :menu-description="$menuDescription" :menu-photo="$menuPhoto" :menu-category-id="$menuCategoryId" />
               </form>
           </div>
       </div>
