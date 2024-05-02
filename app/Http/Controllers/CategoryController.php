@@ -82,7 +82,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category_id)
     {
         $rule = [
             'name' => 'required'
@@ -102,11 +102,11 @@ class CategoryController extends Controller
 
          try{
             DB::beginTransaction();
-            $category = Category::find($request->id);
+            $category = $category_id;
             $category->name = $request->input('name');
             $category->save();
             DB::commit();
-            return to_route('menu.add')->with(['message' => 'カテゴリー名が更新されました。', 'type' => 'success']);
+            return to_route('menu.add')->with(['message' => '「'.$category->name.'」に更新されました。', 'type' => 'success']);
          }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Category Update', ['message' => $th->getMessage()]);
