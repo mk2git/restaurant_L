@@ -23,8 +23,8 @@ class Takeout extends Model
     }
 
     public function getNames(){
-        $takeout_order_ids = Takeout_Order::where('check_status', config('takeout_order.not yet'))->distinct()->get('takeout_id');
+        $takeout_ids = Takeout::whereDate('created_at', today())->where('status', config('takeout.not yet'))->get('id');
         
-        return $this::whereIn('id', $takeout_order_ids)->select('id', 'name')->get();
+        return $this::whereIn('id', $takeout_ids)->select('id', 'name')->get();
     }
 }
