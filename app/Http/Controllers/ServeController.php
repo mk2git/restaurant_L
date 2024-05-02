@@ -26,7 +26,6 @@ class ServeController extends Controller
         $order_tables = $table->getOrderTables();
         $orders = $order->getOrders();
 
-        $takeout_order_ids = $takeout_order->getTakeoutOrderIds();
         $takeout_order_names = $takeout->getNames();
         $takeout_orders = $takeout_order->getTakeoutOrders();
 
