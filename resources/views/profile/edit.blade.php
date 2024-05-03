@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             各種設定
@@ -49,5 +49,5 @@
         </div>
 
     </div>
-</x-admin-layout>
+</x-app-layout>
 

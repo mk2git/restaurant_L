@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-app-layout>
     <div class="container mt-5">
 
         @if (session('message'))
@@ -68,4 +68,4 @@
             @endif
         </div>
     </div>
-</x-admin-layout>
+</x-app-layout>
