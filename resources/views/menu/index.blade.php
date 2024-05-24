@@ -22,7 +22,7 @@
         </form>
 
         {{-- 一覧 --}}
-        <div class="container-menu rounded mt-5 w-75 mx-auto p-3 mb-5">
+        <div class="container-menu rounded mt-5 w-75 mx-auto py-3 px-5 mb-5">
             <h2 class="my-4 pt-4 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;&nbsp;&nbsp;メニュー&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-utensils"></i></h2>
             @if (!isset($selectedCategories) || isset($selectedAllCategories))
                 @foreach ($categories as $category)
