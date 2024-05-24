@@ -21,13 +21,22 @@ h1{
 .logo, .logo a {
     font-family: "Ephesis", cursive;
     font-size: 50px;
-    color: rgb(224, 164, 72);
+    color: rgb(224, 166, 79);
     text-decoration: none;
     font-weight: 400;
     font-style: normal;
 }
+.logo-login{
+    font-family: "Ephesis", cursive;
+    font-size: 80px;
+    color: rgb(238, 129, 20);
+    text-decoration: none;
+    font-weight: 400;
+    font-style: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 .logo-sm{
-    font-size: 40px;
+    font-size: 50px;
 }
 
 .top-bg{
