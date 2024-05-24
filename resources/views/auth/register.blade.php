@@ -2,7 +2,7 @@
 @section('background-class', 'register-bg')
 @section('content')
 <div class="container ms-3 mt-3">
-    <h1 class="logo"><span class="logo-sm">Restaurant</span>  L</h1>
+    <h1 class="logo-login"><span class="logo-sm">Restaurant</span>  L</h1>
 </div>
 <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
