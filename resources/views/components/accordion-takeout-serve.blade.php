@@ -1,11 +1,11 @@
-<div class="accordion accordion-flush" id="accordionFlushExample{{$takeoutOrderId}}">
+<div class="accordion" id="accordionPanelsStayOpenTakeOut{{$takeoutOrderId}}">
   <div class="accordion-item">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{$takeoutOrderId}}" aria-expanded="false" aria-controls="flush-collapseOne{{$takeoutOrderId}}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpenTakeOut-collapseOne{{$takeoutOrderId}}" aria-expanded="true" aria-controls="panelsStayOpenTakeOut-collapseOne{{$takeoutOrderId}}">
         {{$takeoutOrderName}}
       </button>
     </h2>
-    <div id="flush-collapseOne{{$takeoutOrderId}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+    <div id="panelsStayOpenTakeOut-collapseOne{{$takeoutOrderId}}" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
         @foreach ($takeoutOrders as $takeoutOrder)
           @if ($takeoutOrder->takeout_id == $takeoutOrderId)         
