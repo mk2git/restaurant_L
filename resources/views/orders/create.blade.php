@@ -10,7 +10,7 @@
     <p class="h3">テーブル名：{{$table->seat_type}}-{{$table->seat_number}}</p>
   </div>
 
-  <div class="container-menu mt-3 rounded w-50 mx-auto p-5 mb-5">
+  <div class="container-menu mt-3 rounded w-75 mx-auto p-5 mb-5">
     <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;メニュー</p>
        <form action="{{route('orders.store')}}" method="post">
         @csrf
