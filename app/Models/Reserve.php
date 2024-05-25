@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Reserve extends Model
 {
     use HasFactory;
@@ -23,9 +23,9 @@ class Reserve extends Model
     }
 
     public function getAscReserves(){
-        return $this::orderBy('date', 'asc')->orderBy('time', 'asc')->get();
+        return $this::whereDate('date', '>=', Carbon::today())->orderBy('date', 'asc')->orderBy('time', 'asc')->get();
     }
     public function getAscDates(){
-        return $this::orderBy('date', 'asc')->distinct()->pluck('date');
+        return $this::whereDate('date', '>=', Carbon::today())->orderBy('date', 'asc')->distinct()->pluck('date');
     }
 }
