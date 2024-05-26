@@ -1,15 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.edit-using-Btable').click(function() {
-          var tableId = $(this).data('table-id');
-          $.get('/table/' + tableId, function(data) {
-              $('#usingTableBModal' + tableId).find('.modal-body').html(data);
-              $('#usingTableBModal' + tableId).modal('show');
-          });
-      });
-  });
-</script>
-
   {{-- 2人席使用中モーダル --}}
   <div class="modal fade" id="usingTableBModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="usingTableBModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

@@ -1,16 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.delete-reserve').click(function() {
-          var reserveId = $(this).data('reserve-id');
-          $.get('/reserve/' + reserveId, function(data) {
-              $('#deleteReserveModal' + reserveId).find('.modal-body').html(data);
-              $('#deleteReserveModal' + reserveId).modal('show');
-          });
-      });
-  });
-</script>
-
-
 <div class="modal fade" id="deleteReserveModal{{$reserveId}}" tabindex="-1" role="dialog" aria-labelledby="deleteReserveModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">

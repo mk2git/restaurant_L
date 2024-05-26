@@ -1,15 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.delete-menu').click(function() {
-          var menuId = $(this).data('menu-id');
-          $.get('/menu/' + menuId, function(data) {
-              $('#deleteMenuModal' + menuId).find('.modal-body').html(data);
-              $('#deleteMenuModal' + menuId).modal('show');
-          });
-      });
-  });
-</script>
-
 <div class="modal fade" id="deleteMenuModal{{$menuId}}" tabindex="-1" role="dialog" aria-labelledby="deleteMenuModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">

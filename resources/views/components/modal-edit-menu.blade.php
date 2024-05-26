@@ -1,15 +1,3 @@
-{{-- <script>
-  $(document).ready(function() {
-      $('.edit-menu').click(function() {
-          var menuId = $(this).data('menu-id');
-          $.get('/menu/' + menuId, function(data) {
-              $('#editMenuModal' + menuId).find('.modal-body').html(data);
-              $('#editMenuModal' + menuId).modal('show');
-          });
-      });
-  });
-</script> --}}
-
 <div class="modal fade" id="editMenuModal{{$menuId}}" tabindex="-1" role="dialog" aria-labelledby="editMenuModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
