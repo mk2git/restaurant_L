@@ -1,15 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.edit-unused-Atable').click(function() {
-          var tableId = $(this).data('table-id');
-          $.get('/table/' + tableId, function(data) {
-              $('#unusedTableAModal' + tableId).find('.modal-body').html(data);
-              $('#unusedTableAModal' + tableId).modal('show');
-          });
-      });
-  });
-</script>
-
 {{-- 4人席用未使用モーダル --}}
 <div class="modal fade" id="unusedTableAModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="unusedTableAModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

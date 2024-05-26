@@ -1,15 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.edit-using-Atable').click(function() {
-          var tableId = $(this).data('table-id');
-          $.get('/table/' + tableId, function(data) {
-              $('#usingTableAModal' + tableId).find('.modal-body').html(data);
-              $('#usingTableAModal' + tableId).modal('show');
-          });
-      });
-  });
-</script>
-
 {{-- 4人席用使用中モーダル --}}
 <div class="modal fade" id="usingTableAModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="usingTableAModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

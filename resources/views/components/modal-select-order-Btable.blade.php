@@ -1,15 +1,3 @@
-<script>
-  $(document).ready(function() {
-      $('.select-Btable').click(function() {
-          var tableId = $(this).data('table-id');
-          $.get('/order/' + tableId, function(data) {
-              $('#selectTableBModal' + tableId).find('.modal-body').html(data);
-              $('#selectTableBModal' + tableId).modal('show');
-          });
-      });
-  });
-</script>
-
 <div class="modal fade" id="selectTableBModal{{$tableId}}" tabindex="-1" role="dialog" aria-labelledby="selectTableBModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
