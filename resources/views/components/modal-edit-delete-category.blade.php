@@ -1,16 +1,3 @@
-{{-- <script>
-  $(document).ready(function() {
-      $('.edit-category').click(function() {
-          var categoryId = $(this).data('category-id');
-          $.get('/category/' + categoryId, function(data) {
-              $('#editCategoryModal' + categoryId).find('.modal-body').html(data);
-              $('#editCategoryModal' + categoryId).modal('show');
-          });
-      });
-  });
-</script> --}}
-
-
 <div class="modal fade" id="editCategoryModal{{$categoryId}}" tabindex="-1" role="dialog" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
