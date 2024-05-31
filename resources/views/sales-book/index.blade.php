@@ -176,19 +176,19 @@
             </div>
             <div class="col-sm-2 text-center">
                @php
-                  $gap = 0;
+                  $monthGap = 0;
                @endphp
 
                 @if ($lastMonthTotalOrders > $thisMonthTotalOrders)
                   @php
-                    $gap = $lastMonthTotalOrders - $thisMonthTotalOrders;
+                    $monthGap = $lastMonthTotalOrders - $thisMonthTotalOrders;
                   @endphp
-                  <span class="text-primary">-{{number_format($gap)}}</span> 
+                  <span class="text-primary">-{{number_format($monthGap)}}</span> 
                 @elseif ($lastMonthTotalOrders < $thisMonthTotalOrders)
                   @php
-                    $gap = $thisMonthTotalOrders - $lastMonthTotalOrders;
+                    $monthGap = $thisMonthTotalOrders - $lastMonthTotalOrders;
                   @endphp
-                  <span class="text-danger">+{{number_format($gap)}}</span>
+                  <span class="text-danger">+{{number_format($monthGap)}}</span>
                 @else
                   <span>±0</span>
                 @endif
