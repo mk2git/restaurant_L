@@ -39,12 +39,12 @@
                 <form action="{{route('checkout.store')}}" method="post">
                   @csrf
                   <input type="hidden" name="table_id" value="{{$orderTableId}}">
-                  <button type="submit" class="btn btn-success text-white w-50">会計へ</button>
+                  <button type="submit" class="btn btn-success text-white w-75">会計へ</button>
                 </form>
                 
                 @break
               @else
-                <button type="submit" class="btn btn-success text-white w-50" disabled>会計へ</button>
+                <button type="submit" class="btn btn-success text-white w-75" disabled>会計へ</button>
                 @break
               @endif
             @endif
