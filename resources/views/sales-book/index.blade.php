@@ -23,8 +23,8 @@
             @foreach ($menus as $menu)
                 @if ($category->id == $menu->category_id) 
                     <div class="row mb-2">
-                        <div class="col-sm-5">{{$menu->name}}（&yen;{{number_format($menu->price)}}）</div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-7">{{$menu->name}}（&yen;{{number_format($menu->price)}}）</div>
+                        <div class="col-sm-2">
                           @php
                              $menuTableQuantity = 0;
                              $menuTakeoutQuantity = 0;
@@ -50,7 +50,7 @@
                             @endphp
                              × {{$totalQuantity}}
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                           @php
                             $tableTotal = 0;
                             $takeoutTotal = 0;
