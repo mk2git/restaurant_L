@@ -8,7 +8,7 @@
               <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
                 <p>{{$menu->name}}</p>
             </button>
-            <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" :menu-desc="$menuDescription" />
+            <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" :menu-desc="$menu->description" />
             </div>
             <div class="col-2">・・・・・</div>
             <div class="col-3">
