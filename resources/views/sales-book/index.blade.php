@@ -23,7 +23,7 @@
             @foreach ($menus as $menu)
                 @if ($category->id == $menu->category_id) 
                     <div class="row mb-2">
-                        <div class="col-sm-5">{{$menu->name}}</div>
+                        <div class="col-sm-5">{{$menu->name}}（&yen;{{number_format($menu->price)}}/個）</div>
                         <div class="col-sm-3">
                           @php
                              $menuTableQuantity = 0;
