@@ -38,7 +38,7 @@
                       @php
                           $allDone = false;
                       @endphp
-                      <button type="submit" class="btn btn-success text-white w-50" disabled>会計へ</button>
+                      <button type="submit" class="btn btn-success text-white w-75" disabled>会計へ</button>
                       @break
                   @endif
               @endif
@@ -47,7 +47,7 @@
               <form action="{{ route('takeout-check.store') }}" method="post">
                   @csrf
                   <input type="hidden" name="takeout_id" value="{{ $takeoutOrderId }}">
-                  <button type="submit" class="btn btn-success text-white w-50">会計へ</button>
+                  <button type="submit" class="btn btn-success text-white w-75">会計へ</button>
               </form>
           @endif
         </div>
