@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="{{$menuImg}}" alt="イメージ写真" class="img-fluid mx-auto menu-photo">
+        <img src="{{$menuImg}}" alt="イメージ写真" class="mx-auto menu-photo">
         <p class="mt-3">＜料理の説明＞</p>
         <p>{{$menuDesc}}</p>
       </div>
