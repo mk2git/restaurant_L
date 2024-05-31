@@ -1,4 +1,4 @@
-<script>
+{{-- <script>
   $(document).ready(function() {
       $('.menu-img').click(function() {
           var menuId = $(this).data('menu-id');
@@ -8,7 +8,7 @@
           });
       });
   });
-</script>
+</script> --}}
 
 <div class="modal fade" id="menuModal{{$menuId}}" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -21,6 +21,8 @@
       </div>
       <div class="modal-body text-center">
         <img src="{{$menuImg}}" alt="イメージ写真" class="img-fluid mx-auto">
+        <p>＜料理の説明＞</p>
+        <p>{{$menuDesc}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
