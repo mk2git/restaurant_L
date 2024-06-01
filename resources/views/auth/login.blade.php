@@ -40,12 +40,7 @@
                     </div>    
                 </div>
 
-                <small class="d-flex align-items-center justify-content-end mt-4">
-                    @if (Route::has('password.request'))
-                        <a class="text-secondary hover:text-gray-900" href="{{ route('password.request') }}">
-                           パスワードを忘れましたか？
-                        </a>
-                    @endif
+                <small class="d-block text-center mt-4">
                     <x-success-button class="m-3">
                         ログイン
                     </x-success-button>
