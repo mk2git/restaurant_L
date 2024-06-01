@@ -35,7 +35,9 @@
 
                 <div class="mb-5 d-flex flex-wrap">
                     @foreach ($categories as $category)
-                        <button type="button" class="btn category-btn btn-success edit-category me-2 mb-2" data-toggle="modal" data-target="#editCategoryModal{{$category->id}}" data-category-id="{{ $category->id }}">{{$category->name}}</button>
+                    <button type="button" class="btn category-btn btn-success me-2 mb-2" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{$category->id}}">
+                        {{$category->name}}
+                    </button>
                         <x-modal-edit-delete-category :category-id="$category->id" :category-name="$category->name" />
                     @endforeach
                 </div>
