@@ -10,7 +10,6 @@
         <p class="text-center">4人席を1つ削除しますか？</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form action="{{route('table.destroy')}}" method="post">
             @csrf
             @method('delete')
