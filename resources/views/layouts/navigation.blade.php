@@ -1,103 +1,33 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center logo">
-                    <a href="{{ route('dashboard') }}">
-                        Restaurant&nbsp;&nbsp;L
-                    </a>
-                </div>
-            </div>
-
-                <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
-
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
-
-                        
-                        <x-slot name="content">
-                            @can('admin')
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    <i class="fa-solid fa-gear"></i>&nbsp;各種設定
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('table.edit')">
-                                    座席編集
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('menu.add')">
-                                    メニュー追加
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('menu.index')">
-                                    メニュー編集
-                                </x-dropdown-link>
-                                {{-- <x-dropdown-link :href="route('profile.edit')">
-                                在庫
-                                </x-dropdown-link> --}}
-                                <x-dropdown-link :href="route('salesbook.index')">
-                                    売上
-                                </x-dropdown-link>
-                            @endcan
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </x-slot>
-                    </x-dropdown>
-                </div>
-
-                <!-- Hamburger -->
-                <div class="-me-2 flex items-center sm:hidden">
-                    <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
+<nav class="navbar navbar-expand-sm navbar-dark px-5 bg-white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="logo" href="{{ route('dashboard') }}">Restaurant&nbsp;&nbsp;L</a>
+    <div class="collapse navbar-collapse justify-content-end">
+        <div class="dropdown">
+            <button class="btn dropdown-toggle text-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="font-medium text-base">{{ Auth::user()->name }}</span>
+            </button>
+            <ul class="dropdown-menu">
+                @can('admin')
+                    <li><a class="dropdown-item" href="{{route('table.edit')}}">座席編集</a></li>
+                    <li><a class="dropdown-item" href="{{route('menu.add')}}">メニュー追加</a></li>
+                    <li><a class="dropdown-item" href="{{route('menu.index')}}">メニュー編集</a></li>
+                    <li><a class="dropdown-item" href="{{route('salesbook.index')}}">売上</a></li>
+                    <li><a class="dropdown-item" href="{{route('profile.edit')}}"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;各種設定</a></li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <li><a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                            this.closest('form').submit();">{{ __('Log Out') }}</a></li>
+                    </form>     
+                @else
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <li><a class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault();
+                            this.closest('form').submit();">{{ __('Log Out') }}</a></li>
+                    </form>                           
+                @endcan
+            </ul>
         </div>
     </div>
 </nav>
