@@ -51,7 +51,7 @@
               </select>
           </div>
           <div class="col-2 d-flex justify-content-center">
-            <button type="submit" class=""><i class="fa-solid fa-arrows-rotate text-success"></i></button>
+            <button type="submit" class="btn btn-custom"><i class="fa-solid fa-arrows-rotate "></i></button>
             </form>
           </div>
           <div class="col-2">
