@@ -8,15 +8,15 @@
     <div id="panelsStayOpenTakeOut-collapseOne{{$takeoutOrderId}}" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
         @foreach ($takeoutOrders as $takeoutOrder)
-          @if ($takeoutOrder->takeout_id == $takeoutOrderId)         
+          @if ($takeoutOrder->takeout_id == $takeoutOrderId)     
             <div class="row mb-3">
                 <div class="col-sm-7">
-                  <small @if($takeoutOrder->status == 'done') class="text-decoration-line-through" @endif>{{$takeoutOrder->menu->name}}</small>
+                  <small @if($takeoutOrder->status == config('takeout_order.done')) class="text-decoration-line-through" @endif>{{$takeoutOrder->menu->name}}</small>
                 </div>
                 <div class="col-sm-2">×&nbsp;{{$takeoutOrder->quantity}}</div>
                 <div class="col-sm-3">
                   @if ($takeoutOrder->status == config('takeout_order.cooking'))
-                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}"><i class="fa-solid fa-bell-concierge text-success"></i></button>
+                    <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}" class="btn"><i class="fa-solid fa-bell-concierge text-success"></i></button>
                     <x-modal-update-takeout-order-status-to-done :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
                   @else
                     <i class="fa-solid fa-check text-danger"></i>
