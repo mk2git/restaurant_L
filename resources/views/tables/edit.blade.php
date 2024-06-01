@@ -44,7 +44,9 @@
                                 <input type="hidden" name="seat_type" value="A">
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
-                            <button type="submit" class="btn" data-toggle="modal" data-target="#deleteASeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteASeatModal">
+                                <i class="fa-solid fa-minus text-primary"></i>
+                            </button>
                             <x-modal-delete-Atable :atables="$tables" />
                         </div>
                     </div>
@@ -57,7 +59,9 @@
                                 <input type="hidden" name="seat_type" value="B">
                                 <button type="submit" class="btn"><i class="fa-solid fa-plus text-danger"></i></button>
                             </form>
-                            <button type="submit" class="btn" data-toggle="modal" data-target="#deleteBSeatModal"><i class="fa-solid fa-minus text-primary"></i></button>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteBSeatModal">
+                                <i class="fa-solid fa-minus text-primary"></i>
+                            </button>
                             <x-modal-delete-Btable :tables="$tables" />
                         </div>
                     </div>
