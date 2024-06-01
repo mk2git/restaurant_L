@@ -157,3 +157,6 @@ h1{
 .font-small{
   font-size: 15px;
 }
+.btn-custom{
+  border: none;
+}
