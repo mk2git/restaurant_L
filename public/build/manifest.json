@@ -1,6 +1,22 @@
 {
+  "public/images/home.jpg": {
+    "file": "assets/home-CuPnweif.jpg",
+    "src": "public/images/home.jpg"
+  },
+  "public/images/login.jpg": {
+    "file": "assets/login-2XyK3vX-.jpg",
+    "src": "public/images/login.jpg"
+  },
+  "public/images/sign-up.jpg": {
+    "file": "assets/sign-up-Dp3t73n6.jpg",
+    "src": "public/images/sign-up.jpg"
+  },
+  "public/images/takeout.jpg": {
+    "file": "assets/takeout-DdjUVv3y.jpg",
+    "src": "public/images/takeout.jpg"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CLn4ue2n.css",
+    "file": "assets/app-DNS5uTVg.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
