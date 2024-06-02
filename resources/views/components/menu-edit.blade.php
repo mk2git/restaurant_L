@@ -20,9 +20,6 @@
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menuId}}">
             <i class="fa-regular fa-trash-can text-danger"></i>
         </button>
-          {{-- <button type="button" data-toggle="modal" data-target="#deleteMenuModal{{$menuId}}" data-menu-id="{{ $menuId }}" class="btn delete-menu">
-              <i class="fa-regular fa-trash-can text-danger"></i>
-          </button> --}}
           <x-modal-delete-menu :menu-id="$menuId" :menu-name="$menuName" />
       </div>
   </div>
