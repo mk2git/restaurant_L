@@ -47,6 +47,13 @@ class TakeoutCheckoutController extends Controller
             $takeout_checkout = new Takeout_Checkout();
             $takeout_checkout->takeout_id =  $takeout_id;
             $takeout_checkout->save();
+
+            $takeout_orders = Takeout_Order::where('takeout_id', $takeout_id)->get();
+            foreach($takeout_orders as $takeout_order){
+                $takeout_order->takeout_checkout_id = $takeout_checkout->id;
+                $takeout_order->save();
+            }
+            
             DB::commit();
         }catch(\Throwable $th){
             DB::rollBack();
