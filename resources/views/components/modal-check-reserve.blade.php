@@ -1,28 +1,23 @@
 <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
       $('.change-reserve-status').click(function() {
-          if ($(this).is(':checked')) {
-              var reserveId = $(this).data('reserve-id');
-              $.get('/dashboard/' + reserveId, function(data) {
-                  $('#changeReserveModal' + reserveId).find('.modal-body').html(data);
-                  $('#changeReserveModal'+ reserveId).modal('show');
-              });
-          }
-      });
-
-      // モーダルを閉じた時にチェックボックスのチェックをなくす設定
-      // モーダルが閉じられたときのイベントリスナーを設定（まず.modalクラスを持つすべてのモーダルに対してhidden.bs.modalイベントリスナーを設定）
-      $('.modal').on('hidden.bs.modal', function (e) {
-          // モーダルに関連付けられたチェックボックスのdata-reserve-idを取得
-          var reserveId = $(this).attr('id').replace('changeReserveModal', '');
-          // 対応するチェックボックスを検索し、prop('checked', false)を使用してチェックを外す
-          $('input.change-reserve-status[data-reserve-id="' + reserveId + '"]').prop('checked', false);
-      });
-      // モーダルを閉じた時にチェックボックスのチェックをなくす設定が正しく機能するためには、モーダルのIDとチェックボックスのdata-reserve-id属性が正しく設定されている必要がある！
-  });
+            // チェックされたらモーダルを表示
+            if ($(this).is(':checked')) {
+                var reserveId = $(this).data('reserve-id');
+                $('#changeReserveModal' + reserveId).modal('show');
+            }
+     });
+    });
+    // モーダル閉じたらチェックボタンのチェックなくす設定
+    $(document).ready(function() {
+        $('.modal').on('hidden.bs.modal', function (e) {
+            var reserveId = $(this).attr('id').replace('changeReserveModal', '');
+            $('input.change-reserve-status[data-reserve-id="' + reserveId + '"]').prop('checked', false);
+        });
+    });
 </script>
 
-<div id="changeReserveModal{{$reserveId}}" class="modal fade" tabindex="-1" role="dialog">
+<div class="modal fade" id="changeReserveModal{{$reserveId}}" tabindex="-1"  aria-labelledby="changeReserveModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
