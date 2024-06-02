@@ -34,7 +34,12 @@ class Takeout_Order extends Model
     }
 
     public function getTodayTakeoutOrders(){
-        return $this::whereDate('created_at', today())->get();
+        $getTakeoutOrders = $this::join('takeout__checkouts', 'takeout__orders.takeout_checkout_id', '=', 'takeout__checkouts.id')
+        ->whereDate('takeout__orders.created_at', today())
+        ->where('takeout__checkouts.check_status', config('takeout_checkout.done'))
+        ->get();
+
+        return $getTakeoutOrders;
     }
     public function getThisMonthTakeoutOrders(){
         $startDate = getThisMonthStartDay();

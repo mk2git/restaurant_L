@@ -26,7 +26,12 @@ class Order extends Model
     }
 
     public function getTodayOrders(){
-        return Order::whereDate('created_at', today())->get();
+        $getOrders = $this::join('checkouts', 'orders.checkout_id', '=', 'checkouts.id')
+        ->whereDate('orders.created_at', today())
+        ->where('checkouts.check_status', config('check.done'))
+        ->get();
+
+        return $getOrders;
       }
 
     public function countOrders(){
