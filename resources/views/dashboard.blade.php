@@ -47,7 +47,7 @@
                                     @if ($reserve->status !== config('reserve.arrived'))
                                         <tr>
                                             <td>
-                                                <input type="checkbox" class="change-reserve-status" data-reserve-id="{{$reserve->id}}" data-toggle="modal" data-target="#changeReserveModal{{$reserve->id}}">
+                                                <input type="checkbox" data-toggle="modal" data-target="#changeReserveModal{{$reserve->id}}" data-reserve-id="{{$reserve->id}}" class="change-reserve-status" >
                                                 <x-modal-check-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" />
                                             </td>
                                             <td>{{\Carbon\Carbon::parse($reserve->time)->format('H:i')}}</td>
