@@ -8,13 +8,20 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <p><span id="confirmName"></span>&nbsp;様</p>
-                  <p class="text-center">日時： <span id="confirmDate"></span>&nbsp;&nbsp;&nbsp;<span id="confirmTime"></span>〜</p>
-                  <p class="text-center">人数： &nbsp; 大人: <span id="confirmAdult"></span>人&nbsp;&nbsp;&nbsp;&nbsp;子供: <span id="confirmKid"></span>人</p>
-                  <p class="text-center">電話番号：&nbsp;&nbsp; <span id="confirmPhoneNumber"></span></p>
+                  <p>
+                    <span id="confirmName"></span>&nbsp;様
+                  </p>
+                  <p class="text-center">
+                    日時： <span id="confirmDate"></span>&nbsp;&nbsp;&nbsp;<span id="confirmTime"></span>〜
+                  </p>
+                  <p class="text-center">
+                    人数： &nbsp; 大人: <span id="confirmAdult"></span>人&nbsp;&nbsp;&nbsp;&nbsp;子供: <span id="confirmKid"></span>人
+                  </p>
+                  <p class="text-center">
+                    電話番号：&nbsp;&nbsp; <span id="confirmPhoneNumber"></span>
+                  </p>
               </div>
               <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
               <button type="submit" class="btn btn-success">予約確定</button>
               </div>
           </form>
@@ -25,7 +32,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', (event) => {
-      document.querySelector('button[data-target="#reserveModal"]').addEventListener('click', function() {
+      document.querySelector('button[data-bs-target="#reserveModal"]').addEventListener('click', function() {
       // 入力値を取得
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
@@ -42,5 +49,6 @@
       document.getElementById('confirmName').textContent = name;
       document.getElementById('confirmPhoneNumber').textContent = phoneNumber;
       });
+
   });
 </script>

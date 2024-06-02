@@ -43,9 +43,9 @@
           </div>
       </div>
       <div class="mt-3 d-flex justify-content-center">
-          <button type="button" class="btn btn-success w-50" data-toggle="modal" data-target="#reserveModal">
-          予約
-        </button>
+        <button type="button" class="btn btn-success w-50" data-bs-toggle="modal" data-bs-target="#reserveModal">
+            予約
+         </button>
       </div>
   </div>
 </div>
