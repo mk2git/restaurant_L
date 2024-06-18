@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ServeController::class)->group(function(){
         Route::get('serve', 'index')->name('serve.index');
         Route::put('serve', 'update')->name('serve.update');
+        Route::delete('serve', 'destroy')->name('serve.destroy');
     });
 
     Route::controller(CheckoutController::class)->group(function(){
