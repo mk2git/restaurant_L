@@ -18,7 +18,7 @@
                 </select>
             </div>
             <div class="col-2 d-flex justify-content-center">
-              <button type="submit" class=""><i class="fa-solid fa-arrows-rotate text-success"></i></button>
+              <button type="submit" class="btn"><i class="fa-solid fa-arrows-rotate text-success"></i></button>
               </form>
             </div>
             <div class="col-2">
