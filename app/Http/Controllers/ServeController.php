@@ -53,4 +53,23 @@ class ServeController extends Controller
         }
     }
 
+    public function destroy(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $order = Order::find($request->order_id);
+            $table = $order->table->seat_type .'-'. $order->table->seat_number;
+            $order_name = $order->menu->name;
+            $order->delete();
+            DB::commit();
+            $message = $table.'  テーブルの「'.$order_name.'」をキャンセルをしました。';
+            return redirect()->route('serve.index')->with(['message' => $message, 'type' => 'warning']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Serve Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '料理のキャンセルに失敗しました');
+        }
+    }
+
 }
