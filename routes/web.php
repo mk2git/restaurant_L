@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
         Route::put('serve/{takeout_id}', 'updateStatusDone')->name('takeout-order.updateStatusDone');
         Route::delete('takeout/edit/{takeout_id}', 'destroy')->name('takeout-order.delete');
         Route::get('takeout/order', 'sendMessage')->name('takeout-order.sendMessage');
+        Route::delete('serve', 'cancel')->name('takeout-order.cancel');
     });
 
     Route::controller(TakeoutCheckoutController::class)->group(function(){
