@@ -107,6 +107,25 @@ class TakeoutOrderController extends Controller
         }
     }
 
+    public function cancel(Request $request)
+    {
+        try{
+            DB::beginTransaction();
+            $takeout_order = Takeout_Order::find($request->takeout_order_id);
+            $name = Takeout::where('id', $takeout_order->takeout_id)->value('name');
+            $order_name = $takeout_order->menu->name;
+            $takeout_order->delete();
+            DB::commit();
+            $message = $name.'  様の「'.$order_name.'」をキャンセルをしました。';
+            return redirect()->route('serve.index')->with(['message' => $message, 'type' => 'warning']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error TakeoutOrder Cancel', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '料理のキャンセルに失敗しました');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
