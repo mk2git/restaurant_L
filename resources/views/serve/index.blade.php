@@ -16,7 +16,7 @@
       <p class="text-center">テーブルの注文はありません。</p>
     @else
       @foreach ($order_tables as $order_table)
-        <div class="m-4 w-25">
+        <div class="m-4 w-serve">
           <x-accordion-serve :order-table-id="$order_table->id" :order-table-seat-type="$order_table->seat_type" :order-table-seat-number="$order_table->seat_number" :orders="$orders" />
         </div>
       @endforeach
