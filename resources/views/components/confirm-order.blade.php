@@ -18,7 +18,10 @@
                 </select>
             </div>
             <div class="col-2 d-flex justify-content-center">
-              <button type="submit" class="btn"><i class="fa-solid fa-arrows-rotate text-success"></i></button>
+              <button type="submit" class="btn">
+                <i class="fa-solid fa-arrows-rotate text-success">
+                <span class="d-block">更新</span></i>
+              </button>
               </form>
             </div>
             <div class="col-2">
@@ -26,7 +29,9 @@
                   @csrf
                   @method('delete')
                   <input type="hidden" name="table_id" value="{{$order->table_id}}">       
-                  <button type="submit" class="btn w-50"><i class="fa-regular fa-trash-can text-danger"></i></button>
+                  <button type="submit" class="btn">
+                    <i class="fa-regular fa-trash-can text-danger"><span class="d-block">削除</span></i>
+                  </button>
                 </form>
             </div>
           </div>
@@ -51,7 +56,9 @@
               </select>
           </div>
           <div class="col-2 d-flex justify-content-center">
-            <button type="submit" class="btn"><i class="fa-solid fa-arrows-rotate text-success"></i></button>
+            <button type="submit" class="btn">
+              <i class="fa-solid fa-arrows-rotate text-success"><span class="d-block">更新</span></i>
+            </button>
             </form>
           </div>
           <div class="col-2">
@@ -59,7 +66,9 @@
                 @csrf
                 @method('delete')
                 <input type="hidden" name="takeout_id" value="{{$order->takeout_id}}">          
-                <button type="submit" class="btn w-50"><i class="fa-regular fa-trash-can text-danger"></i></button>
+                <button type="submit" class="btn">
+                  <i class="fa-regular fa-trash-can text-danger"><span class="d-block">削除</span></i>
+                </button>
               </form>
           </div>
         </div>
