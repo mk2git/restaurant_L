@@ -14,7 +14,7 @@
                         @if ($table->seat_type == 'A' && $table->status == config('table.未使用'))
                             <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                         @elseif($table->seat_type == 'A' && $table->status == config('table.使用中'))
-                        <button type="button" class="btn select-Atable" data-bs-toggle="modal" data-bs-target="#selectTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                        <button type="button" class="btn p-0 select-Atable" data-bs-toggle="modal" data-bs-target="#selectTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
                              <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" />
                         </button>
                         <x-modal-select-order-Atable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
@@ -36,7 +36,7 @@
                         @if ($table->seat_type == 'B' && $table->status == config('table.未使用'))
                              <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                         @elseif($table->seat_type == 'B' && $table->status == config('table.使用中'))
-                            <button type="button" class="btn select-Btable" data-bs-toggle="modal" data-bs-target="#selectTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                            <button type="button" class="btn p-0 select-Btable" data-bs-toggle="modal" data-bs-target="#selectTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
                                 <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" />
                             </button>
                             <x-modal-select-order-Btable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />

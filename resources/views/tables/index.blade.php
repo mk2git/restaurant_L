@@ -11,12 +11,12 @@
                 <div class="col-10 d-flex justify-content-between flex-wrap">
                     @foreach ($tables as $table)
                       @if ($table->seat_type == 'A' && $table->status == config('table.未使用'))
-                            <button type="button" class="btn edit-unused-Atable" data-bs-toggle="modal" data-bs-target="#unusedTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
-                                <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
-                            </button>
-                            <x-modal-unused-Atable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
+                        <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#unusedTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                            <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
+                        </button>
+                        <x-modal-unused-Atable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />                           
                       @elseif(($table->seat_type == 'A' && $table->status == config('table.使用中')))
-                            <button type="button" class="btn edit-using-Atable" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                            <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#usingTableAModal{{$table->id}}" data-table-id="{{ $table->id }}">
                                 <x-Atable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" colorA="blue" />
                             </button>
                             <x-modal-using-Atable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
@@ -36,12 +36,12 @@
                 <div class="col-10 d-flex justify-content-between flex-wrap">
                     @foreach ($tables as $table)
                         @if ($table->seat_type == 'B' && $table->status == config('table.未使用'))
-                            <button type="button" class="btn edit-unused-Btable" data-bs-toggle="modal" data-bs-target="#unusedTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                            <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#unusedTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
                                  <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                             </button>
                             <x-modal-unused-Btable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
                         @elseif($table->seat_type == 'B' && $table->status == config('table.使用中'))
-                            <button type="button" class="btn edit-using-Btable" data-bs-toggle="modal" data-bs-target="#usingTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
+                            <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#usingTableBModal{{$table->id}}" data-table-id="{{ $table->id }}">
                                  <x-Btable-style :seat-type="$table->seat_type" :seat-number="$table->seat_number" class="using-table" />
                             </button>
                             <x-modal-using-Btable :table-id="$table->id" :seat-type="$table->seat_type" :seat-number="$table->seat_number" />
