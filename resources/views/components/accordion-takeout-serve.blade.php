@@ -18,6 +18,11 @@
                   @if ($takeoutOrder->status == config('takeout_order.cooking'))
                     <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}" class="btn"><i class="fa-solid fa-bell-concierge text-success"></i></button>
                     <x-modal-update-takeout-order-status-to-done :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
+                      
+                    <button type="submit" data-bs-toggle="modal" data-bs-target="#cancelTakeoutModal{{$takeoutOrder->id}}" class="btn">
+                      <small><i class="fa-solid fa-ban text-danger"></i></small>
+                    </button>
+                    <x-modal-cancel-takeout :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
                   @else
                     <i class="fa-solid fa-check text-danger"></i>
                   @endif
