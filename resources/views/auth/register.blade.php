@@ -5,22 +5,15 @@
     <h1 class="logo-login"><span class="logo-sm">Restaurant</span>  L</h1>
 </div>
 <div class="d-flex justify-content-center align-items-center pt-5">
-    <div class="w-50 mt-6 p-6 bg-white rounded">
+    <div class="custom-div mt-6 p-6 bg-white rounded">
 
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div class="text-center mt-4">
-            <div class="row">
-                <div class="col text-end">
-                    <x-input-label for="name" :value="__('Name')" />
-                </div>
-                <div class="col text-start">
-                    <x-text-input id="name" class="mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                </div>
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            </div>
+            <x-text-input id="name" placeholder="Name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         @if($one_user_admin->isEmpty())
@@ -40,47 +33,32 @@
             <input type="hidden" name="role" value="staff">
         @endif
         
-
         <!-- Password -->
         <div class="mt-4 text-center">
-            <div class="row">
-                <div class="col text-end">
-                    <x-input-label for="password" :value="__('Password')" />
-                </div>
-                <div class="col text-start">
-                  <x-text-input id="password" class="mt-1 w-full"
+           <x-text-input id="password"
                             type="password"
                             name="password"
+                            placeholder="Password"
                             required autocomplete="new-password" />                   
-                </div>
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>    
+           <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
         <div class="mt-4 text-center">
-            <div class="row">
-                <div class="col text-end">
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                </div>
-                <div class="col text-start">
-                    <x-text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-text-input id="password_confirmation"
                     type="password"
-                    name="password_confirmation" required autocomplete="new-password" />                   
-                </div>
-                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-            </div>    
+                    name="password_confirmation"
+                    placeholder="Confirm Password"
+                     required autocomplete="new-password" />                   
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <small class="d-flex align-items-center justify-content-end mt-4">
-            <a class="text-secondary hover:text-gray-900" href="{{ route('login') }}">
-                すでに登録済み？
+        <div class="mt-4 text-center float-end">
+             <a class="text-secondary hover:text-gray-900" href="{{ route('login') }}">
+                <small>すでに登録済み？</small>
             </a>
-
-            <x-success-button class="m-3">
-                登録
-            </x-success-button>
-        </small>
+            <x-success-button class="m-2">登録</x-success-button>
+        </div>
     </form>
     </div>
 </div>
