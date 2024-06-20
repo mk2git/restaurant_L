@@ -13,7 +13,9 @@
                 <div class="col-sm-7">
                   <small @if($takeoutOrder->status == config('takeout_order.done')) class="text-decoration-line-through" @endif>{{$takeoutOrder->menu->name}}</small>
                 </div>
-                <div class="col-sm-2">×&nbsp;{{$takeoutOrder->quantity}}</div>
+                <div class="col-sm-2">
+                  <small>×&nbsp;{{$takeoutOrder->quantity}}</small>
+                </div>
                 <div class="col-sm-3">
                   @if ($takeoutOrder->status == config('takeout_order.cooking'))
                     <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}" class="btn"><i class="fa-solid fa-bell-concierge text-success"></i></button>
