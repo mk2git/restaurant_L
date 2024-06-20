@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-reserve">
   <div class="card-header">
       <h2 class="text-center"><i class="fa-solid fa-phone h4"></i> 予約受付</h2>
   </div>

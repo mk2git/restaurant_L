@@ -2,7 +2,7 @@
     <x-breadcrumb :list="[
         ['name' => '予約', 'link' => '']
         ]" />
-    <div class="container mt-5 w-50">
+    <div class="container mt-5">
         {{-- エラーメッセージ --}}
         @if ($errors->any())
           <x-error-message />
@@ -26,9 +26,9 @@
 
         <form action="{{route('reserve.getDate')}}" method="post">
             @csrf
-            <div class="w-25 mb-3 mx-auto">
+            <div class="select-serch mb-3">
                 <select name="date" class="form-control" onchange="this.form.submit()">
-                    <option value="" disabled @if(!isset($selectedDates) || !isset($selectedAllDates)) selected @endif>日付指定可能</option>
+                    <option value="" disabled @if(!isset($selectedDates) || !isset($selectedAllDates)) selected @endif class="text-center">日付指定可能</option>
                     @foreach ($dates as $date)
                         <option value="{{$date}}" @if ($date == $selectedDate) selected @endif>{{$date}}</option>
                     @endforeach
@@ -36,7 +36,7 @@
                 </select>
             </div>
         </form>
-        <table class="table table-hover w-75 mx-auto">
+        <table class="table table-hover reserve-table mb-5 table-sm">
             <thead>
                 <tr class="table-active text-center">
                     <th>日付</th>
@@ -59,17 +59,24 @@
                                 {{Carbon\Carbon::createFromFormat('H:i:s', $reserve->time)->format('H:i')}}
                             </td>
                             <td>{{$reserve->name}}</td>
-                            <td>大人：{{$reserve->adult}}人 &nbsp;&nbsp;子供：{{$reserve->kid}}人</td>
+                            <td>
+                                @if ($reserve->kid !== 0)
+                                    <span>大人：{{$reserve->adult}}人</span>
+                                    <span class="d-block">子供：{{$reserve->kid}}人</span>
+                                @else
+                                    大人：{{$reserve->adult}}人
+                                @endif                               
+                            </td>
                             <td>{{$reserve->phone_number}}</td>
                             <td>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editReserveModal{{$reserve->id}}">
-                                    <i class="fa-solid fa-pencil"></i>
+                                <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#editReserveModal{{$reserve->id}}">
+                                    <i class="fa-solid fa-pencil edit-icon"></i>
                                  </button>
                                 <x-modal-edit-reserve :reserve-id="$reserve->id"  :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" :reserve-phone-number="$reserve->phone_number" />
                             </td>
                             <td>
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteReserveModal{{$reserve->id}}">
-                                    <i class="fa-regular fa-trash-can text-danger"></i>
+                                <button type="button" class="btn p-0" data-bs-toggle="modal" data-bs-target="#deleteReserveModal{{$reserve->id}}">
+                                    <i class="fa-regular fa-trash-can text-danger cancel-icon"></i>
                                  </button>
                                 <x-modal-delete-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" />
                             </td>
@@ -83,17 +90,24 @@
                                     <td>{{ \Carbon\Carbon::parse($reserve->date)->format('n月j日') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($reserve->time)->format('H:i') }}</td>
                                     <td>{{ $reserve->name }}</td>
-                                    <td>大人：{{ $reserve->adult }}人 &nbsp;&nbsp;子供：{{ $reserve->kid }}人</td>
+                                    <td>
+                                        @if ($reserve->kid !== 0)
+                                            <span>大人：{{$reserve->adult}}人</span>
+                                            <span class="d-block">子供：{{$reserve->kid}}人</span>
+                                        @else
+                                            大人：{{$reserve->adult}}人
+                                        @endif   
+                                    </td>
                                     <td>{{ $reserve->phone_number }}</td>
                                     <td>
-                                        <button type="button" class="btn edit-reserve" data-toggle="modal" data-target="#editReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
-                                            <i class="fa-solid fa-pencil"></i>
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#editReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
+                                            <i class="fa-solid fa-pencil edit-icon"></i>
                                         </button>
                                         <x-modal-edit-reserve :reserve-id="$reserve->id"  :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" :reserve-phone-number="$reserve->phone_number" />
                                     </td>
                                     <td>
-                                        <button type="button" class="btn" data-toggle="modal" data-target="#deleteReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
-                                            <i class="fa-regular fa-trash-can text-danger"></i>
+                                        <button type="button" class="btn p-0" data-toggle="modal" data-target="#deleteReserveModal{{$reserve->id}}" data-reserve-id="{{ $reserve->id }}">
+                                            <i class="fa-regular fa-trash-can text-danger cancel-icon"></i>
                                         </button>
                                         <x-modal-delete-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" :reserve-date="$reserve->date" :reserve-time="$reserve->time" :reserve-adult="$reserve->adult" :reserve-kid="$reserve->kid" />
                                     </td>

@@ -178,6 +178,25 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .select-serch{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .reserve-table{
+    width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 8.5px;
+  }
+  .edit-icon{
+    font-size: 10px;
+    padding: 0;
+  }
+  .cancel-icon{
+    font-size: 10px;
+    padding: 0;
+  }
 }
 
 /* タブレット */
@@ -196,6 +215,21 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .card-reserve{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .select-serch{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .reserve-table{
+    width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ラップトップ以上 */
@@ -207,5 +241,20 @@ h1{
     width: 45%;
     float: inline-end;
     margin-right: 5%;
+  }
+  .card-reserve{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .select-serch{
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .reserve-table{
+    width: 80% !important; 
+    margin-left: auto;
+    margin-right: auto;
   }
 }

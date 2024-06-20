@@ -11,48 +11,48 @@
                   @method('put')
                   <input type="hidden" name="id" value="{{$reserveId}}">
                   <div class="form-group row mb-2">
-                      <div class="col-sm-2">
-                          <label for="name" class=" col-form-label">氏名：</label>
+                      <div class="col-12 col-md-2 text-start">
+                          <label for="name" class="col-form-label">氏名：</label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-12 col-md-10">
                           <input type="text" name="name" id="name" value="{{$reserveName}}" class="form-control">
                       </div>
                   </div>
 
                   <div class="form-group row mb-2">
-                      <div class="col-sm-2">
+                      <div class="col-12 col-md-2 text-start">
                           <label class="col-form-label">日時：</label>
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-6 col-md-5">
                               <input type="date" name="date" value="{{$reserveDate}}" class="form-control">
                       </div>
-                      <div class="col-sm-5">
+                      <div class="col-6 col-md-5">
                           <input type="time" name="time" value="{{$reserveTime}}" class="form-control">
                       </div>
                   </div>
 
                   <div class="form-group row mb-2">
-                      <div class="col-sm-2">
+                      <div class="col-12 col-md-2 text-start">
                           <label class="col-form-label">大人：</label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-12 col-md-10">
                            <input type="number" name="adult" value="{{$reserveAdult}}" class="form-control w-50" min="0">
                       </div>
                   </div>
                   <div class="form-group row mb-2">
-                      <div class="col-sm-2">
+                      <div class="col-12 col-md-2 text-start">
                           <label class="col-form-label">子供：</label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-12 col-md-10">
                            <input type="number" name="kid" value="{{$reserveKid}}" class="form-control w-50" min="0">
                       </div>
                   </div>
 
                   <div class="form-group row mb-3">
-                      <div class="col-sm-2">
+                      <div class="col-12 col-md-2 text-start">
                           <label for="" class="col-form-label h5"><small>電話番号</small></label>
                       </div>
-                      <div class="col-sm-10">
+                      <div class="col-12 col-md-10">
                           <input type="text" name="phone_number" value="{{$reservePhoneNumber}}" class="form-control">
                       </div>
                   </div>
