@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-white px-5 py-0">
+<nav class="navbar navbar-expand-sm navbar-light bg-white px-4 py-0">
     <div class="container-fluid">
         <a class="logo" href="{{ route('dashboard') }}">Restaurant L</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

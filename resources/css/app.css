@@ -86,6 +86,8 @@ h1{
 }
 .container-dash {
   margin-top: 100px;
+  margin-right: 3%;
+  margin-left: 3%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly; /* 要素間のスペースを均等に配置 */
@@ -93,9 +95,6 @@ h1{
 
 .container-menu{
   background-color: rgb(241, 219, 121);
-}
-.container-reserve{
-  width: 45%;
 }
 
 .using-table .border{
@@ -174,6 +173,11 @@ h1{
   .custom-div {
     width: 60%;
   }
+  .container-reserve{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* タブレット */
@@ -187,11 +191,21 @@ h1{
   .custom-div {
     width: 40%;
   }
+  .container-reserve{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ラップトップ以上 */
 @media (min-width: 769px) {
   .custom-div {
     width: 25%;
+  }
+  .container-reserve{
+    width: 45%;
+    float: inline-end;
+    margin-right: 5%;
   }
 }
