@@ -163,3 +163,13 @@ h1{
 .w-serve{
   width: 35%;
 }
+@media (max-width: 576px) {
+  .custom-text-size {
+    font-size: 12px; /* スマートフォンサイズでの文字サイズを小さく設定 */
+  }
+}
+@media (max-width: 768px) {
+  .custom-text-size {
+    font-size: 13px; /* スマートフォンサイズでの文字サイズを小さく設定 */
+  }
+}

@@ -1,11 +1,14 @@
 <x-app-layout>
   <div class="container mt-5">
     <div class="row">
-      <div class="col">
+      <div class="col-12 col-lg-6">
         <section class="border rounded p-3 mb-3">
           <h3 class="text-center">本日の売り上げ金額</h3>
           <p class="text-center">
-           <span class="border-bottom h1"> &yen;{{number_format($todayTotal)}}<small class="font-small d-block mt-3">（ テイクアウト：&yen;{{number_format($today_takeout_total)}} ）</small></span>
+           <span class="border-bottom border-danger border-3 h1">
+              &yen;{{number_format($todayTotal)}}
+              <small class="font-small d-block mt-3">（ テイクアウト：&yen;{{number_format($today_takeout_total)}} ）</small>
+           </span>
           </p>
         </section>
         <div class="text-center mb-2">
@@ -23,8 +26,8 @@
             @foreach ($menus as $menu)
                 @if ($category->id == $menu->category_id) 
                     <div class="row mb-2">
-                        <div class="col-sm-7">{{$menu->name}}（&yen;{{number_format($menu->price)}}）</div>
-                        <div class="col-sm-2">
+                        <div class="col-5 col-md-7 custom-text-size">{{$menu->name}}（&yen;{{number_format($menu->price)}}）</div>
+                        <div class="col-3 col-md-2">
                           @php
                              $menuTableQuantity = 0;
                              $menuTakeoutQuantity = 0;
@@ -38,7 +41,6 @@
                               @endif
                             @endforeach
                             @foreach ($todayTakeoutOrders as $todayTakeoutOrder)
-                            {{-- @dump($todayTakeoutOrder) --}}
                               @if ($todayTakeoutOrder->menu_id == $menu->id)
                                 @php
                                   $menuTakeoutQuantity += $todayTakeoutOrder->quantity; 
@@ -50,7 +52,7 @@
                             @endphp
                              × {{$totalQuantity}}
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-4 col-md-3">
                           @php
                             $tableTotal = 0;
                             $takeoutTotal = 0;
@@ -88,45 +90,51 @@
           @endforeach
         </section>
       </div>
-      <div class="col">
-        <section class="border rounded p-4 mb-3">
-          <p class="h5 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文数によるランキング</p>
-            @if ($table_top_three_orders_q->isEmpty())               
-              <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
-            @else
-              <x-ranking-table ranking-name="レストラン" class="bg-success" :table-top-three-orders-q="$table_top_three_orders_q" />
-            @endif 
-            @if ($takeout_top_three_orders_q->isEmpty())  
-              <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
-            @else
-              <x-ranking-table ranking-name="テイクアウト" class="bg-warning" :table-top-three-orders-q="$takeout_top_three_orders_q" />
-            @endif
-        </section>
-        <section class="border rounded p-4 mb-3">
-          <p class="h5 text-center"><i class="fa-solid fa-sack-dollar"></i>&nbsp;&nbsp;合計金額によるランキング</p>
-          @if ($table_top_three_prices->isEmpty()) 
-              <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
-          @else
-            <x-ranking-table ranking-name="レストラン" class="bg-success" :table-top-three-orders-q="$table_top_three_prices" />
-          @endif
-          @if ($takeout_top_three_prices->isEmpty()) 
-              <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
-          @else
-            <x-ranking-table ranking-name="テイクアウト" class="bg-warning" :table-top-three-orders-q="$takeout_top_three_prices" />
-           @endif
-        </section>
+      <div class="col-12 col-lg-6">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-12">
+            <section class="border rounded p-4 mb-3">
+              <p class="h5 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文数によるランキング</p>
+                @if ($table_top_three_orders_q->isEmpty())               
+                  <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
+                @else
+                  <x-ranking-table ranking-name="レストラン" class="bg-success" :table-top-three-orders-q="$table_top_three_orders_q" />
+                @endif 
+                @if ($takeout_top_three_orders_q->isEmpty())  
+                  <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
+                @else
+                  <x-ranking-table ranking-name="テイクアウト" class="bg-warning" :table-top-three-orders-q="$takeout_top_three_orders_q" />
+                @endif
+            </section>
+          </div>
+          <div class="col-12 col-md-6 col-lg-12">
+            <section class="border rounded p-4 mb-3">
+              <p class="h5 text-center"><i class="fa-solid fa-sack-dollar"></i>&nbsp;&nbsp;合計金額によるランキング</p>
+              @if ($table_top_three_prices->isEmpty()) 
+                  <x-ranking-no-data-table ranking-name="レストラン" class="bg-success" />
+              @else
+                <x-ranking-table ranking-name="レストラン" class="bg-success" :table-top-three-orders-q="$table_top_three_prices" />
+              @endif
+              @if ($takeout_top_three_prices->isEmpty()) 
+                  <x-ranking-no-data-table ranking-name="テイクアウト" class="bg-warning" />
+              @else
+                <x-ranking-table ranking-name="テイクアウト" class="bg-warning" :table-top-three-orders-q="$takeout_top_three_prices" />
+              @endif
+            </section>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="row mb-5">
-      <div class="col">
+      <div class="col-12 col-lg-6">
          <section class="border rounded p-4 mb-3">
           <h3 class="mb-4 text-center">前日比</h3>
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-4 col-md-5">
               <span class="badge rounded-pill text-bg-info text-white">昨日</span>
             </div>
-            <div class="col-sm-2 text-center">
+            <div class="col-4 col-md-2 text-center">
                @php
                   $gap = 0;
                 @endphp
@@ -144,20 +152,20 @@
                   <span>±0</span> 
                 @endif
             </div>
-            <div class="col-sm-5">
+            <div class="col-4 col-md-5">
               <span class="badge rounded-pill text-bg-success">今日</span> 
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-5 h3 text-center">
+            <div class="col-4 col-md-5 h3 text-center">
               @if ($yesterdayTotal !== true)
                 &yen;{{number_format($yesterdayTotal)}}
               @else
                 <span class="h5">昨日の売り上げなし</span>
               @endif
             </div>
-            <div class="col-sm-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
-            <div class="col-sm-5 h3 text-center">
+            <div class="col-4 col-md-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
+            <div class="col-4 col-md-5 h3 text-center">
               @if ($todayTotal !== true)
                 &yen;{{number_format($todayTotal)}}
               @else
@@ -167,14 +175,14 @@
           </div>
         </section>
       </div>
-      <div class="col">
+      <div class="col-12 col-lg-6">
          <section class="border rounded p-4 mb-3">
           <h3 class="mb-4 text-center">前月比</h3>
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-4 col-md-5">
               <span class="badge rounded-pill text-bg-info text-white">先月</span>
             </div>
-            <div class="col-sm-2 text-center">
+            <div class="col-4 col-md-2 text-center">
                @php
                   $monthGap = 0;
                @endphp
@@ -193,20 +201,20 @@
                   <span>±0</span>
                 @endif
             </div>
-            <div class="col-sm-5">
+            <div class="col-4 col-md-5">
               <span class="badge rounded-pill text-bg-success">今月</span> 
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-5 h3 text-center">
+            <div class="col-4 col-md-5 h3 text-center">
               @if ($lastMonthTotalOrders !== true)
                 &yen;{{number_format($lastMonthTotalOrders)}}
               @else
                 <span class="h5">先月の売り上げなし</span>
               @endif
             </div>
-            <div class="col-sm-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
-            <div class="col-sm-5 h3 text-center">
+            <div class="col-4 col-md-2 h1 text-center"><i class="fa-solid fa-right-long"></i></div>
+            <div class="col-4 col-md-5 h3 text-center">
               @if ($thisMonthTotalOrders !== true)
                 &yen;{{number_format($thisMonthTotalOrders)}}
               @else

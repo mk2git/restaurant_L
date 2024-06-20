@@ -15,7 +15,7 @@
     @foreach ($tableTopThreeOrdersQ as $table_top_three_order)
       <tr>
         <td>{{ $loop->iteration }}</td>
-        <td>{{$table_top_three_order->menu->name}}</td>
+        <td class="custom-text-size">{{$table_top_three_order->menu->name}}</td>
         <td>{{$table_top_three_order->total_quantity}}</td>
         <td>
           &yen;{{number_format($table_top_three_order->total_quantity * $table_top_three_order->menu->price)}}
