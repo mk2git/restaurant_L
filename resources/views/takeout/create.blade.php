@@ -7,35 +7,19 @@
           @if ($errors->any())
             <x-error-message />
           @endif
-      <div class="form-border border rounded w-75 p-5 mx-auto">
-        <h3 class="text-center mt-4"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;Takeout</h3>
-        <hr class="w-75 mx-auto">
+      <div class="form-border border rounded p-3 takeout-form">
+        <h3 class="text-center my-4"><i class="fa-solid fa-bell-concierge"></i>&nbsp;&nbsp;Takeout</h3>
          
         <form action="{{route('takeout.store')}}" method="post">
             @csrf
-            <div class="row mt-5">
-              <div class="col-4">
-                <label for="name" class="col-form-label">名前</label>
-              </div>
-              <div class="col-8">
-                <input type="text" name="name" id="name" class="form-control">
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-4">
-                 <label for="phone_number" class="col-form-label">携帯電話</label>
-              </div>
-              <div class="col-8">
-                  <input type="text" name="phone_number" id="phone_number" class="form-control">
-              </div>
-            </div>
+           <input type="text" name="name" id="name" class="form-control w-75 mx-auto" placeholder="Name">
+           <input type="text" name="phone_number" id="phone_number" class="form-control w-75 mx-auto mt-4" placeholder="電話番号">
             
           <div class="text-center mt-4">
             <button type="submit" class="btn btn-success w-50 form-btn">注文へ</button>
             <hr class="w-75 mx-auto">
-            <a href="{{route('dashboard')}}" class="btn btn-light d-block mt-3 w-50 mx-auto">ホームへ戻る</a>
+            <a href="{{route('dashboard')}}" class="btn btn-light d-block mt-3 w-25 mx-auto"><i class="fa-solid fa-house text-secondary"></i></a>
           </div>
-          
         </form>
       </div>
     </div>
