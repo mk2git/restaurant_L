@@ -163,13 +163,35 @@ h1{
 .w-serve{
   width: 35%;
 }
+/* スマホ */
 @media (max-width: 576px) {
   .custom-text-size {
     font-size: 12px; /* スマートフォンサイズでの文字サイズを小さく設定 */
   }
+  .custom-button {
+    width: 60%;
+  }
+  .custom-div {
+    width: 60%;
+  }
 }
-@media (max-width: 768px) {
+
+/* タブレット */
+@media (min-width: 577px) and (max-width: 768px) {
   .custom-text-size {
-    font-size: 13px; /* スマートフォンサイズでの文字サイズを小さく設定 */
+    font-size: 13px; /* タブレットサイズでの文字サイズを小さく設定 */
+  }
+  .custom-button {
+    width: 40%;
+  }
+  .custom-div {
+    width: 40%;
+  }
+}
+
+/* ラップトップ以上 */
+@media (min-width: 769px) {
+  .custom-div {
+    width: 25%;
   }
 }
