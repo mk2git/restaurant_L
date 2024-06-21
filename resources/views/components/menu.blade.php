@@ -10,7 +10,7 @@
             <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" :menu-desc="$menu->description" />
             </div>
             <div class="col-3">
-              <span>{{number_format($menu->price)}}<small>円</small></span>
+              <span class="custom-text-size">{{number_format($menu->price)}}<small>円</small></span>
             </div>
             <div class="col-3">
                 <input type="hidden" name="menu_id" value="{{$menu->id}}">
