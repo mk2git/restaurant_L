@@ -93,10 +93,6 @@ h1{
   justify-content: space-evenly; /* 要素間のスペースを均等に配置 */
 }
 
-.container-menu{
-  background-color: rgb(241, 219, 121);
-}
-
 .using-table .border{
   background-color: coral !important;
 }
@@ -199,6 +195,20 @@ h1{
     width: 97%;
     height: 42%;
   }
+  .select-category{
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container-menu{
+    background-color: brown;
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .menu-paper{
+    background-color: white;
+  }
 }
 
 /* タブレット */
@@ -249,6 +259,20 @@ h1{
     justify-content: center;
     background-color: whitesmoke;
   }
+  .select-category{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container-menu{
+    background-color: brown;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .menu-paper{
+    background-color: white;
+  }
 }
 
 /* ラップトップ以上 */
@@ -297,5 +321,19 @@ h1{
     width: 85% !important;
     margin-left: auto;
     margin-right: auto;
+  }
+  .select-category{
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container-menu{
+    background-color: brown;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .menu-paper{
+    background-color: white;
   }
 }

@@ -11,7 +11,7 @@
         @else
 
         @endif
-        <div class="card w-50 mx-auto">
+        <div class="card w-50 mx-auto profile-card">
             <div class="card-header">
                 <h2 class="text-center">User管理</h2>
             </div>
