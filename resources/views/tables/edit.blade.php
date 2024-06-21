@@ -5,9 +5,9 @@
             <x-alert-message :type="session('type')" :message="session('message')" />
         @endif
 
-        <div class="container border bg-light w-75 mt-3">
-            <div class="row m-5">
-                <div class="col-10">
+        <div class="container border bg-light mt-3 container-table">
+            <div class="row my-4 mx-3">
+                <div class="col-12 col-md-10">
                     <div class="container border bg-white d-flex flex-wrap">
                         @php $hasSeatTypeA = false; @endphp
                         @foreach ($tables as $table)
@@ -35,10 +35,10 @@
                 </div>
 
                 {{-- Aは4人席、Bは2人席用 --}}
-                <div class="col-2">
+                <div class="col-12 col-md-2">
                     <div class="bg-white p-3 border rounded mb-3">
-                        <p>4人席</p>
-                        <div class="d-flex">
+                        <p class="text-center">4人席</p>
+                        <div class="d-flex justify-content-center">
                             <form action="{{route('table.store')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="seat_type" value="A">
@@ -52,8 +52,8 @@
                     </div>
 
                     <div class="bg-white p-3 border rounded">
-                        <p>2人席</p>
-                        <div class="d-flex">
+                        <p class="text-center">2人席</p>
+                        <div class="d-flex justify-content-center">
                             <form action="{{route('table.store')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="seat_type" value="B">

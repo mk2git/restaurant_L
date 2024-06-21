@@ -293,4 +293,9 @@ h1{
     justify-content: center;
     background-color: whitesmoke;
   }
+  .container-table{
+    width: 85% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
