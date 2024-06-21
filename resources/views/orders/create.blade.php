@@ -12,7 +12,7 @@
 
   <div class="container-menu rounded p-3 my-5">
     <div class="menu-paper p-4 p-md-5">
-       <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;メニュー</p>
+       <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;Menu</p>
        <form action="{{route('orders.store')}}" method="post">
           @csrf
           <x-menu :categories="$categories" :menus="$menus" />

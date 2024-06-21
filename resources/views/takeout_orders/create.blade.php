@@ -3,7 +3,7 @@
     <p class="h4"><span class="fw-bold">{{$takeout->name}}</span>&nbsp;&nbsp;様</p>
 
     <div class="container-menu mt-3 rounded w-75 mx-auto p-5 mb-5">
-      <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;メニュー</p>
+      <p class="text-center h2"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;Menu</p>
   
       <form action="{{route('takeout-order.store')}}" method="post">
         @csrf

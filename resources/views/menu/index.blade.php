@@ -24,7 +24,7 @@
         {{-- 一覧 --}}
         <div class="container-menu rounded my-5 p-3">
             <div class="menu-paper py-2 px-3">
-                <h2 class="pt-4 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;&nbsp;&nbsp;メニュー&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-utensils"></i></h2>
+                <h2 class="pt-4 text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;&nbsp;&nbsp;Menu&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-utensils"></i></h2>
                 @if (!isset($selectedCategories) || isset($selectedAllCategories))
                     @foreach ($categories as $category)
                     <div class="mb-3">
