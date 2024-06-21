@@ -1,4 +1,4 @@
-<table class="table table-borderless">
+<table class="table table-borderless text-center">
   <thead class="border-buttom-black">
     <tr>
       <th>料理名</th>

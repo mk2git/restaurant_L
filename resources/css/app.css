@@ -144,6 +144,9 @@ h1{
 .btn-custom{
   border: none;
 }
+.checkout-btn:hover{
+  background-color: rgb(179, 71, 71) !important;
+}
 
 /* スマホ */
 @media (max-width: 576px) {
@@ -242,6 +245,27 @@ h1{
   .select-checkout{
     width: 80%;
   }
+  .checkout-btn{
+    width: 50%;
+    background-color: brown !important;
+    color: white !important;
+  }
+  .bill-inside{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bill-outside{
+    width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bill-inside .h4{
+    font-size: 18px;
+  }
+  .bill-inside small{
+    font-size: 12px;
+  }
 }
 
 /* タブレット */
@@ -330,6 +354,21 @@ h1{
   .select-checkout{
     width: 40%;
   }
+  .checkout-btn{
+    width: 30%;
+    background-color: brown !important;
+    color: white !important;
+  }
+  .bill-inside{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bill-outside{
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ラップトップ以上 */
@@ -414,4 +453,20 @@ h1{
   .select-checkout{
     width: 30%;
   }
+  .checkout-btn{
+    width: 25%;
+    background-color: brown !important;
+    color: white !important;
+  }
+  .bill-inside{
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bill-outside{
+    width: 70% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
 }
