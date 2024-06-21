@@ -1,17 +1,11 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            各種設定
-        </h2>
-    </x-slot>
-
-    <div class="container m-5">
+    <div class="container mx-auto m-5">
         @if (session('message'))
           <x-alert-message :type="session('type')" :message="session('message')" />
         @else
 
         @endif
-        <div class="card w-50 mx-auto profile-card">
+        <div class="card profile-card">
             <div class="card-header">
                 <h2 class="text-center">User管理</h2>
             </div>
@@ -38,7 +32,7 @@
                                   </select>
                               </td>
                               <td>
-                                 <button type="submit" class="btn btn-success w-50">変更</button>
+                                 <button type="submit" class="btn btn-outline-success w-75">変更</button>
                                 </form>
                               </td>
                           </tr>

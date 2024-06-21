@@ -209,6 +209,11 @@ h1{
   .menu-paper{
     background-color: white;
   }
+  .profile-card{
+    width: 90%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 /* タブレット */
@@ -273,6 +278,11 @@ h1{
   .menu-paper{
     background-color: white;
   }
+  .profile-card{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ラップトップ以上 */
@@ -335,5 +345,10 @@ h1{
   }
   .menu-paper{
     background-color: white;
+  }
+  .profile-card{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
