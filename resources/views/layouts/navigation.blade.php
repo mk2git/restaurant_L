@@ -16,7 +16,7 @@
                             <li><a class="dropdown-item" href="{{ route('menu.add') }}">メニュー追加</a></li>
                             <li><a class="dropdown-item" href="{{ route('menu.index') }}">メニュー編集</a></li>
                             <li><a class="dropdown-item" href="{{ route('salesbook.index') }}">売上</a></li>
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;各種設定</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fa-solid fa-gear"></i>&nbsp;&nbsp;権限設定</a></li>
                         @endcan
                         <li>
                             <hr class="dropdown-divider">
