@@ -144,9 +144,7 @@ h1{
 .btn-custom{
   border: none;
 }
-.w-serve{
-  width: 35%;
-}
+
 /* スマホ */
 @media (max-width: 576px) {
   .custom-text-size {
@@ -224,6 +222,20 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .menu-name-font{
+    font-size: 12px !important;
+  }
+  .icon-size{
+    font-size: 10px;
+  }
+  .container-serve{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .w-serve{
+    width: 70%;
+  }
 }
 
 /* タブレット */
@@ -298,6 +310,17 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .menu-name-font{
+    font-size: 9px !important;
+  }
+  .container-serve{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .w-serve{
+    width: 30%;
+  }
 }
 
 /* ラップトップ以上 */
@@ -370,5 +393,13 @@ h1{
     width: 75% !important;
     margin-left: auto;
     margin-right: auto;
+  }
+  .container-serve{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .w-serve{
+    width: 30%;
   }
 }

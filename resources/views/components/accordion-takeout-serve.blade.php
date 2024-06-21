@@ -10,28 +10,22 @@
         @foreach ($takeoutOrders as $takeoutOrder)
           @if ($takeoutOrder->takeout_id == $takeoutOrderId)     
             <div class="row mb-1 text-center">
-                <div class="col-sm-6">
-                  <small @if($takeoutOrder->status == config('takeout_order.done')) class="text-decoration-line-through" @endif>{{$takeoutOrder->menu->name}}</small>
+                <div class="col-6">
+                  <small @if($takeoutOrder->status == config('takeout_order.done')) class="text-decoration-line-through" @endif class="menu-name-font">{{$takeoutOrder->menu->name}}</small>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-2">
                   <small>×&nbsp;{{$takeoutOrder->quantity}}</small>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-4">
                   @if ($takeoutOrder->status == config('takeout_order.cooking'))
-                  <div class="row">
-                    <div class="col">
-                      <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}" class="btn p-0">
-                        <i class="fa-solid fa-bell-concierge text-success"><small class="d-block">配膳</small></i>
+                      <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleTakeoutModal{{$takeoutOrder->id}}" class="btn p-0 p-lg-1">
+                        <i class="fa-solid fa-bell-concierge text-success"></i>
                       </button>
                       <x-modal-update-takeout-order-status-to-done :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
-                    </div>
-                    <div class="col">
-                      <button type="submit" data-bs-toggle="modal" data-bs-target="#cancelTakeoutModal{{$takeoutOrder->id}}" class="btn p-0">
-                        <small><i class="fa-solid fa-ban text-danger"><small class="d-block">キャンセル</small></i></small>
+                      <button type="submit" data-bs-toggle="modal" data-bs-target="#cancelTakeoutModal{{$takeoutOrder->id}}" class="btn p-0 p-lg-1">
+                        <i class="fa-solid fa-ban text-danger"></i>
                       </button>
                       <x-modal-cancel-takeout :takeout-order-id="$takeoutOrder->id" :takeout-order-menu-name="$takeoutOrder->menu->name" />
-                    </div>
-                  </div>
                   @else
                     <i class="fa-solid fa-check text-danger"></i>
                   @endif
