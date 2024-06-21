@@ -1,18 +1,16 @@
 @foreach ($categories as $category)
-    <h5 class="text-start fw-bold ps-5">{{$category->name}}</h5>
-    <hr class="w-25">
+    <h5 class="text-start fw-bold ps-5 border-bottom custom-text-size">{{$category->name}}</h5>
       @foreach ($menus as $menu)
         @if($category->id == $menu->category_id)
-          <div class="row">
-            <div class="col-4">
+          <div class="row text-center me-4">
+            <div class="col-6">
               <button type="button" class="btn menu-img" data-bs-toggle="modal" data-bs-target="#menuModal{{$menu->id}}" data-menu-id="{{ $menu->id }}">
-                <p>{{$menu->name}}</p>
+                <p class="custom-text-size">{{$menu->name}}</p>
             </button>
             <x-modal-select-menu-img :menu-id="$menu->id" :menu-name="$menu->name" :menu-img="asset('images/'. $menu->photo)" :menu-desc="$menu->description" />
             </div>
-            <div class="col-2">・・・・・</div>
             <div class="col-3">
-              <span>{{number_format($menu->price)}}円</span>
+              <span>{{number_format($menu->price)}}<small>円</small></span>
             </div>
             <div class="col-3">
                 <input type="hidden" name="menu_id" value="{{$menu->id}}">
