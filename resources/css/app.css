@@ -236,6 +236,12 @@ h1{
   .w-serve{
     width: 70%;
   }
+  .takeout-font{
+    font-size: 15px;
+  }
+  .select-checkout{
+    width: 80%;
+  }
 }
 
 /* タブレット */
@@ -321,6 +327,9 @@ h1{
   .w-serve{
     width: 30%;
   }
+  .select-checkout{
+    width: 40%;
+  }
 }
 
 /* ラップトップ以上 */
@@ -400,6 +409,9 @@ h1{
     margin-right: auto;
   }
   .w-serve{
+    width: 30%;
+  }
+  .select-checkout{
     width: 30%;
   }
 }

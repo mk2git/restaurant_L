@@ -5,15 +5,15 @@
   ]" />
   
   <div class="container my-5">
-    <h3 class="text-center">どのテイクアウトのお会計をしますか？</h3>
+    <h3 class="text-center takeout-font">どのテイクアウトのお会計をしますか？</h3>
   </div>
 
    @if ($takeout_order_ids->isEmpty())
       <p class="text-center fw-bold mt-5">現在会計できるテイクアウトはありません。</p>
     @endif
-  <div class="container d-flex justity-content-between flex-wrap my-5">
+  <div class="container d-flex justify-content-md-start justify-content-center flex-wrap my-5 container-serve p-0">
     @foreach ($takeout_order_ids as $takeout_order_id)
-      <a href="{{route('takeout-check.show', $takeout_order_id->takeout_id)}}" class="d-block border rounded w-25 p-0 m-3 text-decoration-none text-black select-checkout">
+      <a href="{{route('takeout-check.show', $takeout_order_id->takeout_id)}}" class="d-block border rounded p-0 m-3 text-decoration-none text-black select-checkout">
           <div class="bill bg-white mx-auto px-4 pt-5 mb-5 w-100">
               <p class="h5"><small>名前：</small><span class="fw-bold">{{$takeout_order_id->takeout->name}}</span> <small>様</small></p>
               
