@@ -3,9 +3,8 @@
     <x-alert-message :type="session('type')" :message="session('message')" />
   @endif
 
-  <div class="container mt-5 w-50">
-    <h2 class=""><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文確認</h2>
-    <hr>
+  <div class="container mt-5 container-confirm">
+    <h2 class="mb-4 border-bottom border-3 border-secondary"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文確認</h2>
     <x-confirm-order :orders="$orders" />
     <hr>
     <div class="mt-5 text-center">
@@ -13,7 +12,7 @@
           @csrf
           @method('put')
           <input type="hidden" name="table_id" value="{{$table_id}}">
-          <button type="submit" class="btn btn-success w-50">注文確定</button>
+          <button type="submit" class="btn btn-success w-25">確定</button>
         </form>
     </div>
 

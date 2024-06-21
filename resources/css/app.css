@@ -219,6 +219,11 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .container-confirm{
+    width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* タブレット */
@@ -288,6 +293,11 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .container-confirm{
+    width: 75% !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ラップトップ以上 */
@@ -353,6 +363,11 @@ h1{
   }
   .profile-card{
     width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container-confirm{
+    width: 75% !important;
     margin-left: auto;
     margin-right: auto;
   }
