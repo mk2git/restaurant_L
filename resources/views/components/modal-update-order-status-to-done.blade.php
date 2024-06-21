@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-       <p>{{$orderMenuName}}を配膳しましたか？</p> 
+       <p>「<span class="fw-bold">&nbsp;{{$orderMenuName}}&nbsp;</span>」を配膳しましたか？</p> 
        <div>
          <form action="{{route('serve.update')}}" method="post">
             @csrf
