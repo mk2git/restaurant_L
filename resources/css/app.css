@@ -97,14 +97,14 @@ h1{
   background-color: coral !important;
 }
 
-.seat{
+/* .seat{
   height: 25px;
   width: 25px;
 }
 .seat-Atable{
   height: 70px;
   width: 70px;
-}
+} */
 .seat-Btable{
   height: 70px;
   width: 50px;
@@ -146,6 +146,10 @@ h1{
 }
 .checkout-btn:hover{
   background-color: rgb(179, 71, 71) !important;
+}
+.four-seat{
+  width: 50%;
+  height: 50%;
 }
 
 /* スマホ */
@@ -266,6 +270,41 @@ h1{
   .bill-inside small{
     font-size: 12px;
   }
+  .table-container{
+    width: 99%;
+  }
+  .seat{
+    height: 8px;
+    width: 8px;
+  }
+  .seat-Atable{
+    height: 25px;
+    width: 25px;
+  }
+  .seat-Atable span{
+    font-size: 10px;
+  }
+  .btn-Atable{
+    width: 45px;
+    height: 80px;
+  }
+  .fa-restroom{
+    font-size: 10px;
+  }
+  .seat-Btable{
+    height: 30px;
+    width: 20px;
+  }
+  .seat-Btable span{
+    font-size: 8px;
+  }
+  .kitchen-size{
+    font-size: 12px;
+  }
+  .btn-Btable{
+    width: 35px;
+    height: 80px;
+  }
 }
 
 /* タブレット */
@@ -369,6 +408,24 @@ h1{
     margin-left: auto;
     margin-right: auto;
   }
+  .table-container{
+    width: 98%;
+  }
+  .seat{
+    height: 18px;
+    width: 18px;
+  }
+  .seat-Atable{
+    height: 60px;
+    width: 60px;
+  }
+  .fa-restroom{
+    font-size: 16px;
+  }
+  .seat-Btable{
+    height: 60px;
+    width: 35px;
+  }
 }
 
 /* ラップトップ以上 */
@@ -467,6 +524,25 @@ h1{
     width: 70% !important;
     margin-left: auto;
     margin-right: auto;
+  }
+  .table-container{
+    width: 85%;
+
+  }
+  .seat{
+    height: 25px;
+    width: 25px;
+  }
+  .seat-Atable{
+    height: 70px;
+    width: 70px;
+  }
+  .fa-restroom{
+    font-size: 20px;
+  }
+  .seat-Btable{
+    height: 70px;
+    width: 45px;
   }
  
 }
