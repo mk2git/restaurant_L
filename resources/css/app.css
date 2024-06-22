@@ -97,19 +97,6 @@ h1{
   background-color: coral !important;
 }
 
-/* .seat{
-  height: 25px;
-  width: 25px;
-}
-.seat-Atable{
-  height: 70px;
-  width: 70px;
-} */
-.seat-Btable{
-  height: 70px;
-  width: 50px;
-}
-
 .check-table .border{
   background-color: rgb(26, 190, 190) !important;
 }
@@ -274,8 +261,8 @@ h1{
     width: 99%;
   }
   .seat{
-    height: 8px;
-    width: 8px;
+    height: 8.5px;
+    width: 8.5px;
   }
   .seat-Atable{
     height: 25px;
@@ -304,6 +291,9 @@ h1{
   .btn-Btable{
     width: 35px;
     height: 80px;
+  }
+  .table-title{
+    font-size: 15px;
   }
 }
 
@@ -425,6 +415,9 @@ h1{
   .seat-Btable{
     height: 60px;
     width: 35px;
+  }
+  .table-title{
+    font-size: 20px;
   }
 }
 
