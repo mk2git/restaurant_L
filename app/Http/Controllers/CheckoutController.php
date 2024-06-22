@@ -42,9 +42,10 @@ class CheckoutController extends Controller
         $orders = Order::whereIn('checkout_id', $checkout_ids)->get();
 
         $table = Table::where('id', $table_id)->first();
+        $table_name = $table->seat_type. '-' . $table->seat_number;
         $checkoutTime = Checkout::where('table_id', $table_id)->select('created_at')->first();
 
-        return view('checkouts.show', compact('orders', 'table', 'checkoutTime'));
+        return view('checkouts.show', compact('orders', 'table', 'table_name', 'checkoutTime'));
     }
 
     public function storeAndUpdate(Request $request){
