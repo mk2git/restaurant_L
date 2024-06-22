@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <hr> --}}
+
             <div class="row bg-white m-2 mt-0">
                 <div class="col-10 d-flex justify-content-between flex-wrap px-0">
                     @foreach ($tables as $table)
