@@ -295,6 +295,10 @@ h1{
   .table-title{
     font-size: 15px;
   }
+  .table-time, .table-name, .table-number{
+    font-size: 12px;
+  }
+
 }
 
 /* タブレット */

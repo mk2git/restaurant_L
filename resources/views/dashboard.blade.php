@@ -50,9 +50,16 @@
                                                 <input type="checkbox" data-toggle="modal" data-target="#changeReserveModal{{$reserve->id}}" data-reserve-id="{{$reserve->id}}" class="change-reserve-status" >
                                                 <x-modal-check-reserve :reserve-id="$reserve->id" :reserve-name="$reserve->name" />
                                             </td>
-                                            <td>{{\Carbon\Carbon::parse($reserve->time)->format('H:i')}}</td>
-                                            <td>{{$reserve->name}}</td>
-                                            <td>大人：{{$reserve->adult}}人&nbsp;&nbsp;子供：{{$reserve->kid}}人</td>
+                                            <td class="table-time">{{\Carbon\Carbon::parse($reserve->time)->format('H:i')}}</td>
+                                            <td class="table-name">{{$reserve->name}}</td>
+                                            <td class="table-number">
+                                                @if ($reserve->kid !== 0)
+                                                <span>大人：{{$reserve->adult}}人</span>
+                                                <span class="d-block">子供：{{$reserve->kid}}人</span>
+                                            @else
+                                                大人：{{$reserve->adult}}人
+                                            @endif  
+                                            </td>
                                         </tr>
                                     @endif
                                 @endforeach
