@@ -9,7 +9,7 @@
   <div class="my-5 mx-0 mx-auto table-container">
     <div class="bg-light p-2">
       <div class="row bg-white m-2 mb-1">
-        <div class="col-10 d-flex justify-content-between flex-wrap px-0">
+        <div class="col-10 d-flex justify-content-start flex-wrap px-0">
           @foreach ($tables as $table)
             @foreach ($checkoutTables as $checkoutTable)
                 @if($table->seat_type == 'A' && $table->id == $checkoutTable->table_id)
@@ -34,7 +34,7 @@
       </div>
 
       <div class="row bg-white m-2 mt-0">
-        <div class="col-10 d-flex justify-content-between flex-wrap px-0">
+        <div class="col-10 d-flex justify-content-start flex-wrap px-0">
           @foreach ($tables as $table)
             @foreach ($checkoutTables as $checkoutTable)
                 @if($table->seat_type == 'B' && $table->id == $checkoutTable->table_id)
