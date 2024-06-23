@@ -4,7 +4,7 @@
   @endif
 
   <div class="container mt-5 container-confirm">
-    <h2 class="mb-4 border-bottom border-3 border-secondary"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文確認</h2>
+    <h2 class="mb-4 border-bottom border-3 border-secondary text-center"><i class="fa-solid fa-utensils"></i>&nbsp;&nbsp;注文確認</h2>
     <x-confirm-order :orders="$orders" />
     <hr>
     <div class="mt-5 text-center">
