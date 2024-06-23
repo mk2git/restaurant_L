@@ -1,4 +1,4 @@
-<div class="alert alert-danger w-50 mx-auto">
+<div class="alert alert-danger">
   <ul class="mx-auto w-50">
       @foreach ($errors->all() as $error)
           <li>{{ $error }}</li>
