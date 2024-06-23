@@ -1,3 +1,3 @@
-<div class="w-50 mx-auto">
+<div>
   <p class="alert alert-{{$type}} text-center">{{$message}}</p>
 </div>
