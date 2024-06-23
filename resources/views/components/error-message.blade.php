@@ -1,7 +1,7 @@
 <div class="alert alert-danger w-50 mx-auto">
-  <ul>
+  <ul class="mx-auto w-50">
       @foreach ($errors->all() as $error)
-          <li class="text-center">{{ $error }}</li>
+          <li>{{ $error }}</li>
       @endforeach
   </ul>
 </div>
